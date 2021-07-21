@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "830033620136",
+    "project_id": "projectsms-e891d",
+    "storage_bucket": "projectsms-e891d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830033620136:android:5293854c0801346816e69d",
+        "android_client_info": {
+          "package_name": "com.enfotrix.studentportal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "830033620136-5hkh2pctg3pkaph3evsi7g1brv3atat3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDc-9CsDm1AbtyiuNdMzwpQ5lvqTLK8X-8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "830033620136-5hkh2pctg3pkaph3evsi7g1brv3atat3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
