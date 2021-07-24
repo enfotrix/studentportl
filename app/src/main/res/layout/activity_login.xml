@@ -4,37 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.ActivityResetPassword"
+    tools:context=".Activities.ActivityLogin"
     android:orientation="vertical"
-    android:gravity="center">
+    android:layout_gravity="center"
+    android:paddingHorizontal="100dp"
+    android:paddingTop="100dp"
+    >
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reset Password">
-    </TextView>
+        android:text="@string/str_schoolName"
+        android:textSize="28dp"></TextView>
 
     <EditText
-        android:id="@+id/txt_newPassword"
+        android:id="@+id/txt_regNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="New Password"
-        android:inputType="textPassword"
-        ></EditText>
-
-    <EditText
-        android:id="@+id/txt_newPasswordAgain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Retype Password"
-        android:inputType="textPassword"
+        android:hint="@string/str_studentRegNo"
         >
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/txt_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="@string/str_studentPassword">
+
     </EditText>
 
     <Button
-        android:id="@+id/btn_resetPassword"
+        android:id="@+id/btn_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reset"></Button>
+        android:text="@string/str_btnLogin">
+    </Button>
+
+    <TextView
+        android:id="@+id/txt_forgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/str_forgotPassword">
+
+    </TextView>
+
 
 
 </LinearLayout>

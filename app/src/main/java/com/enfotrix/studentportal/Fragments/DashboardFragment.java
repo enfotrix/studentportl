@@ -1,9 +1,11 @@
 package com.enfotrix.studentportal.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,13 +14,36 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.enfotrix.studentportal.Activities.ActivityForgetPasswordAuth;
+import com.enfotrix.studentportal.Activities.ActivityLogin;
+import com.enfotrix.studentportal.R;
+import com.enfotrix.studentportal.Utils;
 import com.enfotrix.studentportal.databinding.FragmentDashboardBinding;
 import com.enfotrix.studentportal.Models.DashboardViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import org.jetbrains.annotations.NotNull;
 
 public class DashboardFragment extends Fragment {
 
     private DashboardViewModel dashboardViewModel;
     private FragmentDashboardBinding binding;
+
+
+    //------------------ variables initialization
+    private TextView txt_studentRegNo,txt_studentFullName,txt_studentFatherName;
+    private TextView txt_studentAddress,txt_studentPhoneNo;
+    private TextView txt_studentEmail,txt_studentDOB;
+    private Button btn_logout;
+    private FirebaseFirestore db;
+    private Utils utils;
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -36,6 +61,68 @@ public class DashboardFragment extends Fragment {
             }
         });*/
 
+        txt_studentRegNo = root.findViewById(R.id.txt_studentRegNo);
+        txt_studentFullName = root.findViewById(R.id.txt_studentFullName);
+        txt_studentFatherName = root.findViewById(R.id.txt_studentFatherName);
+        txt_studentAddress = root.findViewById(R.id.txt_studentAddress);
+        txt_studentPhoneNo = root.findViewById(R.id.txt_studentPhoneNo);
+        txt_studentDOB = root.findViewById(R.id.txt_studentDOB);
+        txt_studentEmail = root.findViewById(R.id.txt_studentEmail);
+        utils = new Utils(getContext());
+
+        btn_logout = root.findViewById(R.id.btn_logout);
+
+        db = FirebaseFirestore.getInstance();
+
+
+        //------ logout button click event
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                utils.logout();
+                Intent intent = new Intent(getActivity(), ActivityLogin.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+
+        //fetch data of specific student from db
+        getData();
+
+//        db.collection("Students").whereEqualTo("student_regNo",utils.getToken()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+//                if(task.isSuccessful()){
+//                    for(QueryDocumentSnapshot document : task.getResult()) {
+//                        //String str = document.getString("student_fullName");
+//                        String student_RegNoFromDb=document.getString("student_regNo");
+//                        String student_FullNameFromDb = document.getString("student_fName");
+//                        String student_FatherNameFromDb = document.getString("student_fatherName");
+//                        String student_homeAddressFromDb = document.getString("student_homeAddress");
+//                        String student_PhoneNoFromDb = document.getString("student_phoneNo");
+//                        String student_EmailFromDb = document.getString("student_email");
+//                        String student_DOBFromDb = document.getString("student_dob");
+//
+//
+//                        txt_studentRegNo.setText(student_RegNoFromDb);
+//                        txt_studentAddress.setText(student_homeAddressFromDb);
+//                        txt_studentFatherName.setText(student_FatherNameFromDb);
+//                        txt_studentPhoneNo.setText(student_PhoneNoFromDb);
+//                        txt_studentFullName.setText(student_FullNameFromDb);
+//                        txt_studentEmail.setText(student_EmailFromDb);
+//                        txt_studentDOB.setText(student_DOBFromDb);
+//
+//
+////                    }
+//
+//
+//
+//
+//                }
+//
+//            }
+//        });
+
 
         return root;
     }
@@ -45,4 +132,34 @@ public class DashboardFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    public void getData(){
+        db.collection("Students").document(utils.getToken()).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
+                        DocumentSnapshot document= task.getResult();
+
+                        String student_RegNoFromDb=document.getString("student_regNo");
+                        String student_FullNameFromDb = document.getString("student_fName");
+                        String student_FatherNameFromDb = document.getString("student_fatherName");
+                        String student_homeAddressFromDb = document.getString("student_homeAddress");
+                        String student_PhoneNoFromDb = document.getString("student_phoneNo");
+                        String student_EmailFromDb = document.getString("student_email");
+                        String student_DOBFromDb = document.getString("student_dob");
+
+
+                        txt_studentRegNo.setText(student_RegNoFromDb);
+                        txt_studentAddress.setText(student_homeAddressFromDb);
+                        txt_studentFatherName.setText(student_FatherNameFromDb);
+                        txt_studentPhoneNo.setText(student_PhoneNoFromDb);
+                        txt_studentFullName.setText(student_FullNameFromDb);
+                        txt_studentEmail.setText(student_EmailFromDb);
+                        txt_studentDOB.setText(student_DOBFromDb);
+
+
+                    }
+                });
+    }
 }
+

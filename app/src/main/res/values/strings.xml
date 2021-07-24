@@ -1,6 +1,42 @@
 <resources>
     <string name="app_name">Student Portal</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_dashboard">My Profile</string>
     <string name="title_notifications">Notifications</string>
+
+
+    <string name="str_schoolName">School Name</string>
+
+
+
+    <!-- Splash strings   -->
+    <string name="str_splashWelcomeMessage">Welcome to Student Portal</string>
+
+
+    <!--    Login strings-->
+    <string name="str_studentRegNo">Registration No</string>
+    <string name="str_studentPassword">Password</string>
+    <string name="str_btnLogin">Login</string>
+    <string name="str_forgotPassword">Forgot Password?</string>
+
+
+    <!--    My Profile Strings-->
+    <string name="str_studentName">Name </string>
+    <string name="str_studentFatherName">Father Name</string>
+    <string name="str_studentDOB">Date of Birth</string>
+    <string name="str_studentGender">Gender</string>
+    <string name="str_studentPhoneNo">Phone No</string>
+    <string name="str_studentEmail">Email</string>
+    <string name="str_studentHomeAddress">Address</string>
+    <string name="str_strDB">Data from Database</string>
+
+<!--    Forget Password Strings-->
+    <string name="str_studentFatherCNIC">Father CNIC</string>
+
+
+
+
+
+
+
 </resources>
