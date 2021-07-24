@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linear_layoutbottamsheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:elevation="16dp"
+
+    android:orientation="vertical"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="0.1dp"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+
+    <LinearLayout
+
+
+        android:elevation="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_cu_departmentName1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Department Name"
+            android:layout_marginLeft="5sp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <Button
+            android:id="@+id/btn_cu_call1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Call"></Button>
+
+        <Button
+            android:id="@+id/btn_cu_mail1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="email"></Button>
+        <Button
+            android:id="@+id/btn_cu_whatsapp1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="whatsapp"></Button>
+
+
+        <TextView
+            android:id="@+id/txt_cu_departmentName2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Department Name"
+            android:layout_marginLeft="5sp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <Button
+            android:id="@+id/btn_cu_call2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Call"></Button>
+
+        <Button
+            android:id="@+id/btn_cu_mail2"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="email"></Button>
+        <Button
+            android:id="@+id/btn_cu_whatsapp2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="whatsapp"></Button>
+        <TextView
+            android:id="@+id/txt_cu_departmentName3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Department Name"
+            android:layout_marginLeft="5sp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <Button
+            android:id="@+id/btn_cu_call3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Call"></Button>
+
+        <Button
+            android:id="@+id/btn_cu_mail3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="email"></Button>
+        <Button
+            android:id="@+id/btn_cu_whatsapp3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="whatsapp"></Button>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
