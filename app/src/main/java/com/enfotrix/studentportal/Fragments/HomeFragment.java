@@ -82,7 +82,7 @@ public class HomeFragment extends Fragment {
         btn_contactus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fetchContacts();
+                contactUs();
             }
         });
 
@@ -94,6 +94,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
+
+        fetchContacts();
 
 
 
