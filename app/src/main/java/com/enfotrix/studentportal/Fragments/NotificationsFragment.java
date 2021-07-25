@@ -5,17 +5,49 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.enfotrix.studentportal.Activities.ActivityAnnouncement;
+import com.enfotrix.studentportal.Adapters.Adapter_Announ;
+import com.enfotrix.studentportal.Adapters.Adapter_Notifi;
+import com.enfotrix.studentportal.Models.Model_Announ;
+import com.enfotrix.studentportal.Models.Model_Notifi;
+import com.enfotrix.studentportal.Models.Model_Notifi;
+import com.enfotrix.studentportal.R;
+import com.enfotrix.studentportal.Utils;
 import com.enfotrix.studentportal.databinding.FragmentNotificationsBinding;
 import com.enfotrix.studentportal.Models.NotificationsViewModel;
+import com.enfotrix.studentportal.lottiedialog;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NotificationsFragment extends Fragment {
+
+    private FirebaseFirestore firestore;
+    private Utils utils;
+
+
+    List<Model_Notifi> list_Notifi = new ArrayList<>();
+    RecyclerView recyc_Notifi ;
 
     private NotificationsViewModel notificationsViewModel;
     private FragmentNotificationsBinding binding;
@@ -36,10 +68,72 @@ public class NotificationsFragment extends Fragment {
 //            }
 //        });
 
+        firestore= FirebaseFirestore.getInstance();
+        utils=new Utils(getContext());
+
+        recyc_Notifi = root.findViewById(R.id.list_Notifi);
+        recyc_Notifi.setHasFixedSize(true);
+        recyc_Notifi.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+        fetchNotifi(utils.getToken());
+
+        final SwipeRefreshLayout pullToRefresh = root.findViewById(R.id.swiperefresh);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchNotifi(utils.getToken());
+                pullToRefresh.setRefreshing(false);
+            }
+        });
+
 
 
 
         return root;
+    }
+
+    private void fetchNotifi(String token) {
+        final lottiedialog lottie=new lottiedialog(getContext());
+        lottie.show();
+
+        list_Notifi.clear();
+        firestore.collection("Students").document(token)
+                .collection("Notifications").orderBy("student_nDate", Query.Direction.DESCENDING)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                Model_Notifi model_Notifi =  new Model_Notifi(
+                                        document.getId(),
+                                        document.getString("student_nData"),
+                                        document.getString("student_nDate"),
+                                        document.getString("student_nHeading"));
+                                list_Notifi.add(model_Notifi);
+
+                            }
+
+
+                            Adapter_Notifi adapter_notifi = new Adapter_Notifi(list_Notifi);
+                            recyc_Notifi.setAdapter(adapter_notifi);
+
+                            lottie.dismiss();
+                        }
+                        else {
+                            lottie.dismiss();
+                            Toast.makeText(getContext(), "Connection Error", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+                        lottie.dismiss();
+                        Toast.makeText(getContext(), "Connection Error", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override

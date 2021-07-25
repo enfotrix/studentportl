@@ -62,7 +62,7 @@ public class ActivityFeedback extends AppCompatActivity {
         firestore= FirebaseFirestore.getInstance();
         utils=new Utils(this);
 
-        recyc_Feedback = findViewById(R.id.list_Announ);
+        recyc_Feedback = findViewById(R.id.list_Feedback);
         recyc_Feedback.setHasFixedSize(true);
         recyc_Feedback.setLayoutManager(new LinearLayoutManager(this));
         edt_feedback=findViewById(R.id.edit_annBody);

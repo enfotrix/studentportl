@@ -83,6 +83,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 contactUs();
+
             }
         });
 
@@ -94,9 +95,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
         fetchContacts();
-
 
 
         return root;
