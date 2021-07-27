@@ -1,8 +1,10 @@
-package com.enfotrix.studentportal;
+package com.enfotrix.studentportal.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.enfotrix.studentportal.R;
 
 public class Activity_custom_image extends AppCompatActivity {
 

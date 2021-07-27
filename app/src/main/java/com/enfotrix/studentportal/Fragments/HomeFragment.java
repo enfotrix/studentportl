@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.enfotrix.studentportal.Activities.ActivityAnnouncement;
 import com.enfotrix.studentportal.Activities.ActivityFeedback;
+import com.enfotrix.studentportal.Activities.ActivityGallery;
 import com.enfotrix.studentportal.R;
 import com.enfotrix.studentportal.Utils;
 import com.enfotrix.studentportal.databinding.FragmentHomeBinding;
@@ -41,7 +42,7 @@ public class HomeFragment extends Fragment {
     private Utils utils;
     private FirebaseFirestore firestore;
 
-    private Button btn_announcement,btn_contactus,btn_feedback;
+    private Button btn_announcement,btn_contactus,btn_feedback,btn_gallery;
 
 
     private String cu_departmentName1,cu_email1,cu_mobileNo1,cu_whatsapp1,cu_landline1;
@@ -92,6 +93,14 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), ActivityFeedback.class));
+            }
+        });
+
+        btn_gallery=root.findViewById(R.id.btn_gallery);
+        btn_gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), ActivityGallery.class));
             }
         });
 

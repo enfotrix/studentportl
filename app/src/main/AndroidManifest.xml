@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.enfotrix.studentportal">
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/appicon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/appicon"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentPortal">
-        <activity android:name=".Activities.ActivityAttendance"></activity>
+        <activity android:name=".Activities.Activity_custom_image"></activity>
+        <activity android:name=".Activities.Activity_full_image_container" />
+        <activity android:name=".Activities.ActivityAttendance" />
         <activity android:name=".Activities.ActivityFeedback" />
         <activity android:name=".Activities.ActivityProgressReport" />
         <activity android:name=".Activities.ActivityGallery" />

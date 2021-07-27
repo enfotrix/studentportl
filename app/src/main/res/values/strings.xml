@@ -8,7 +8,6 @@
     <string name="str_schoolName">School Name</string>
 
 
-
     <!-- Splash strings   -->
     <string name="str_splashWelcomeMessage">Welcome to Student Portal</string>
 
@@ -30,13 +29,8 @@
     <string name="str_studentHomeAddress">Address</string>
     <string name="str_strDB">Data from Database</string>
 
-<!--    Forget Password Strings-->
+    <!--    Forget Password Strings-->
     <string name="str_studentFatherCNIC">Father CNIC</string>
-
-
-
-
-
 
 
 </resources>

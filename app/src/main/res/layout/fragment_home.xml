@@ -32,6 +32,7 @@
             android:layout_height="wrap_content"
             android:text="contact us"></Button>
         <Button
+            android:id="@+id/btn_gallery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="gallery"></Button>

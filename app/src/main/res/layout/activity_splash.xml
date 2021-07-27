@@ -15,5 +15,15 @@
     android:textSize="26dp">
 
 </TextView>
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/progressAnimationView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_url="https://assets3.lottiefiles.com/packages/lf20_e27xvycf.json"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true" />
 
 </LinearLayout>
