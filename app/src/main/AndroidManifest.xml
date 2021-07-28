@@ -22,13 +22,15 @@
         <activity android:name=".Activities.ActivityForgetPasswordAuth" />
         <activity android:name=".Activities.ActivityLogin" />
         <activity android:name=".Activities.ActivitySplash">
+
+        </activity>
+        <activity android:name=".Activities.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.MainActivity" />
     </application>
 
 </manifest>

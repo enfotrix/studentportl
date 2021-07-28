@@ -79,30 +79,7 @@ public class HomeFragment extends Fragment {
                 startActivity(new Intent(getContext(), ActivityAnnouncement.class));
             }
         });
-        btn_contactus=root.findViewById(R.id.btn_contactus);
-        btn_contactus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                contactUs();
 
-            }
-        });
-
-        btn_feedback=root.findViewById(R.id.btn_feedback);
-        btn_feedback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), ActivityFeedback.class));
-            }
-        });
-
-        btn_gallery=root.findViewById(R.id.btn_gallery);
-        btn_gallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), ActivityGallery.class));
-            }
-        });
 
         fetchContacts();
 

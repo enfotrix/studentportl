@@ -22,11 +22,12 @@ public class Adapter_Notifi extends RecyclerView.Adapter<Adapter_Notifi.ViewHold
     public Adapter_Notifi(List<Model_Notifi> model_Notifi) {
         this.model_Notifi = model_Notifi;
     }
+
     @NonNull
     @Override
     public Adapter_Notifi.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem= layoutInflater.inflate(R.layout.list_notifi, parent, false);
+        View listItem = layoutInflater.inflate(R.layout.list_notifi, parent, false);
         Adapter_Notifi.ViewHolder viewHolder = new Adapter_Notifi.ViewHolder(listItem);
         return viewHolder;
     }
@@ -57,17 +58,18 @@ public class Adapter_Notifi extends RecyclerView.Adapter<Adapter_Notifi.ViewHold
         return model_Notifi.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
 
-        public TextView txt_date,txt_name,txt_notifi;
+        public TextView txt_date, txt_name, txt_notifi;
         public LinearLayout layout_Notifi;
+
         public ViewHolder(View itemView) {
             super(itemView);
             this.txt_date = (TextView) itemView.findViewById(R.id.txt_date);
             this.txt_name = (TextView) itemView.findViewById(R.id.txt_header_notify);
             this.txt_notifi = (TextView) itemView.findViewById(R.id.txt_notifi);
-            layout_Notifi = (LinearLayout)itemView.findViewById(R.id.layout_Notify);
+            layout_Notifi = (LinearLayout) itemView.findViewById(R.id.layout_Notify);
         }
 
     }

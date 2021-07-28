@@ -6,52 +6,129 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Fragments.HomeFragment">
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_announcement"
+        <LinearLayout
+            android:id="@+id/lay_vie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Announcement"></Button>
+            android:orientation="vertical">
 
-        <Button
-            android:layout_width="wrap_content"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                android:background="@drawable/fhome_bg" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_70sdp"
+                android:src="@drawable/ic_wave" />
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Date sheet"></Button>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="time Table"></Button>
+            android:layout_below="@+id/lay_vie">
 
-        <Button
-            android:id="@+id/btn_contactus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="contact us"></Button>
-        <Button
-            android:id="@+id/btn_gallery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="gallery"></Button>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Result"></Button>
-        <Button
-            android:id="@+id/btn_feedback"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Feedback"></Button>
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="2"
+                    android:columnOrderPreserved="false"
+                    android:rowCount="2">
 
-    </LinearLayout>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_100sdp"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="@dimen/_10sdp"
+                        app:cardCornerRadius="@dimen/_12sdp"
+                        app:cardElevation="@dimen/_8sdp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="@dimen/_14sdp">
+
+                            <ImageView
+                                android:layout_width="@dimen/_40sdp"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:src="@drawable/boy" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentTop="true"
+                                android:text="Time Table"
+                                android:textColor="@color/yellow_b"
+                                android:textSize="@dimen/_12ssp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_100sdp"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="@dimen/_10sdp"
+                        app:cardCornerRadius="@dimen/_12sdp"
+                        app:cardElevation="@dimen/_8sdp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="@dimen/_14sdp">
+
+                            <ImageView
+                                android:layout_width="@dimen/_40sdp"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:src="@drawable/boy" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentTop="true"
+                                android:text="Time Table"
+                                android:textColor="@color/yellow_b"
+                                android:textSize="@dimen/_12ssp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
 
 
+                </GridLayout>
+
+                
 
 
-    <include layout="@layout/bottam_sheet_contacts"/>
+            </LinearLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+    <include layout="@layout/bottam_sheet_contacts" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
