@@ -1,14 +1,13 @@
 package com.enfotrix.studentportal.Activities;
 
+import android.os.Bundle;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.enfotrix.studentportal.Adapters.Adapter_Image;
 import com.enfotrix.studentportal.Models.Model_Image;
@@ -37,9 +36,12 @@ public class ActivityGallery extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
 
+        // hide actionbar and statusBar
+        getSupportActionBar().hide();
+
         list = new ArrayList<Model_Image>();
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(ActivityGallery.this,2));
+        recyclerView.setLayoutManager(new GridLayoutManager(ActivityGallery.this, 3));
         progressBar = findViewById(R.id.progressBar);
         db = FirebaseFirestore.getInstance();
         //reference = FirebaseDatabase.getInstance().getReference().child("images");
@@ -55,9 +57,9 @@ public class ActivityGallery extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
 
-                        if(task.isSuccessful()){
-                            for(QueryDocumentSnapshot document : task.getResult()){
-                                Toast.makeText(ActivityGallery.this, ""+document.getString("path"), Toast.LENGTH_SHORT).show();
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Toast.makeText(ActivityGallery.this, "" + document.getString("path"), Toast.LENGTH_SHORT).show();
                                 Model_Image model_image = new Model_Image(
                                         document.getId(),
                                         document.getString("path")
@@ -65,7 +67,7 @@ public class ActivityGallery extends AppCompatActivity {
                                 list.add(model_image);
 
                             }
-                            Adapter_Image adapter_image = new Adapter_Image(ActivityGallery.this,list);
+                            Adapter_Image adapter_image = new Adapter_Image(ActivityGallery.this, list);
                             recyclerView.setAdapter(adapter_image);
                         }
 

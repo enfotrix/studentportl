@@ -1,15 +1,16 @@
 package com.enfotrix.studentportal.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.WallpaperManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.bumptech.glide.Glide;
 import com.enfotrix.studentportal.R;
@@ -19,12 +20,15 @@ import java.io.IOException;
 public class Activity_full_image_container extends AppCompatActivity {
 
     private ImageView fullImage;
-    private Button apply;
+    private AppCompatButton apply;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_image_container);
+
+        // hide actionbar and statusBar
+        getSupportActionBar().hide();
 
         fullImage = findViewById(R.id.fullImage);
         apply = findViewById(R.id.apply);
@@ -38,7 +42,7 @@ public class Activity_full_image_container extends AppCompatActivity {
     }
 
     private void setBackground() {
-        Bitmap bitmap = ((BitmapDrawable)fullImage.getDrawable()).getBitmap();
+        Bitmap bitmap = ((BitmapDrawable) fullImage.getDrawable()).getBitmap();
         WallpaperManager manager = WallpaperManager.getInstance(getApplicationContext());
         try {
             manager.setBitmap(bitmap);

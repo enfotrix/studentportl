@@ -9,23 +9,19 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.enfotrix.studentportal.Activities.ActivityForgetPasswordAuth;
 import com.enfotrix.studentportal.Activities.ActivityLogin;
+import com.enfotrix.studentportal.Models.DashboardViewModel;
 import com.enfotrix.studentportal.R;
 import com.enfotrix.studentportal.Utils;
 import com.enfotrix.studentportal.databinding.FragmentDashboardBinding;
-import com.enfotrix.studentportal.Models.DashboardViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -36,13 +32,12 @@ public class DashboardFragment extends Fragment {
 
 
     //------------------ variables initialization
-    private TextView txt_studentRegNo,txt_studentFullName,txt_studentFatherName;
-    private TextView txt_studentAddress,txt_studentPhoneNo;
-    private TextView txt_studentEmail,txt_studentDOB;
-    private Button btn_logout;
+    private TextView txt_studentRegNo, txt_studentFullName, txt_studentFatherName;
+    private TextView txt_studentAddress, txt_studentPhoneNo;
+    private TextView txt_studentEmail, txt_studentDOB;
+    private Button btn_logout, btn_attendance;
     private FirebaseFirestore db;
     private Utils utils;
-
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -71,6 +66,7 @@ public class DashboardFragment extends Fragment {
         utils = new Utils(getContext());
 
         btn_logout = root.findViewById(R.id.btn_logout);
+        btn_attendance = root.findViewById(R.id.btn_attendance);
 
         db = FirebaseFirestore.getInstance();
 
@@ -83,6 +79,13 @@ public class DashboardFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), ActivityLogin.class);
                 startActivity(intent);
                 getActivity().finish();
+            }
+        });
+
+        btn_attendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AttendanceSheet();
             }
         });
 
@@ -127,20 +130,32 @@ public class DashboardFragment extends Fragment {
         return root;
     }
 
+    private void AttendanceSheet() {
+
+        BottomSheetDialog dialog = new BottomSheetDialog(getContext());
+        View vie = getLayoutInflater().inflate(R.layout.bottam_sheet_attendance, null);
+
+
+        dialog.setContentView(vie);
+        dialog.setCancelable(true);
+        dialog.show();
+
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
 
-    public void getData(){
+    public void getData() {
         db.collection("Students").document(utils.getToken()).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
-                        DocumentSnapshot document= task.getResult();
+                        DocumentSnapshot document = task.getResult();
 
-                        String student_RegNoFromDb=document.getString("student_regNo");
+                        String student_RegNoFromDb = document.getString("student_regNo");
                         String student_FullNameFromDb = document.getString("student_fName");
                         String student_FatherNameFromDb = document.getString("student_fatherName");
                         String student_homeAddressFromDb = document.getString("student_homeAddress");
