@@ -262,43 +262,9 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lay_sn"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:orientation="horizontal"
-        android:weightSum="5">
-
-        <View
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="1dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_line" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_15sdp"
-            android:layout_weight="3"
-            android:gravity="center_horizontal"
-            android:text="Histroy"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_18ssp" />
-
-        <View
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="1dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_line" />
-    </LinearLayout>
-
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_earlier"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/_30sdp"
@@ -306,6 +272,11 @@
         android:layout_marginRight="@dimen/_30sdp"
         android:layout_marginBottom="@dimen/_20sdp"
         android:background="@drawable/btn_bg"
+        android:drawableLeft="@drawable/ic_baseline_history_24"
+        android:drawablePadding="@dimen/_8sdp"
+        android:drawableTint="@color/white"
+        android:gravity="center"
+        android:paddingLeft="@dimen/_8sdp"
         android:text="Earlier"
         android:textAllCaps="false"
         android:textColor="@color/white"

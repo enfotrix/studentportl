@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.enfotrix.studentportal.Models.Model_Announ;
 import com.enfotrix.studentportal.R;
 
@@ -23,11 +22,12 @@ public class Adapter_Announ extends RecyclerView.Adapter<Adapter_Announ.ViewHold
     public Adapter_Announ(List<Model_Announ> model_Announ) {
         this.model_Announ = model_Announ;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem= layoutInflater.inflate(R.layout.list_announce, parent, false);
+        View listItem = layoutInflater.inflate(R.layout.list_announce, parent, false);
         ViewHolder viewHolder = new ViewHolder(listItem);
         return viewHolder;
     }
@@ -39,7 +39,7 @@ public class Adapter_Announ extends RecyclerView.Adapter<Adapter_Announ.ViewHold
         holder.txt_name.setText(model_Announ.get(position).getHeading());
         holder.txt_notifi.setText(model_Announ.get(position).getData());
 
-        holder.layout_Announ.setBackgroundColor(Color.TRANSPARENT);// setBackgroundColor(Color.parseColor("#9F000000"));
+//        holder.layout_Announ.setBackgroundColor(Color.TRANSPARENT);// setBackgroundColor(Color.parseColor("#9F000000"));
 
 //        holder.layout_Withdraw_req.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -58,17 +58,18 @@ public class Adapter_Announ extends RecyclerView.Adapter<Adapter_Announ.ViewHold
         return model_Announ.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
 
-        public TextView txt_date,txt_name,txt_notifi;
+        public TextView txt_date, txt_name, txt_notifi;
         public LinearLayout layout_Announ;
+
         public ViewHolder(View itemView) {
             super(itemView);
             this.txt_date = (TextView) itemView.findViewById(R.id.txt_date);
             this.txt_name = (TextView) itemView.findViewById(R.id.txt_header_notify);
             this.txt_notifi = (TextView) itemView.findViewById(R.id.txt_notifi);
-            layout_Announ = (LinearLayout)itemView.findViewById(R.id.layout_Notify);
+//            layout_Announ = (LinearLayout) itemView.findViewById(R.id.layout_Notify);
         }
 
     }

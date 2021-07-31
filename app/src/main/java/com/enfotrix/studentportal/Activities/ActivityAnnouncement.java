@@ -1,13 +1,13 @@
 package com.enfotrix.studentportal.Activities;
 
+import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import android.os.Bundle;
-import android.widget.Toast;
 
 import com.enfotrix.studentportal.Adapters.Adapter_Announ;
 import com.enfotrix.studentportal.Models.Model_Announ;
@@ -30,21 +30,20 @@ import java.util.List;
 public class ActivityAnnouncement extends AppCompatActivity {
 
 
-
     private FirebaseFirestore firestore;
     private Utils utils;
 
 
     List<Model_Announ> list_Announ = new ArrayList<>();
-    RecyclerView recyc_Announ ;
+    RecyclerView recyc_Announ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_announcement);
 
-        firestore= FirebaseFirestore.getInstance();
-        utils=new Utils(this);
+        firestore = FirebaseFirestore.getInstance();
+        utils = new Utils(this);
 
         recyc_Announ = findViewById(R.id.list_Announ);
         recyc_Announ.setHasFixedSize(true);
@@ -67,7 +66,7 @@ public class ActivityAnnouncement extends AppCompatActivity {
     private void fetchNotifi(String userID) {
 
 
-        final lottiedialog lottie=new lottiedialog(this);
+        final lottiedialog lottie = new lottiedialog(this);
         lottie.show();
 
         list_Announ.clear();
@@ -78,7 +77,7 @@ public class ActivityAnnouncement extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                Model_Announ model_Announ =  new Model_Announ(
+                                Model_Announ model_Announ = new Model_Announ(
                                         document.getId(),
                                         document.getString("data"),
                                         document.getString("date"),
@@ -92,20 +91,19 @@ public class ActivityAnnouncement extends AppCompatActivity {
                             recyc_Announ.setAdapter(adapter_Announ);
 
                             lottie.dismiss();
-                        }
-                        else {
+                        } else {
                             lottie.dismiss();
                             Toast.makeText(ActivityAnnouncement.this, "Connection Error", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
-        .addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull @NotNull Exception e) {
-                lottie.dismiss();
-                Toast.makeText(ActivityAnnouncement.this, "Connection Error", Toast.LENGTH_SHORT).show();
-            }
-        });
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+                        lottie.dismiss();
+                        Toast.makeText(ActivityAnnouncement.this, "Connection Error", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
 
     }

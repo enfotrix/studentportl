@@ -6,13 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.enfotrix.studentportal.Activities.ActivityLogin;
+import com.enfotrix.studentportal.Activities.ActivityAttendance;
 import com.enfotrix.studentportal.Models.DashboardViewModel;
 import com.enfotrix.studentportal.R;
 import com.enfotrix.studentportal.Utils;
@@ -38,6 +40,7 @@ public class DashboardFragment extends Fragment {
     private Button btn_logout, btn_attendance;
     private FirebaseFirestore db;
     private Utils utils;
+    private LinearLayout lay_attendance;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -56,6 +59,14 @@ public class DashboardFragment extends Fragment {
             }
         });*/
 
+        lay_attendance = root.findViewById(R.id.lay_attendance);
+        lay_attendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attendancedailog();
+
+            }
+        });
 //        txt_studentRegNo = root.findViewById(R.id.txt_studentRegNo);
 //        txt_studentFullName = root.findViewById(R.id.txt_studentFullName);
 //        txt_studentFatherName = root.findViewById(R.id.txt_studentFatherName);
@@ -72,25 +83,25 @@ public class DashboardFragment extends Fragment {
 
 
         //------ logout button click event
-        btn_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                utils.logout();
-                Intent intent = new Intent(getActivity(), ActivityLogin.class);
-                startActivity(intent);
-                getActivity().finish();
-            }
-        });
+//        btn_logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                utils.logout();
+//                Intent intent = new Intent(getActivity(), ActivityLogin.class);
+//                startActivity(intent);
+//                getActivity().finish();
+//            }
+//        });
 
-        btn_attendance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AttendanceSheet();
-            }
-        });
+//        btn_attendance.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                AttendanceSheet();
+//            }
+//        });
 
         //fetch data of specific student from db
-        getData();
+//        getData();
 
 //        db.collection("Students").whereEqualTo("student_regNo",utils.getToken()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 //            @Override
@@ -130,17 +141,25 @@ public class DashboardFragment extends Fragment {
         return root;
     }
 
-    private void AttendanceSheet() {
+    private void attendancedailog() {
 
         BottomSheetDialog dialog = new BottomSheetDialog(getContext());
         View vie = getLayoutInflater().inflate(R.layout.bottam_sheet_attendance, null);
 
+        AppCompatButton btn_earlier = vie.findViewById(R.id.btn_earlier);
 
         dialog.setContentView(vie);
         dialog.setCancelable(true);
         dialog.show();
 
+        btn_earlier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), ActivityAttendance.class));
+            }
+        });
     }
+
 
     @Override
     public void onDestroyView() {
@@ -164,13 +183,13 @@ public class DashboardFragment extends Fragment {
                         String student_DOBFromDb = document.getString("student_dob");
 
 
-                        txt_studentRegNo.setText(student_RegNoFromDb);
-                        txt_studentAddress.setText(student_homeAddressFromDb);
-                        txt_studentFatherName.setText(student_FatherNameFromDb);
-                        txt_studentPhoneNo.setText(student_PhoneNoFromDb);
-                        txt_studentFullName.setText(student_FullNameFromDb);
-                        txt_studentEmail.setText(student_EmailFromDb);
-                        txt_studentDOB.setText(student_DOBFromDb);
+//                        txt_studentRegNo.setText(student_RegNoFromDb);
+//                        txt_studentAddress.setText(student_homeAddressFromDb);
+//                        txt_studentFatherName.setText(student_FatherNameFromDb);
+//                        txt_studentPhoneNo.setText(student_PhoneNoFromDb);
+//                        txt_studentFullName.setText(student_FullNameFromDb);
+//                        txt_studentEmail.setText(student_EmailFromDb);
+//                        txt_studentDOB.setText(student_DOBFromDb);
 
 
                     }

@@ -48,7 +48,7 @@
                     android:layout_marginHorizontal="@dimen/_8sdp"
                     android:text="Academics"
                     android:textColor="@color/black_gray"
-                    android:textSize="@dimen/_18ssp"
+                    android:textSize="@dimen/_14ssp"
                     android:textStyle="bold" />
 
                 <View
@@ -174,7 +174,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:text="News"
                     android:textColor="@color/black_gray"
-                    android:textSize="@dimen/_18ssp"
+                    android:textSize="@dimen/_14ssp"
                     android:textStyle="bold" />
 
                 <View
@@ -234,6 +234,7 @@
                         app:cardElevation="@dimen/_8sdp">
 
                         <RelativeLayout
+                            android:id="@+id/lay_announcement"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
@@ -269,6 +270,7 @@
                         app:cardElevation="@dimen/_8sdp">
 
                         <RelativeLayout
+                            android:id="@+id/lay_feedback"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 

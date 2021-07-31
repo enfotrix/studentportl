@@ -14,6 +14,8 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.enfotrix.studentportal.Activities.ActivityAnnouncement;
+import com.enfotrix.studentportal.Activities.ActivityFeedback;
 import com.enfotrix.studentportal.Activities.ActivityGallery;
 import com.enfotrix.studentportal.Models.HomeViewModel;
 import com.enfotrix.studentportal.R;
@@ -37,7 +39,7 @@ public class HomeFragment extends Fragment {
     private Button btn_announcement, btn_contactus, btn_feedback, btn_gallery;
 
     private CardView cv_contactus;
-    RelativeLayout lay_gallery;
+    RelativeLayout lay_gallery, lay_announcement, lay_feedback;
 
 
     private String cu_departmentName1, cu_email1, cu_mobileNo1, cu_whatsapp1, cu_landline1;
@@ -73,6 +75,22 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), ActivityGallery.class));
+            }
+        });
+
+        lay_feedback = root.findViewById(R.id.lay_feedback);
+        lay_feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), ActivityFeedback.class));
+            }
+        });
+
+        lay_announcement = root.findViewById(R.id.lay_announcement);
+        lay_announcement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), ActivityAnnouncement.class));
             }
         });
 

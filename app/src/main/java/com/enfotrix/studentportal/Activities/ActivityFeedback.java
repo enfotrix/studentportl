@@ -1,17 +1,17 @@
 package com.enfotrix.studentportal.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.enfotrix.studentportal.Adapters.Adapter_Feedback;
 import com.enfotrix.studentportal.Models.Model_Feedback;
@@ -39,17 +39,16 @@ import java.util.Map;
 public class ActivityFeedback extends AppCompatActivity {
 
 
-
     private FirebaseFirestore firestore;
     private Utils utils;
 
 
     List<Model_Feedback> list_Feedback = new ArrayList<>();
 
-    RecyclerView recyc_Feedback ;
+    RecyclerView recyc_Feedback;
 
 
-    private EditText edt_head,edt_feedback;
+    private EditText edt_head, edt_feedback;
 
 
     @Override
@@ -57,49 +56,48 @@ public class ActivityFeedback extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
 
+        getSupportActionBar().hide();
 
-
-        firestore= FirebaseFirestore.getInstance();
-        utils=new Utils(this);
+        firestore = FirebaseFirestore.getInstance();
+        utils = new Utils(this);
 
         recyc_Feedback = findViewById(R.id.list_Feedback);
         recyc_Feedback.setHasFixedSize(true);
         recyc_Feedback.setLayoutManager(new LinearLayoutManager(this));
-        edt_feedback=findViewById(R.id.edit_annBody);
-        edt_head=findViewById(R.id.edit_annHead);
+//        edt_feedback = findViewById(R.id.edit_annBody);
+//        edt_head = findViewById(R.id.edit_annHead);
 
 
-        Button btn_announ=findViewById(R.id.btn_announcement);
-        btn_announ.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        Button btn_announ = findViewById(R.id.btn_announcement);
+//        btn_announ.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//
+//                addFeedback(utils.getToken());
+//
+//
+//            }
+//        });
 
-
-                addFeedback(utils.getToken());
-
-
-            }
-        });
-
-        fetchFeedback(utils.getToken());
+//        fetchFeedback(utils.getToken());
 
 
         final SwipeRefreshLayout pullToRefresh = findViewById(R.id.swiperefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                fetchFeedback(utils.getToken());
+//                fetchFeedback(utils.getToken());
                 pullToRefresh.setRefreshing(false);
             }
         });
-
 
 
     }
 
     private void fetchFeedback(String token) {
 
-        final lottiedialog lottie=new lottiedialog(this);
+        final lottiedialog lottie = new lottiedialog(this);
         lottie.show();
 
         list_Feedback.clear();
@@ -112,7 +110,7 @@ public class ActivityFeedback extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                Model_Feedback model_feedback =  new Model_Feedback(
+                                Model_Feedback model_feedback = new Model_Feedback(
                                         document.getId(),
                                         document.getString("data"),
                                         document.getString("date"),
@@ -125,8 +123,7 @@ public class ActivityFeedback extends AppCompatActivity {
                             recyc_Feedback.setAdapter(adapter_feedback);
 
                             lottie.dismiss();
-                        }
-                        else {
+                        } else {
                             lottie.dismiss();
                             Toast.makeText(ActivityFeedback.this, "something wrong!", Toast.LENGTH_SHORT).show();
                         }
@@ -138,14 +135,14 @@ public class ActivityFeedback extends AppCompatActivity {
     private void addFeedback(String token) {
 
 
-        final lottiedialog lottie=new lottiedialog(this);
+        final lottiedialog lottie = new lottiedialog(this);
         lottie.show();
 
 
         Map<String, Object> map = new HashMap<>();
-        map.put("data",edt_feedback.getText().toString());
-        map.put("date",getDate());
-        map.put("heading",edt_head.getText().toString());
+        map.put("data", edt_feedback.getText().toString());
+        map.put("date", getDate());
+        map.put("heading", edt_head.getText().toString());
 
 
         firestore.collection("Students").document(token).collection("Feedback").add(map)

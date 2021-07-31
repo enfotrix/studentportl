@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.enfotrix.studentportal">
+
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,7 +15,9 @@
         <activity android:name=".Activities.Activity_custom_image"></activity>
         <activity android:name=".Activities.Activity_full_image_container" />
         <activity android:name=".Activities.ActivityAttendance" />
-        <activity android:name=".Activities.ActivityFeedback" />
+        <activity android:name=".Activities.ActivityFeedback">
+
+        </activity>
         <activity android:name=".Activities.ActivityProgressReport" />
         <activity android:name=".Activities.ActivityGallery" />
         <activity android:name=".Activities.ActivityAnnouncement" />
@@ -24,7 +27,7 @@
         <activity android:name=".Activities.ActivitySplash">
 
         </activity>
-        <activity android:name=".Activities.MainActivity" >
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
