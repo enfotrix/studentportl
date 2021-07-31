@@ -56,17 +56,17 @@ public class DashboardFragment extends Fragment {
             }
         });*/
 
-        txt_studentRegNo = root.findViewById(R.id.txt_studentRegNo);
-        txt_studentFullName = root.findViewById(R.id.txt_studentFullName);
-        txt_studentFatherName = root.findViewById(R.id.txt_studentFatherName);
-        txt_studentAddress = root.findViewById(R.id.txt_studentAddress);
-        txt_studentPhoneNo = root.findViewById(R.id.txt_studentPhoneNo);
-        txt_studentDOB = root.findViewById(R.id.txt_studentDOB);
-        txt_studentEmail = root.findViewById(R.id.txt_studentEmail);
+//        txt_studentRegNo = root.findViewById(R.id.txt_studentRegNo);
+//        txt_studentFullName = root.findViewById(R.id.txt_studentFullName);
+//        txt_studentFatherName = root.findViewById(R.id.txt_studentFatherName);
+//        txt_studentAddress = root.findViewById(R.id.txt_studentAddress);
+//        txt_studentPhoneNo = root.findViewById(R.id.txt_studentPhoneNo);
+//        txt_studentDOB = root.findViewById(R.id.txt_studentDOB);
+//        txt_studentEmail = root.findViewById(R.id.txt_studentEmail);
         utils = new Utils(getContext());
 
-        btn_logout = root.findViewById(R.id.btn_logout);
-        btn_attendance = root.findViewById(R.id.btn_attendance);
+//        btn_logout = root.findViewById(R.id.btn_logout);
+//        btn_attendance = root.findViewById(R.id.btn_attendance);
 
         db = FirebaseFirestore.getInstance();
 

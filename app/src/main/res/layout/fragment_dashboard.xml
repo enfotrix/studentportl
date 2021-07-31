@@ -75,6 +75,11 @@
         android:layout_marginTop="-100dp"
         app:cardCornerRadius="@dimen/_20sdp">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/boypro"></ImageView>
 
     </androidx.cardview.widget.CardView>
 
