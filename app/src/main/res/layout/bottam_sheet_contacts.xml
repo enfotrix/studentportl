@@ -12,369 +12,397 @@
     app:behavior_peekHeight="0.1dp"
     app:layout_behavior="@string/bottom_sheet_behavior">
 
-
-    <RelativeLayout
-        android:id="@+id/lay_sn"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_15sdp">
+        android:layout_height="match_parent">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_logo"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:src="@drawable/slogo"
-            app:civ_border_color="@color/yellow_b"
-            app:civ_border_width="@dimen/_1sdp" />
-
-
-        <TextView
-            android:id="@+id/text_schoolName"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_toRightOf="@+id/img_logo"
-            android:text="Mehtab Public High School Chak No 86 Sb Sargodha"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_16ssp" />
-
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/txt_pri"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lay_sn"
-        android:layout_marginLeft="@dimen/_15sdp"
-        android:gravity="center_horizontal"
-        android:text="Principal"
-        android:textColor="@color/black_gray"
-        android:textSize="@dimen/_18ssp" />
-
-    <LinearLayout
-        android:id="@+id/text_ple"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_pri"
-        android:orientation="horizontal"
-        android:weightSum="5">
-
-        <View
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="1dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_line" />
+            android:layout_height="match_parent">
 
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_principle"
-            android:layout_width="@dimen/_65sdp"
-            android:layout_height="@dimen/_65sdp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:layout_weight="3"
-            android:src="@drawable/slogo"
-            app:civ_border_color="@color/yellow_b"
-            app:civ_border_width="@dimen/_1sdp" />
-
-        <View
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="1dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_line" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lay_ple_conatct"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_60sdp"
-        android:layout_below="@+id/text_ple"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:orientation="horizontal">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginHorizontal="@dimen/_8sdp"
-            android:layout_weight="1"
-            app:cardCornerRadius="@dimen/_12sdp">
-
-            <ImageView
+            <RelativeLayout
+                android:id="@+id/lay_sn"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/_5sdp"
-                android:src="@drawable/call" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp">
 
-        </androidx.cardview.widget.CardView>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_logo"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:src="@drawable/slogo"
+                    app:civ_border_color="@color/yellow_b"
+                    app:civ_border_width="@dimen/_1sdp" />
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginHorizontal="@dimen/_8sdp"
-            android:layout_weight="1"
-            app:cardCornerRadius="@dimen/_12sdp">
 
-            <ImageView
+                <TextView
+                    android:id="@+id/text_schoolName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_toRightOf="@+id/img_logo"
+                    android:text="Mehtab Public High School Chak No 86 Sb Sargodha"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/text_ple"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/_5sdp"
-                android:src="@drawable/landline" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lay_sn"
+                android:orientation="horizontal"
+                android:weightSum="5">
 
-        </androidx.cardview.widget.CardView>
+                <View
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_line" />
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginHorizontal="@dimen/_8sdp"
-            android:layout_weight="1"
-            app:cardCornerRadius="@dimen/_12sdp">
 
-            <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_principle"
+                    android:layout_width="@dimen/_65sdp"
+                    android:layout_height="@dimen/_65sdp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_weight="3"
+                    android:src="@drawable/slogo"
+                    app:civ_border_color="@color/yellow_b"
+                    app:civ_border_width="@dimen/_1sdp" />
+
+                <View
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_line" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_pri"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/_10sdp"
-                android:src="@drawable/whats" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_ple"
+                android:gravity="center_horizontal"
+                android:text="Principal"
+                android:textColor="@color/black_gray"
+                android:textSize="@dimen/_18ssp" />
 
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginHorizontal="@dimen/_8sdp"
-            android:layout_weight="1"
-            app:cardCornerRadius="@dimen/_12sdp">
-
-            <ImageView
+            <LinearLayout
+                android:id="@+id/lay_ple_conatct"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/_10sdp"
-                android:src="@drawable/emailicon" />
+                android:layout_height="@dimen/_60sdp"
+                android:layout_below="@+id/txt_pri"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal">
 
-        </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_12sdp">
 
-    </LinearLayout>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/call" />
 
-    <LinearLayout
-        android:id="@+id/text_admins"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lay_ple_conatct"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:orientation="horizontal"
-        android:weightSum="5">
+                </androidx.cardview.widget.CardView>
 
-        <View
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="1dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_line" />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_12sdp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_15sdp"
-            android:layout_weight="3"
-            android:gravity="center_horizontal"
-            android:text="Administration Contact"
-            android:textColor="@color/black_gray"
-            android:textSize="@dimen/_18ssp" />
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/landline" />
 
-        <View
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="1dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_line" />
-    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
-    <LinearLayout
-        android:id="@+id/lay_admin_conatct"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_60sdp"
-        android:layout_below="@+id/text_admins"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:orientation="horizontal">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_12sdp">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginHorizontal="@dimen/_8sdp"
-            android:layout_weight="1"
-            app:cardCornerRadius="@dimen/_12sdp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_10sdp"
+                        android:src="@drawable/whats" />
 
-            <ImageView
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_12sdp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_10sdp"
+                        android:src="@drawable/emailicon" />
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/text_admins"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/_5sdp"
-                android:src="@drawable/call" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lay_ple_conatct"
+                android:orientation="horizontal"
+                android:weightSum="5">
 
-        </androidx.cardview.widget.CardView>
+                <View
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_line" />
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginHorizontal="@dimen/_8sdp"
-            android:layout_weight="1"
-            app:cardCornerRadius="@dimen/_12sdp">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="@dimen/_65sdp"
+                    android:layout_height="@dimen/_65sdp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_weight="3"
+                    android:src="@drawable/slogo"
+                    app:civ_border_color="@color/yellow_b"
+                    app:civ_border_width="@dimen/_1sdp" />
 
-            <ImageView
+                <View
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_line" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_admin"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/_5sdp"
-                android:src="@drawable/landline" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_admins"
+                android:gravity="center_horizontal"
+                android:text="Administration"
+                android:textColor="@color/black_gray"
+                android:textSize="@dimen/_18ssp" />
 
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginHorizontal="@dimen/_8sdp"
-            android:layout_weight="1"
-            app:cardCornerRadius="@dimen/_12sdp">
-
-            <ImageView
+            <LinearLayout
+                android:id="@+id/lay_admin_conatct"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/_10sdp"
-                android:src="@drawable/whats" />
+                android:layout_height="@dimen/_60sdp"
+                android:layout_below="@+id/txt_admin"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:orientation="horizontal">
 
-        </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_12sdp">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginHorizontal="@dimen/_8sdp"
-            android:layout_weight="1"
-            app:cardCornerRadius="@dimen/_12sdp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/call" />
 
-            <ImageView
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_12sdp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/landline" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_12sdp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_10sdp"
+                        android:src="@drawable/whats" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_12sdp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_10sdp"
+                        android:src="@drawable/emailicon" />
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/text_account"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/_10sdp"
-                android:src="@drawable/emailicon" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lay_admin_conatct"
+                android:orientation="horizontal"
+                android:weightSum="5">
 
-        </androidx.cardview.widget.CardView>
+                <View
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_line" />
 
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="@dimen/_65sdp"
+                    android:layout_height="@dimen/_65sdp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_weight="3"
+                    android:src="@drawable/slogo"
+                    app:civ_border_color="@color/yellow_b"
+                    app:civ_border_width="@dimen/_1sdp" />
 
-    </LinearLayout>
+                <View
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_line" />
+            </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/text_account"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lay_admin_conatct"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:orientation="horizontal"
-        android:weightSum="5">
-
-        <View
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="1dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_line" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_15sdp"
-            android:layout_weight="3"
-            android:gravity="center_horizontal"
-            android:text="Account Contact"
-            android:textColor="@color/black_gray"
-            android:textSize="@dimen/_18ssp" />
-
-        <View
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="1dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_line" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lay_admin_account"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_60sdp"
-        android:layout_below="@+id/text_account"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginBottom="@dimen/_20sdp"
-        android:orientation="horizontal">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginHorizontal="@dimen/_8sdp"
-            android:layout_weight="1"
-            app:cardCornerRadius="@dimen/_12sdp">
-
-            <ImageView
+            <TextView
+                android:id="@+id/txt_acc"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/_5sdp"
-                android:src="@drawable/call" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_account"
+                android:gravity="center_horizontal"
+                android:text="Account"
+                android:textColor="@color/black_gray"
+                android:textSize="@dimen/_18ssp" />
 
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginHorizontal="@dimen/_8sdp"
-            android:layout_weight="1"
-            app:cardCornerRadius="@dimen/_12sdp">
-
-            <ImageView
+            <LinearLayout
+                android:id="@+id/lay_admin_account"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/_5sdp"
-                android:src="@drawable/landline" />
+                android:layout_height="@dimen/_60sdp"
+                android:layout_below="@+id/txt_acc"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:orientation="horizontal">
 
-        </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_12sdp">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginHorizontal="@dimen/_8sdp"
-            android:layout_weight="1"
-            app:cardCornerRadius="@dimen/_12sdp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/call" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/_10sdp"
-                android:src="@drawable/whats" />
+                </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_12sdp">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginHorizontal="@dimen/_8sdp"
-            android:layout_weight="1"
-            app:cardCornerRadius="@dimen/_12sdp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/landline" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/_10sdp"
-                android:src="@drawable/emailicon" />
+                </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_12sdp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_10sdp"
+                        android:src="@drawable/whats" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_12sdp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_10sdp"
+                        android:src="@drawable/emailicon" />
+
+                </androidx.cardview.widget.CardView>
 
 
-    </LinearLayout>
+            </LinearLayout>
 
+        </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>
