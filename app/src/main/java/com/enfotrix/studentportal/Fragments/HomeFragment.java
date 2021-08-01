@@ -10,7 +10,6 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -38,8 +37,8 @@ public class HomeFragment extends Fragment {
 
     private Button btn_announcement, btn_contactus, btn_feedback, btn_gallery;
 
-    private CardView cv_contactus;
-    RelativeLayout lay_gallery, lay_announcement, lay_feedback;
+
+    RelativeLayout lay_gallery, lay_announcement, lay_feedback, cv_contactus;
 
 
     private String cu_departmentName1, cu_email1, cu_mobileNo1, cu_whatsapp1, cu_landline1;
@@ -62,7 +61,7 @@ public class HomeFragment extends Fragment {
         firestore = FirebaseFirestore.getInstance();
         utils = new Utils(this.getContext());
 
-        cv_contactus = root.findViewById(R.id.cv_contactus);
+        cv_contactus = root.findViewById(R.id.lay_contactus);
         cv_contactus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
