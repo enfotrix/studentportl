@@ -28,7 +28,8 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_70sdp"
-                android:src="@drawable/ic_wave" />
+                android:src="@drawable/ic_wave"
+                app:tint="@color/blue_dark" />
 
         </LinearLayout>
 
@@ -72,6 +73,7 @@
                         app:cardCornerRadius="@dimen/_12sdp">
 
                         <RelativeLayout
+                            android:id="@+id/lay_result"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
@@ -87,7 +89,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentTop="true"
-                                android:gravity="center_horizontal"
+                                android:layout_marginHorizontal="@dimen/_12sdp"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                android:gravity="left"
                                 android:text="Result"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_12ssp"
@@ -106,6 +110,7 @@
                         app:cardCornerRadius="@dimen/_12sdp">
 
                         <RelativeLayout
+                            android:id="@+id/lay_dateSheet"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
@@ -121,7 +126,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentTop="true"
-                                android:gravity="center_horizontal"
+                                android:layout_marginHorizontal="@dimen/_12sdp"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                android:gravity="left"
                                 android:text="Date Sheet"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_12ssp"
@@ -140,6 +147,7 @@
                         app:cardCornerRadius="@dimen/_12sdp">
 
                         <RelativeLayout
+                            android:id="@+id/lay_tiemtable"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
@@ -155,7 +163,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentTop="true"
-                                android:gravity="center_horizontal"
+                                android:layout_marginHorizontal="@dimen/_12sdp"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                android:gravity="left"
                                 android:text="Time Table"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_12ssp"
@@ -244,13 +254,16 @@
                                 android:layout_alignParentRight="true"
                                 android:layout_alignParentBottom="true"
                                 android:paddingTop="@dimen/_20sdp"
-                                android:src="@drawable/announcement" />
+                                android:scaleType="fitEnd"
+                                android:src="@drawable/announcemet" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentTop="true"
-                                android:gravity="center_horizontal"
+                                android:layout_marginHorizontal="@dimen/_12sdp"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                android:gravity="left"
                                 android:text="Announcement"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_12ssp"
@@ -286,7 +299,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentTop="true"
-                                android:gravity="center_horizontal"
+                                android:layout_marginHorizontal="@dimen/_12sdp"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                android:gravity="left"
                                 android:text="FeedBack"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_12ssp"
@@ -322,7 +337,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentTop="true"
-                                android:gravity="center_horizontal"
+                                android:layout_marginHorizontal="@dimen/_12sdp"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                android:gravity="left"
                                 android:text="Gallery"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_12ssp"
@@ -333,7 +350,6 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/cv_contactus"
                         android:layout_width="@dimen/_70sdp"
                         android:layout_height="@dimen/_100sdp"
                         android:layout_rowWeight="1"
@@ -343,6 +359,7 @@
                         app:cardElevation="@dimen/_8sdp">
 
                         <RelativeLayout
+                            android:id="@+id/lay_contactus"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
@@ -358,7 +375,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentTop="true"
-                                android:gravity="center_horizontal"
+                                android:layout_marginHorizontal="@dimen/_12sdp"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                android:gravity="left"
                                 android:text="@string/str_contact_us"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_12ssp"
@@ -393,7 +412,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentTop="true"
-                                android:gravity="center_horizontal"
+                                android:layout_marginHorizontal="@dimen/_12sdp"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                android:gravity="left"
                                 android:text="Settings"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_12ssp"

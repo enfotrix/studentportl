@@ -45,10 +45,10 @@ public class Adapter_Month extends RecyclerView.Adapter<Adapter_Month.ViewHolder
 
         holder.tv_monthname.setText(model_month.getMonth_name());
 
-        holder.tv_monthname.setTextColor(context.getResources().getColor(R.color.black));
+        holder.tv_monthname.setTextColor(context.getResources().getColor(R.color.black_m));
 
         if (selectedItem == position) {
-            holder.tv_monthname.setTextColor(context.getResources().getColor(R.color.purple_200));
+            holder.tv_monthname.setTextColor(context.getResources().getColor(R.color.blue_dark));
         }
     }
 

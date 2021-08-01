@@ -9,7 +9,6 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_8sdp"
         android:layout_marginTop="8dp"
-        android:elevation="8dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp">
 
@@ -26,7 +25,7 @@
                 android:layout_height="@dimen/_45sdp"
                 android:layout_centerVertical="true"
                 android:src="@drawable/slogo"
-                app:civ_border_color="@color/yellow_b"
+                app:civ_border_color="@color/blue_dark"
                 app:civ_border_width="@dimen/_1sdp" />
 
             <LinearLayout
@@ -62,7 +61,7 @@
                 android:paddingLeft="@dimen/_8sdp"
                 android:paddingTop="@dimen/_10sdp"
                 android:text="has beennfjdnf jdsfndsfj nj fj fjfjdfdjfjdfjdsjkfddjfjksdfjkjfdskjjfkjfskjsdfjkdsfjdsfjkdskfj"
-                android:textColor="@color/yellow_b" />
+                android:textColor="@color/blue_dark" />
 
             <TextView
                 android:id="@+id/txt_date"

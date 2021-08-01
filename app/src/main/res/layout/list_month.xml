@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_8sdp"
         android:text="month nmae"
-        android:textColor="@color/black"
+        android:textColor="@color/black_m"
         android:textSize="@dimen/_14ssp"
         android:textStyle="bold" />
 

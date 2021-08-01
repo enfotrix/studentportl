@@ -24,7 +24,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/_20sdp"
             android:src="@drawable/slogo"
-            app:civ_border_color="@color/yellow_b"
+            app:civ_border_color="@color/blue_dark"
             app:civ_border_width="@dimen/_1sdp" />
 
 

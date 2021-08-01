@@ -36,7 +36,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_20sdp"
-                    app:cardBackgroundColor="@color/yellow_b"
+                    app:cardBackgroundColor="@color/blue_dark"
                     app:cardCornerRadius="999dp"
                     app:cardElevation="@dimen/_10sdp">
 
@@ -45,7 +45,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/str_login"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_m"
                         android:textSize="@dimen/_18ssp" />
 
 
@@ -86,7 +86,7 @@
                     app:hintAnimationEnabled="true"
                     app:hintTextColor="@color/black"
                     app:startIconDrawable="@drawable/ic_baseline_perm_identity_24"
-                    app:startIconTint="@color/yellow_b">
+                    app:startIconTint="@color/blue_dark">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -109,9 +109,9 @@
                     app:hintAnimationEnabled="true"
                     app:hintTextColor="@color/black"
                     app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@color/yellow_b"
+                    app:passwordToggleTint="@color/blue_dark"
                     app:startIconDrawable="@drawable/ic_baseline_lock_24"
-                    app:startIconTint="@color/yellow_b">
+                    app:startIconTint="@color/blue_dark">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -139,7 +139,7 @@
                     android:layout_marginLeft="@dimen/_20sdp"
                     android:padding="@dimen/_8sdp"
                     android:text="@string/str_forgotPassword"
-                    android:textColor="@color/yellow_b"
+                    android:textColor="@color/blue_dark"
                     android:textSize="@dimen/_14ssp" />
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -151,7 +151,7 @@
                     android:layout_marginRight="@dimen/_20sdp"
                     android:background="@drawable/btn_bg"
                     android:text="@string/str_login"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/black_m" />
             </RelativeLayout>
 
             <LinearLayout
@@ -174,7 +174,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_8sdp"
                     android:text="@string/str_contact_us"
-                    android:textColor="@color/yellow_b"
+                    android:textColor="@color/blue_dark"
                     android:textSize="@dimen/_14ssp" />
 
 

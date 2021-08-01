@@ -14,21 +14,20 @@
         android:roundIcon="@drawable/appicon"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentPortal">
-        <activity android:name=".Activities.Activity_custom_image"></activity>
+        <activity android:name=".Activities.ActivityResult"></activity>
+        <activity android:name=".Activities.Activity_DateSheet" />
+        <activity android:name=".Activities.ActivityTimeTable" />
+        <activity android:name=".Activities.Activity_custom_image" />
         <activity android:name=".Activities.Activity_full_image_container" />
         <activity android:name=".Activities.ActivityAttendance" />
-        <activity android:name=".Activities.ActivityFeedback">
-
-        </activity>
+        <activity android:name=".Activities.ActivityFeedback" />
         <activity android:name=".Activities.ActivityProgressReport" />
         <activity android:name=".Activities.ActivityGallery" />
         <activity android:name=".Activities.ActivityAnnouncement" />
         <activity android:name=".Activities.ActivityResetPassword" />
         <activity android:name=".Activities.ActivityForgetPasswordAuth" />
         <activity android:name=".Activities.ActivityLogin" />
-        <activity android:name=".Activities.ActivitySplash">
-
-        </activity>
+        <activity android:name=".Activities.ActivitySplash"></activity>
         <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -42,6 +42,8 @@ public class ActivityAnnouncement extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_announcement);
 
+
+
         firestore = FirebaseFirestore.getInstance();
         utils = new Utils(this);
 

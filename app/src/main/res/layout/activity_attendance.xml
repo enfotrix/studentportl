@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#96C5F3"
     android:orientation="vertical"
     tools:context=".Activities.ActivityAttendance">
 
@@ -26,8 +25,9 @@
         android:layout_marginTop="@dimen/_12sdp"
         android:hint="Select Session"
         android:textColorHint="@color/black"
-        app:hintTextColor="@color/black_gray"
-        app:startIconDrawable="@drawable/ic_baseline_class_24">
+        app:hintTextColor="@color/black"
+        app:startIconDrawable="@drawable/ic_baseline_class_24"
+        app:startIconTint="@color/black">
 
         <AutoCompleteTextView
             android:layout_width="match_parent"
@@ -59,7 +59,7 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_120sdp"
+                android:layout_height="@dimen/_100sdp"
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:layout_marginRight="@dimen/_20sdp"
@@ -71,10 +71,11 @@
                     android:orientation="horizontal">
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="@dimen/_100sdp"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_80sdp"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_10sdp"
+                        app:cardBackgroundColor="@color/blue_dark"
                         app:cardCornerRadius="@dimen/_20ssp">
 
                         <LinearLayout
@@ -88,7 +89,7 @@
                                 android:layout_marginTop="@dimen/_8sdp"
                                 android:gravity="center_horizontal"
                                 android:text="Present"
-                                android:textColor="@color/black_gray"
+                                android:textColor="@color/black_m"
                                 android:textSize="@dimen/_16ssp"
                                 android:textStyle="bold" />
 
@@ -99,7 +100,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:text="24"
-                                android:textColor="#575454"
+                                android:textColor="@color/black_m"
                                 android:textSize="@dimen/_40ssp" />
 
 
@@ -115,6 +116,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:orientation="horizontal">
 
                             <TextView
@@ -123,7 +125,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:text="Leave"
-                                android:textColor="@color/black_gray"
+                                android:textColor="@color/black"
                                 android:textSize="@dimen/_14ssp"
                                 android:textStyle="bold" />
 
@@ -133,7 +135,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:text="Absent"
-                                android:textColor="@color/black_gray"
+                                android:textColor="@color/black"
                                 android:textSize="@dimen/_14ssp"
                                 android:textStyle="bold" />
 
