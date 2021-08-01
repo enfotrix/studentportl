@@ -4,15 +4,17 @@
     <string name="title_dashboard">My Profile</string>
     <string name="title_notifications">Notifications</string>
 
+    <string name="str_somethingWentWrong">Something went wrong. Try again Later</string>
+
 
     <string name="str_schoolName">School Name</string>
 
 
-    <!-- Splash strings   -->
+    <!-- Activity Splash strings   -->
     <string name="str_splashWelcomeMessage">Welcome to Student Portal</string>
 
 
-    <!--    Login strings-->
+    <!--    Activity Login strings-->
     <string name="str_studentRegNo">Registration No</string>
     <string name="str_studentPassword">Password</string>
     <string name="str_btnLogin">Login</string>
@@ -22,7 +24,7 @@
     <string name="str_contact_us"><u>Contact Us</u></string>
 
 
-    <!--    My Profile Strings-->
+    <!--    Activity My Profile Strings-->
     <string name="str_studentName">Name </string>
     <string name="str_studentFatherName">Father Name</string>
     <string name="str_studentDOB">Date of Birth</string>
@@ -32,14 +34,14 @@
     <string name="str_studentHomeAddress">Address</string>
     <string name="str_strDB">Data from Database</string>
 
-    <!--    Forget Password Strings-->
+    <!--    Activity Forget Password Strings-->
     <string name="str_studentFatherCNIC">Father CNIC</string>
     <string name="str_forget">FORGET</string>
     <string name="str_password">PASSWORD</string>
     <string name="verify">Verify</string>
 
 
-    <!--    Reset Password Strings-->
+    <!--    Activity Reset Password Strings-->
     <string name="str_new">NEW</string>
     <string name="str_credential">CREDENTIAL</string>
     <string name="str_newcred">Your identity has been verfified! Set Your new Password</string>
@@ -47,8 +49,10 @@
     <string name="str_update">update</string>
     <string name="str_fp">Provide your account\'s Reg and Father CNIC for which you want to rest your password</string>
 
-    <!--   Notifications Strings-->
+    <!--   Activity Notifications Strings-->
     <string name="str_notifications">Notifications</string>
     <string name="str_earlier">Earlier</string>
+
+
 
 </resources>

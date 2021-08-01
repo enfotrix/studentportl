@@ -41,7 +41,6 @@ public class ActivitySplash extends AppCompatActivity {
                     Intent intent = new Intent(ActivitySplash.this, ActivityLogin.class);
                     startActivity(intent);
                 }
-
                 finish();
             }
         }, 3000);

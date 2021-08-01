@@ -39,7 +39,7 @@ public class Adapter_Notifi extends RecyclerView.Adapter<Adapter_Notifi.ViewHold
         holder.txt_name.setText(model_Notifi.get(position).getHeading());
         holder.txt_notifi.setText(model_Notifi.get(position).getData());
 
-        holder.layout_Notifi.setBackgroundColor(Color.TRANSPARENT);// setBackgroundColor(Color.parseColor("#9F000000"));
+        //holder.layout_Notifi.setBackgroundColor(Color.TRANSPARENT);// setBackgroundColor(Color.parseColor("#9F000000"));
 
 //        holder.layout_Withdraw_req.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -69,7 +69,7 @@ public class Adapter_Notifi extends RecyclerView.Adapter<Adapter_Notifi.ViewHold
             this.txt_date = (TextView) itemView.findViewById(R.id.txt_date);
             this.txt_name = (TextView) itemView.findViewById(R.id.txt_header_notify);
             this.txt_notifi = (TextView) itemView.findViewById(R.id.txt_notifi);
-            layout_Notifi = (LinearLayout) itemView.findViewById(R.id.layout_Notify);
+            //layout_Notifi = (LinearLayout) itemView.findViewById(R.id.layout_Notify);
         }
 
     }

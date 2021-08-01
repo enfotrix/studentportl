@@ -4,9 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class Utils {
-
-
-
     public SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static final String Token = "Token";
@@ -28,7 +25,4 @@ public class Utils {
         if(getToken().equals("logout")||getToken().isEmpty())LoggedIn=false;
         return LoggedIn;
     }
-
-
-
 }

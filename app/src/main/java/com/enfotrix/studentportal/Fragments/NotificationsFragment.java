@@ -40,7 +40,8 @@ public class NotificationsFragment extends Fragment {
 
 
     List<Model_Notifi> list_Notifi = new ArrayList<>();
-    RecyclerView recyc_Notifi, recyc_eNotifi;
+    RecyclerView recyc_Notifi;
+    //recyc_eNotifi;
 
     private NotificationsViewModel notificationsViewModel;
     private FragmentNotificationsBinding binding;
@@ -68,9 +69,9 @@ public class NotificationsFragment extends Fragment {
         recyc_Notifi.setHasFixedSize(true);
         recyc_Notifi.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        recyc_eNotifi = root.findViewById(R.id.list_e_Notifi);
-        recyc_eNotifi.setHasFixedSize(true);
-        recyc_eNotifi.setLayoutManager(new LinearLayoutManager(getContext()));
+//        recyc_eNotifi = root.findViewById(R.id.list_e_Notifi);
+//        recyc_eNotifi.setHasFixedSize(true);
+//        recyc_eNotifi.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
         fetchNotifi(utils.getToken());
@@ -107,10 +108,7 @@ public class NotificationsFragment extends Fragment {
                                 document.getString("student_nDate"),
                                 document.getString("student_nHeading"));
                         list_Notifi.add(model_Notifi);
-
                     }
-
-
                     Adapter_Notifi adapter_notifi = new Adapter_Notifi(list_Notifi);
                     recyc_Notifi.setAdapter(adapter_notifi);
 

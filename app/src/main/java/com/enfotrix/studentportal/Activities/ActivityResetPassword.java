@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.enfotrix.studentportal.R;
+import com.enfotrix.studentportal.lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -35,6 +36,7 @@ public class ActivityResetPassword extends AppCompatActivity {
         // hide actionbar and statusBar
         getSupportActionBar().hide();
 
+        //-------- get global variables
         Bundle bundle = getIntent().getExtras();
         String documentID = bundle.getString("documentID");
 
@@ -42,31 +44,51 @@ public class ActivityResetPassword extends AppCompatActivity {
         edt_password_lay = findViewById(R.id.edt_password_lay);
         edt_re_pass_lay = findViewById(R.id.edt_re_pass_lay);
         btn_update = findViewById(R.id.btn_update);
-
         db = FirebaseFirestore.getInstance();
 
+        //------hide error message from text layouts on focus
+        edt_password_lay.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                edt_password_lay.setError(null);
+            }
+        });
+        edt_re_pass_lay.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                edt_re_pass_lay.setError(null);
+            }
+        });
 
         //-------------------------- Reset Password button clicked
         btn_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(ActivityResetPassword.this, ""+regNo, Toast.LENGTH_SHORT).show();
-//                Toast.makeText(ActivityResetPassword.this, ""+fatherCNIC, Toast.LENGTH_SHORT).show();
-                update(documentID);
-
+                if (checkEmpty())       update(documentID);
             }
         });
-
+    }
+    // ---------------- check empty fields
+    private Boolean checkEmpty() {
+        Boolean isEmpty = false;
+        if(edt_password_lay.getEditText().getText().toString().isEmpty())   edt_password_lay.setError("Please Enter Password");
+        else if(edt_re_pass_lay.getEditText().getText().toString().isEmpty())     edt_re_pass_lay.setError("Please Enter Re Password");
+        else if(!edt_password_lay.getEditText().getText().toString().equals(edt_re_pass_lay.getEditText().getText().toString()))     edt_re_pass_lay.setError("Passwords Don't Match");
+        else isEmpty = true;
+        return isEmpty;
     }
 
     private void update(String documentID) {
+        final lottiedialog lottie=new lottiedialog(this);
+        lottie.show();
         Map<String, Object> map = new HashMap<>();
-        map.put("student_password", edt_password_lay.getEditText().getText().toString().trim());
+        map.put("student_password",edt_password_lay.getEditText().getText().toString().trim());
         db.collection("Students").document(documentID).update(map).
                 addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                         //Toast.makeText(ActivityResetPassword.this, ""+txt_newPassword, Toast.LENGTH_SHORT).show();
+                       lottie.dismiss();
                         Toast.makeText(ActivityResetPassword.this, "Password Updated", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ActivityResetPassword.this, ActivityLogin.class);
                         startActivity(intent);
@@ -76,6 +98,8 @@ public class ActivityResetPassword extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull @NotNull Exception e) {
+                        lottie.dismiss();
+                        Toast.makeText(ActivityResetPassword.this, ""+getResources().getString(R.string.str_somethingWentWrong), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

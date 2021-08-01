@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,7 +15,9 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
 import com.enfotrix.studentportal.Activities.ActivityAttendance;
+import com.enfotrix.studentportal.Activities.ActivityLogin;
 import com.enfotrix.studentportal.Models.DashboardViewModel;
 import com.enfotrix.studentportal.R;
 import com.enfotrix.studentportal.Utils;
@@ -24,6 +27,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -36,8 +41,9 @@ public class DashboardFragment extends Fragment {
     //------------------ variables initialization
     private TextView txt_studentRegNo, txt_studentFullName, txt_studentFatherName;
     private TextView txt_studentAddress, txt_studentPhoneNo;
-    private TextView txt_studentEmail, txt_studentDOB;
-    private Button btn_logout, btn_attendance;
+    private TextView txt_studentEmail, txt_studentDOB, txt_logout;
+    private ImageView imageView;
+    private Button  btn_attendance;
     private FirebaseFirestore db;
     private Utils utils;
     private LinearLayout lay_attendance;
@@ -63,35 +69,36 @@ public class DashboardFragment extends Fragment {
         lay_attendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                attendancedailog();
+                attendancedialog();
 
             }
         });
-//        txt_studentRegNo = root.findViewById(R.id.txt_studentRegNo);
-//        txt_studentFullName = root.findViewById(R.id.txt_studentFullName);
-//        txt_studentFatherName = root.findViewById(R.id.txt_studentFatherName);
-//        txt_studentAddress = root.findViewById(R.id.txt_studentAddress);
-//        txt_studentPhoneNo = root.findViewById(R.id.txt_studentPhoneNo);
-//        txt_studentDOB = root.findViewById(R.id.txt_studentDOB);
-//        txt_studentEmail = root.findViewById(R.id.txt_studentEmail);
+        txt_studentRegNo = root.findViewById(R.id.txt_studentRegNo);
+        txt_studentFullName = root.findViewById(R.id.txt_studentFullName);
+        txt_studentFatherName = root.findViewById(R.id.txt_studentFatherName);
+        txt_studentAddress = root.findViewById(R.id.txt_studentAddress);
+        txt_studentPhoneNo = root.findViewById(R.id.txt_studentPhoneNo);
+        txt_studentDOB = root.findViewById(R.id.txt_studentDOB);
+        txt_studentEmail = root.findViewById(R.id.txt_studentEmail);
+        imageView  = root.findViewById(R.id.imageView);
         utils = new Utils(getContext());
 
-//        btn_logout = root.findViewById(R.id.btn_logout);
+        txt_logout = root.findViewById(R.id.txt_logout);
 //        btn_attendance = root.findViewById(R.id.btn_attendance);
 
         db = FirebaseFirestore.getInstance();
 
 
-        //------ logout button click event
-//        btn_logout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                utils.logout();
-//                Intent intent = new Intent(getActivity(), ActivityLogin.class);
-//                startActivity(intent);
-//                getActivity().finish();
-//            }
-//        });
+        //------ logout link click event
+        txt_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                utils.logout();
+                Intent intent = new Intent(getActivity(), ActivityLogin.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
 
 //        btn_attendance.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -101,47 +108,39 @@ public class DashboardFragment extends Fragment {
 //        });
 
         //fetch data of specific student from db
-//        getData();
+       getData();
 
-//        db.collection("Students").whereEqualTo("student_regNo",utils.getToken()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
-//                if(task.isSuccessful()){
-//                    for(QueryDocumentSnapshot document : task.getResult()) {
-//                        //String str = document.getString("student_fullName");
-//                        String student_RegNoFromDb=document.getString("student_regNo");
-//                        String student_FullNameFromDb = document.getString("student_fName");
-//                        String student_FatherNameFromDb = document.getString("student_fatherName");
-//                        String student_homeAddressFromDb = document.getString("student_homeAddress");
-//                        String student_PhoneNoFromDb = document.getString("student_phoneNo");
-//                        String student_EmailFromDb = document.getString("student_email");
-//                        String student_DOBFromDb = document.getString("student_dob");
-//
-//
-//                        txt_studentRegNo.setText(student_RegNoFromDb);
-//                        txt_studentAddress.setText(student_homeAddressFromDb);
-//                        txt_studentFatherName.setText(student_FatherNameFromDb);
-//                        txt_studentPhoneNo.setText(student_PhoneNoFromDb);
-//                        txt_studentFullName.setText(student_FullNameFromDb);
-//                        txt_studentEmail.setText(student_EmailFromDb);
-//                        txt_studentDOB.setText(student_DOBFromDb);
-//
-//
-////                    }
-//
-//
-//
-//
-//                }
-//
-//            }
-//        });
+        db.collection("Students").whereEqualTo("student_regNo",utils.getToken()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(QueryDocumentSnapshot document : task.getResult()) {
+                        //String str = document.getString("student_fullName");
+                        String student_RegNoFromDb=document.getString("student_regNo");
+                        String student_FullNameFromDb = document.getString("student_fName");
+                        String student_FatherNameFromDb = document.getString("student_fatherName");
+                        String student_homeAddressFromDb = document.getString("student_homeAddress");
+                        String student_PhoneNoFromDb = document.getString("student_phoneNo");
+                        String student_EmailFromDb = document.getString("student_email");
+                        String student_DOBFromDb = document.getString("student_dob");
 
 
+                        txt_studentRegNo.setText(student_RegNoFromDb);
+                        txt_studentAddress.setText(student_homeAddressFromDb);
+                        txt_studentFatherName.setText(student_FatherNameFromDb);
+                        txt_studentPhoneNo.setText(student_PhoneNoFromDb);
+                        txt_studentFullName.setText(student_FullNameFromDb);
+                        txt_studentEmail.setText(student_EmailFromDb);
+                        txt_studentDOB.setText(student_DOBFromDb);
+
+                    }
+                }
+            }
+        });
         return root;
     }
 
-    private void attendancedailog() {
+    private void attendancedialog() {
 
         BottomSheetDialog dialog = new BottomSheetDialog(getContext());
         View vie = getLayoutInflater().inflate(R.layout.bottam_sheet_attendance, null);
@@ -159,14 +158,11 @@ public class DashboardFragment extends Fragment {
             }
         });
     }
-
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
-
     public void getData() {
         db.collection("Students").document(utils.getToken()).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -182,15 +178,13 @@ public class DashboardFragment extends Fragment {
                         String student_EmailFromDb = document.getString("student_email");
                         String student_DOBFromDb = document.getString("student_dob");
 
-
-//                        txt_studentRegNo.setText(student_RegNoFromDb);
-//                        txt_studentAddress.setText(student_homeAddressFromDb);
-//                        txt_studentFatherName.setText(student_FatherNameFromDb);
-//                        txt_studentPhoneNo.setText(student_PhoneNoFromDb);
-//                        txt_studentFullName.setText(student_FullNameFromDb);
-//                        txt_studentEmail.setText(student_EmailFromDb);
-//                        txt_studentDOB.setText(student_DOBFromDb);
-
+                        txt_studentRegNo.setText(student_RegNoFromDb);
+                        txt_studentAddress.setText(student_homeAddressFromDb);
+                        txt_studentFatherName.setText(student_FatherNameFromDb);
+                        txt_studentPhoneNo.setText(student_PhoneNoFromDb);
+                        txt_studentFullName.setText(student_FullNameFromDb);
+                        txt_studentEmail.setText(student_EmailFromDb);
+                        txt_studentDOB.setText(student_DOBFromDb);
 
                     }
                 });

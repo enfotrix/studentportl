@@ -56,48 +56,19 @@ public class ActivityGallery extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
-
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Toast.makeText(ActivityGallery.this, "" + document.getString("path"), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(ActivityGallery.this, "" + document.getString("path"), Toast.LENGTH_SHORT).show();
                                 Model_Image model_image = new Model_Image(
                                         document.getId(),
                                         document.getString("path")
                                 );
                                 list.add(model_image);
-
                             }
                             Adapter_Image adapter_image = new Adapter_Image(ActivityGallery.this, list);
                             recyclerView.setAdapter(adapter_image);
                         }
-
-
                     }
                 });
-
-
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-//                progressBar.setVisibility(View.GONE);
-//                list = new ArrayList<>();
-//                for (DataSnapshot shot : snapshot.getChildren()){
-//                    String data = shot.getValue().toString();
-//                    list.add(data);
-//                }
-//                recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this,2));
-//                adapter = new WallpapersAdapter(list,MainActivity.this);
-//                recyclerView.setAdapter(adapter);
-//                progressBar.setVisibility(View.GONE);
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-//                progressBar.setVisibility(View.GONE);
-//                Toast.makeText(MainActivity.this, "Error" + error.getMessage(), Toast.LENGTH_SHORT).show();
-
-//            }
-//        });
     }
 }

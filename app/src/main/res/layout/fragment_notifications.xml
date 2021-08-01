@@ -35,6 +35,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_15sdp"
@@ -49,6 +50,7 @@
                         android:layout_marginTop="10dp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_15sdp"
@@ -58,6 +60,7 @@
                         android:textSize="@dimen/_16ssp" />
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:visibility="gone"
                         android:id="@+id/list_e_Notifi"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
