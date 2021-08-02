@@ -57,6 +57,7 @@ public class Activity_full_image_container extends AppCompatActivity {
     }
 
     private void downloadImage() {
+
         BitmapDrawable drawable = (BitmapDrawable) fullImage.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
         File filepath = Environment.getExternalStorageDirectory();

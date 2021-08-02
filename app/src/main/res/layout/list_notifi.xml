@@ -9,9 +9,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_8sdp"
         android:layout_marginTop="8dp"
-        android:elevation="8dp"
         app:cardCornerRadius="8dp"
-        app:cardElevation="8dp">
+        >
 
         <RelativeLayout
             android:id="@+id/layout_Notify"
@@ -24,6 +23,7 @@
                 android:id="@+id/circlr_img"
                 android:layout_width="@dimen/_45sdp"
                 android:layout_height="@dimen/_45sdp"
+                android:layout_marginHorizontal="@dimen/_5sdp"
                 android:layout_centerVertical="true"
                 android:src="@drawable/slogo"
                 app:civ_border_color="@color/blue_dark"
