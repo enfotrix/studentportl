@@ -88,17 +88,19 @@ public class DashboardFragment extends Fragment {
 
         db = FirebaseFirestore.getInstance();
 
+        utils=new Utils(getContext());
+
 
         //------ logout link click event
-        txt_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                utils.logout();
-                Intent intent = new Intent(getActivity(), ActivityLogin.class);
-                startActivity(intent);
-                getActivity().finish();
-            }
-        });
+//        txt_logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                utils.logout();
+//                Intent intent = new Intent(getActivity(), ActivityLogin.class);
+//                startActivity(intent);
+//                getActivity().finish();
+//            }
+//        });
 
 //        btn_attendance.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -178,7 +180,7 @@ public class DashboardFragment extends Fragment {
                         String student_EmailFromDb = document.getString("student_email");
                         String student_DOBFromDb = document.getString("student_dob");
 
-                        txt_studentRegNo.setText(student_RegNoFromDb);
+                        //txt_studentRegNo.setText(student_RegNoFromDb);
                         txt_studentAddress.setText(student_homeAddressFromDb);
                         txt_studentFatherName.setText(student_FatherNameFromDb);
                         txt_studentPhoneNo.setText(student_PhoneNoFromDb);

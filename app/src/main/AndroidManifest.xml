@@ -27,13 +27,16 @@
         <activity android:name=".Activities.ActivityResetPassword" />
         <activity android:name=".Activities.ActivityForgetPasswordAuth" />
         <activity android:name=".Activities.ActivityLogin" />
-        <activity android:name=".Activities.ActivitySplash"></activity>
-        <activity android:name=".Activities.MainActivity">
+        <activity android:name=".Activities.ActivitySplash">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".Activities.MainActivity">
+
         </activity>
     </application>
 

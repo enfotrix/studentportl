@@ -43,6 +43,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16ssp" />
 
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/list_Notifi"
                         android:layout_width="match_parent"
