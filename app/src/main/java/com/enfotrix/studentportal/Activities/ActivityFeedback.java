@@ -64,23 +64,23 @@ public class ActivityFeedback extends AppCompatActivity {
         recyc_Feedback = findViewById(R.id.list_Feedback);
         recyc_Feedback.setHasFixedSize(true);
         recyc_Feedback.setLayoutManager(new LinearLayoutManager(this));
-//        edt_feedback = findViewById(R.id.edit_annBody);
+        edt_feedback = findViewById(R.id.edit_annBody);
 //        edt_head = findViewById(R.id.edit_annHead);
 
 
-//        Button btn_announ = findViewById(R.id.btn_announcement);
-//        btn_announ.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//                addFeedback(utils.getToken());
-//
-//
-//            }
-//        });
+        Button btn_announ = findViewById(R.id.btn_announcement);
+        btn_announ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-//        fetchFeedback(utils.getToken());
+
+                addFeedback(utils.getToken());
+
+
+            }
+        });
+
+        fetchFeedback(utils.getToken());
 
 
         final SwipeRefreshLayout pullToRefresh = findViewById(R.id.swiperefresh);

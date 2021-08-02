@@ -113,7 +113,8 @@
                     android:layout_weight="1"
                     app:cardCornerRadius="@dimen/_12sdp">
 
-                    <ImageView
+                     <ImageView
+                        android:id="@+id/img_cu_call1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/_5sdp"
@@ -129,6 +130,7 @@
                     app:cardCornerRadius="@dimen/_12sdp">
 
                     <ImageView
+                        android:id="@+id/img_cu_landline1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/_5sdp"
@@ -144,6 +146,7 @@
                     app:cardCornerRadius="@dimen/_12sdp">
 
                     <ImageView
+                        android:id="@+id/img_cu_whatsapp1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/_10sdp"
@@ -159,6 +162,7 @@
                     app:cardCornerRadius="@dimen/_12sdp">
 
                     <ImageView
+                        android:id="@+id/img_cu_mail1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/_10sdp"
@@ -229,6 +233,7 @@
                     app:cardCornerRadius="@dimen/_12sdp">
 
                     <ImageView
+                        android:id="@+id/img_cu_call2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/_5sdp"
@@ -244,6 +249,7 @@
                     app:cardCornerRadius="@dimen/_12sdp">
 
                     <ImageView
+                        android:id="@+id/img_cu_landline2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/_5sdp"
@@ -259,6 +265,7 @@
                     app:cardCornerRadius="@dimen/_12sdp">
 
                     <ImageView
+                        android:id="@+id/img_cu_whatsapp2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/_10sdp"
@@ -267,6 +274,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/btn_cu_whatsapp2"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_50sdp"
                     android:layout_marginHorizontal="@dimen/_8sdp"
@@ -274,6 +282,7 @@
                     app:cardCornerRadius="@dimen/_12sdp">
 
                     <ImageView
+                        android:id="@+id/img_cu_mail2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/_10sdp"
@@ -346,6 +355,7 @@
                     app:cardCornerRadius="@dimen/_12sdp">
 
                     <ImageView
+                        android:id="@+id/img_cu_call3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/_5sdp"
@@ -361,6 +371,7 @@
                     app:cardCornerRadius="@dimen/_12sdp">
 
                     <ImageView
+                        android:id="@+id/img_cu_landline3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/_5sdp"
@@ -376,6 +387,7 @@
                     app:cardCornerRadius="@dimen/_12sdp">
 
                     <ImageView
+                        android:id="@+id/img_cu_whatsapp3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/_10sdp"
@@ -391,6 +403,7 @@
                     app:cardCornerRadius="@dimen/_12sdp">
 
                     <ImageView
+                        android:id="@+id/img_cu_mail3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/_10sdp"

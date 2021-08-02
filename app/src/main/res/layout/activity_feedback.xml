@@ -123,7 +123,7 @@
                         </LinearLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/edt_registerNumber"
+                            android:id="@+id/edit_annBody"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_100sdp"
@@ -145,14 +145,14 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/btn_login"
+                            android:id="@+id/btn_announcement"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right"
                             android:layout_marginTop="@dimen/_12sdp"
                             android:layout_marginRight="@dimen/_20sdp"
                             android:background="@drawable/btn_bg"
-                            android:text="@string/str_login"
+                            android:text="Submit"
                             android:textColor="@color/white" />
 
                     </LinearLayout>

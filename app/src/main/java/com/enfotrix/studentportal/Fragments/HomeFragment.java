@@ -1,12 +1,15 @@
 package com.enfotrix.studentportal.Fragments;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -69,6 +72,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         IniViews(root);
 
 //        final TextView textView = binding.textHome;
+
 //        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
 //            @Override
 //            public void onChanged(@Nullable String s) {
@@ -125,31 +129,34 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         View vie = getLayoutInflater().inflate(R.layout.bottam_sheet_contacts, null);
 
 
-//        TextView txt_cu_departmentName1 = vie.findViewById(R.id.txt_cu_departmentName1);
-//        txt_cu_departmentName1.setText(cu_departmentName1);
-//        Button btn_cu_call1 = vie.findViewById(R.id.btn_cu_call1);
-//        Button btn_cu_mail1 = vie.findViewById(R.id.btn_cu_mail1);
-//        Button btn_cu_whatsapp1 = vie.findViewById(R.id.btn_cu_whatsapp1);
-//
-//        TextView txt_cu_departmentName2 = vie.findViewById(R.id.txt_cu_departmentName2);
-//        txt_cu_departmentName2.setText(cu_departmentName2);
-//        Button btn_cu_call2 = vie.findViewById(R.id.btn_cu_call2);
-//        Button btn_cu_mail2 = vie.findViewById(R.id.btn_cu_mail2);
-//        Button btn_cu_whatsapp2 = vie.findViewById(R.id.btn_cu_whatsapp2);
-//
-//
-//        TextView txt_cu_departmentName3 = vie.findViewById(R.id.txt_cu_departmentName3);
-//        txt_cu_departmentName3.setText(cu_departmentName3);
-//        Button btn_cu_call3 = vie.findViewById(R.id.btn_cu_call3);
-//        Button btn_cu_mail3 = vie.findViewById(R.id.btn_cu_mail3);
-//        Button btn_cu_whatsapp3 = vie.findViewById(R.id.btn_cu_whatsapp3);
+        TextView txt_cu_departmentName1 = vie.findViewById(R.id.txt_pri);
+        txt_cu_departmentName1.setText(cu_departmentName1);
+        ImageView img_cu_call1 = vie.findViewById(R.id.img_cu_call1);
+        ImageView img_cu_landline1 = vie.findViewById(R.id.img_cu_landline1);
+        ImageView img_cu_mail1 = vie.findViewById(R.id.img_cu_mail1);
+        ImageView img_cu_whatsapp1 = vie.findViewById(R.id.img_cu_whatsapp1);
+
+        TextView txt_cu_departmentName2 = vie.findViewById(R.id.txt_admin);
+        txt_cu_departmentName2.setText(cu_departmentName2);
+        ImageView img_cu_call2 = vie.findViewById(R.id.img_cu_call2);
+        ImageView img_cu_landline2 = vie.findViewById(R.id.img_cu_landline2);
+        ImageView img_cu_mail2 = vie.findViewById(R.id.img_cu_mail2);
+        ImageView img_cu_whatsapp2 = vie.findViewById(R.id.img_cu_whatsapp2);
+
+
+        TextView txt_cu_departmentName3 = vie.findViewById(R.id.txt_acc);
+        txt_cu_departmentName3.setText(cu_departmentName3);
+        ImageView img_cu_call3 = vie.findViewById(R.id.img_cu_call3);
+        ImageView img_cu_landline3 = vie.findViewById(R.id.img_cu_landline3);
+        ImageView img_cu_mail3 = vie.findViewById(R.id.img_cu_mail3);
+        ImageView img_cu_whatsapp3 = vie.findViewById(R.id.img_cu_whatsapp3);
 
         dialog.setContentView(vie);
         dialog.setCancelable(true);
         dialog.show();
 
 
-        /*btn_cu_call1.setOnClickListener(new View.OnClickListener() {
+        img_cu_call1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String contact = cu_mobileNo1; // use country code with your phone number
@@ -159,18 +166,28 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        btn_cu_mail1.setOnClickListener(new View.OnClickListener() {
+        img_cu_landline1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String contact = cu_landline1; // use country code with your phone number
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:" + contact));
+                startActivity(i);
+            }
+        });
+
+        img_cu_mail1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", cu_email1, null));
-                i.putExtra(Intent.EXTRA_SUBJECT, SUBJECT);
-                i.putExtra(Intent.EXTRA_TEXT, BODY);
+                //i.putExtra(Intent.EXTRA_SUBJECT, SUBJECT);
+                //i.putExtra(Intent.EXTRA_TEXT, BODY);
                 startActivity(i);
 
             }
         });
 
-        btn_cu_whatsapp1.setOnClickListener(new View.OnClickListener() {
+        img_cu_whatsapp1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -182,7 +199,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        btn_cu_call2.setOnClickListener(new View.OnClickListener() {
+        img_cu_call2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String contact = cu_mobileNo2; // use country code with your phone number
@@ -192,18 +209,28 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        btn_cu_mail2.setOnClickListener(new View.OnClickListener() {
+        img_cu_landline2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String contact = cu_landline2; // use country code with your phone number
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:" + contact));
+                startActivity(i);
+            }
+        });
+
+        img_cu_mail2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", cu_email2, null));
-                i.putExtra(Intent.EXTRA_SUBJECT, SUBJECT);
-                i.putExtra(Intent.EXTRA_TEXT, BODY);
+               // i.putExtra(Intent.EXTRA_SUBJECT, SUBJECT);
+                //i.putExtra(Intent.EXTRA_TEXT, BODY);
                 startActivity(i);
 
             }
         });
 
-        btn_cu_whatsapp2.setOnClickListener(new View.OnClickListener() {
+        img_cu_whatsapp2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -214,7 +241,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivity(i);
             }
         });
-        btn_cu_call3.setOnClickListener(new View.OnClickListener() {
+        img_cu_call3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String contact = cu_mobileNo3; // use country code with your phone number
@@ -224,18 +251,28 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        btn_cu_mail3.setOnClickListener(new View.OnClickListener() {
+        img_cu_landline3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String contact = cu_landline3; // use country code with your phone number
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:" + contact));
+                startActivity(i);
+            }
+        });
+
+        img_cu_mail3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", cu_email3, null));
-                i.putExtra(Intent.EXTRA_SUBJECT, SUBJECT);
-                i.putExtra(Intent.EXTRA_TEXT, BODY);
+                //i.putExtra(Intent.EXTRA_SUBJECT, SUBJECT);
+                //i.putExtra(Intent.EXTRA_TEXT, BODY);
                 startActivity(i);
 
             }
         });
 
-        btn_cu_whatsapp3.setOnClickListener(new View.OnClickListener() {
+        img_cu_whatsapp3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -245,7 +282,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 i.setData(Uri.parse(url));
                 startActivity(i);
             }
-        });*/
+        });
 
     }
 
@@ -271,7 +308,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                     cu_landline1 = document.getString("cu_landline");
                                 }
 
-                                if (document.getString("cu_departmentName").equals("Finance")) {
+                                if (document.getString("cu_departmentName").equals("Accounts")) {
 
                                     cu_departmentName2 = document.getString("cu_departmentName");
                                     cu_email2 = document.getString("cu_email");

@@ -30,6 +30,7 @@
             app:cardCornerRadius="@dimen/_99sdp">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/boypro" />
@@ -47,6 +48,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/txt_studentFullName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_12sdp"
@@ -77,6 +79,7 @@
                         android:src="@drawable/ic_baseline_perm_identity_24" />
 
                     <TextView
+                        android:id="@+id/txt_studentFatherName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -99,6 +102,7 @@
                         android:src="@drawable/ic_baseline_credit_card_24" />
 
                     <TextView
+                        android:id="@+id/txt_studentDOB"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -121,6 +125,8 @@
                         android:src="@drawable/ic_baseline_call_24" />
 
                     <TextView
+
+                        android:id="@+id/txt_studentPhoneNo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -143,6 +149,7 @@
                         android:src="@drawable/ic_baseline_my_location_24" />
 
                     <TextView
+                        android:id="@+id/txt_studentAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -165,6 +172,7 @@
                         android:src="@drawable/ic_baseline_email_24" />
 
                     <TextView
+                        android:id="@+id/txt_studentEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -202,6 +210,7 @@
                         android:src="@drawable/ic_baseline_app_registration_24" />
 
                     <TextView
+                        android:id="@+id/txt_studentRegNo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -239,6 +248,7 @@
                         android:src="@drawable/ic_baseline_report_24" />
 
                     <TextView
+                        android:id="@+id/txt_progressReport"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -294,6 +304,7 @@
                         app:tint="#FA0202" />
 
                     <TextView
+                        android:id="@+id/txt_logout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"

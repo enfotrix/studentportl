@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
@@ -18,11 +19,14 @@ import androidx.lifecycle.ViewModelProvider;
 import com.bumptech.glide.Glide;
 import com.enfotrix.studentportal.Activities.ActivityAttendance;
 import com.enfotrix.studentportal.Activities.ActivityLogin;
+import com.enfotrix.studentportal.Activities.ActivityProgressReport;
 import com.enfotrix.studentportal.Models.DashboardViewModel;
 import com.enfotrix.studentportal.R;
 import com.enfotrix.studentportal.Utils;
 import com.enfotrix.studentportal.databinding.FragmentDashboardBinding;
+import com.enfotrix.studentportal.lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -32,6 +36,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class DashboardFragment extends Fragment {
 
     private DashboardViewModel dashboardViewModel;
@@ -40,9 +46,9 @@ public class DashboardFragment extends Fragment {
 
     //------------------ variables initialization
     private TextView txt_studentRegNo, txt_studentFullName, txt_studentFatherName;
-    private TextView txt_studentAddress, txt_studentPhoneNo;
+    private TextView txt_studentAddress, txt_studentPhoneNo, txt_progressReport;
     private TextView txt_studentEmail, txt_studentDOB, txt_logout;
-    private ImageView imageView;
+    private CircleImageView imageView;
     private Button  btn_attendance;
     private FirebaseFirestore db;
     private Utils utils;
@@ -56,6 +62,7 @@ public class DashboardFragment extends Fragment {
 
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
 
         /*final TextView textView = binding.textDashboard;
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -73,17 +80,19 @@ public class DashboardFragment extends Fragment {
 
             }
         });
-//        txt_studentRegNo = root.findViewById(R.id.txt_studentRegNo);
-//        txt_studentFullName = root.findViewById(R.id.txt_studentFullName);
-//        txt_studentFatherName = root.findViewById(R.id.txt_studentFatherName);
-//        txt_studentAddress = root.findViewById(R.id.txt_studentAddress);
-//        txt_studentPhoneNo = root.findViewById(R.id.txt_studentPhoneNo);
-//        txt_studentDOB = root.findViewById(R.id.txt_studentDOB);
-//        txt_studentEmail = root.findViewById(R.id.txt_studentEmail);
-//        imageView  = root.findViewById(R.id.imageView);
-//        utils = new Utils(getContext());
-//
-//        txt_logout = root.findViewById(R.id.txt_logout);
+
+        txt_studentRegNo = root.findViewById(R.id.txt_studentRegNo);
+        txt_studentFullName = root.findViewById(R.id.txt_studentFullName);
+        txt_studentFatherName = root.findViewById(R.id.txt_studentFatherName);
+        txt_studentAddress = root.findViewById(R.id.txt_studentAddress);
+        txt_studentPhoneNo = root.findViewById(R.id.txt_studentPhoneNo);
+        txt_studentDOB = root.findViewById(R.id.txt_studentDOB);
+        txt_studentEmail = root.findViewById(R.id.txt_studentEmail);
+        imageView  = root.findViewById(R.id.imageView);
+        utils = new Utils(getContext());
+
+        txt_logout = root.findViewById(R.id.txt_logout);
+        txt_progressReport = root.findViewById(R.id.txt_progressReport);
 //        btn_attendance = root.findViewById(R.id.btn_attendance);
 
         db = FirebaseFirestore.getInstance();
@@ -92,15 +101,24 @@ public class DashboardFragment extends Fragment {
 
 
         //------ logout link click event
-//        txt_logout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                utils.logout();
-//                Intent intent = new Intent(getActivity(), ActivityLogin.class);
-//                startActivity(intent);
-//                getActivity().finish();
-//            }
-//        });
+        txt_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                utils.logout();
+                Intent intent = new Intent(getActivity(), ActivityLogin.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+
+        //------ progress report link click event
+        txt_progressReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ActivityProgressReport.class);
+                startActivity(intent);
+            }
+        });
 
 //        btn_attendance.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -111,34 +129,6 @@ public class DashboardFragment extends Fragment {
 
         //fetch data of specific student from db
        getData();
-
-        db.collection("Students").whereEqualTo("student_regNo",utils.getToken()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot document : task.getResult()) {
-                        //String str = document.getString("student_fullName");
-                        String student_RegNoFromDb=document.getString("student_regNo");
-                        String student_FullNameFromDb = document.getString("student_fName");
-                        String student_FatherNameFromDb = document.getString("student_fatherName");
-                        String student_homeAddressFromDb = document.getString("student_homeAddress");
-                        String student_PhoneNoFromDb = document.getString("student_phoneNo");
-                        String student_EmailFromDb = document.getString("student_email");
-                        String student_DOBFromDb = document.getString("student_dob");
-
-
-                        txt_studentRegNo.setText(student_RegNoFromDb);
-                        txt_studentAddress.setText(student_homeAddressFromDb);
-                        txt_studentFatherName.setText(student_FatherNameFromDb);
-                        txt_studentPhoneNo.setText(student_PhoneNoFromDb);
-                        txt_studentFullName.setText(student_FullNameFromDb);
-                        txt_studentEmail.setText(student_EmailFromDb);
-                        txt_studentDOB.setText(student_DOBFromDb);
-
-                    }
-                }
-            }
-        });
         return root;
     }
 
@@ -166,6 +156,8 @@ public class DashboardFragment extends Fragment {
         binding = null;
     }
     public void getData() {
+        final lottiedialog lottie = new lottiedialog(getContext());
+        lottie.show();
         db.collection("Students").document(utils.getToken()).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -174,22 +166,37 @@ public class DashboardFragment extends Fragment {
 
                         String student_RegNoFromDb = document.getString("student_regNo");
                         String student_FullNameFromDb = document.getString("student_fName");
+                        String student_LastNameFromDb = document.getString("student_lName");
                         String student_FatherNameFromDb = document.getString("student_fatherName");
                         String student_homeAddressFromDb = document.getString("student_homeAddress");
                         String student_PhoneNoFromDb = document.getString("student_phoneNo");
                         String student_EmailFromDb = document.getString("student_email");
                         String student_DOBFromDb = document.getString("student_dob");
+                        String student_profilePicFromDb = document.getString("student_profilePic");
 
-                        //txt_studentRegNo.setText(student_RegNoFromDb);
+                        txt_studentRegNo.setText(student_RegNoFromDb);
                         txt_studentAddress.setText(student_homeAddressFromDb);
                         txt_studentFatherName.setText(student_FatherNameFromDb);
                         txt_studentPhoneNo.setText(student_PhoneNoFromDb);
-                        txt_studentFullName.setText(student_FullNameFromDb);
+                        txt_studentFullName.setText(student_FullNameFromDb+" "+student_LastNameFromDb);
                         txt_studentEmail.setText(student_EmailFromDb);
                         txt_studentDOB.setText(student_DOBFromDb);
+                        Glide.with(imageView)
+                                .load(student_profilePicFromDb)
+                                .fitCenter().into(imageView);
+                        lottie.dismiss();
 
                     }
-                });
+                })
+        .addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull @NotNull Exception e) {
+                Toast.makeText(getContext(), "Connection Error", Toast.LENGTH_SHORT).show();
+                lottie.dismiss();
+            }
+        });
+        }
+
     }
-}
+
 

@@ -21,6 +21,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/circlr_img"
+                android:visibility="gone"
                 android:layout_width="@dimen/_45sdp"
                 android:layout_height="@dimen/_45sdp"
                 android:layout_marginHorizontal="@dimen/_5sdp"
@@ -61,7 +62,7 @@
                 android:layout_toRightOf="@+id/circlr_img"
                 android:paddingLeft="@dimen/_8sdp"
                 android:paddingTop="@dimen/_10sdp"
-                android:text="has beennfjdnf jdsfndsfj nj fj fjfjdfdjfjdfjdsjkfddjfjksdfjkjfdskjjfkjfskjsdfjkdsfjdsfjkdskfj"
+                android:text="has beennfjdnf jdsfndsfj nj fj fjfjdfdjfjdfjdsj kfddjfjksd fjkjfdskjjfkjfskjsdfjkdsfjdsfjkdskfj"
                 android:textColor="@color/blue_dark" />
 
             <TextView
