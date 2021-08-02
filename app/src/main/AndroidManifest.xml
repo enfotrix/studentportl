@@ -4,8 +4,8 @@
 
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -26,7 +26,11 @@
         <activity android:name=".Activities.ActivityAnnouncement" />
         <activity android:name=".Activities.ActivityResetPassword" />
         <activity android:name=".Activities.ActivityForgetPasswordAuth" />
-        <activity android:name=".Activities.ActivityLogin" />
+        <activity android:name=".Activities.ActivityLogin">
+
+
+
+        </activity>
         <activity android:name=".Activities.ActivitySplash">
 
             <intent-filter>
@@ -34,11 +38,15 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".Activities.MainActivity">
 
+
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

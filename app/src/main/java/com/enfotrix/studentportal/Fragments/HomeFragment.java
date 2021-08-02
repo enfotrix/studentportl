@@ -1,6 +1,7 @@
 package com.enfotrix.studentportal.Fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,6 +25,8 @@ import com.enfotrix.studentportal.Activities.ActivityTimeTable;
 import com.enfotrix.studentportal.Activities.Activity_DateSheet;
 import com.enfotrix.studentportal.Models.HomeViewModel;
 import com.enfotrix.studentportal.R;
+import com.enfotrix.studentportal.SliderAdapterExample;
+import com.enfotrix.studentportal.SliderItem;
 import com.enfotrix.studentportal.Utils;
 import com.enfotrix.studentportal.databinding.FragmentHomeBinding;
 import com.enfotrix.studentportal.lottiedialog;
@@ -34,18 +37,30 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
     private Utils utils;
     private FirebaseFirestore firestore;
+    private FirebaseFirestore db;
 
     private Button btn_announcement, btn_contactus, btn_feedback, btn_gallery;
 
 
     RelativeLayout lay_gallery, lay_announcement, lay_feedback, lay_contactus,
             lay_result, lay_dateSheet, lay_tiemtable;
+
+    private SliderView sliderView;
+    private SliderAdapterExample adapterSlider;
 
 
     private String cu_departmentName1, cu_email1, cu_mobileNo1, cu_whatsapp1, cu_landline1;
@@ -66,10 +81,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
         firestore = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
         utils = new Utils(this.getContext());
 
         //ini views
         IniViews(root);
+
+
+        // sildercall
+        getSliderImage();
 
 //        final TextView textView = binding.textHome;
 
@@ -95,6 +115,49 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         return root;
     }
 
+    private void getSliderImage() {
+
+        adapterSlider = new SliderAdapterExample(this.getContext());
+
+        sliderView.setSliderAdapter(adapterSlider);
+        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
+        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
+        sliderView.setIndicatorSelectedColor(Color.WHITE);
+        sliderView.setIndicatorUnselectedColor(Color.GRAY);
+        sliderView.setScrollTimeInSec(3);
+        sliderView.setAutoCycle(true);
+
+        sliderView.startAutoCycle();
+
+        List<SliderItem> sliderItemList = new ArrayList<>();
+
+        db.collection("Gallery").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                SliderItem sliderItem = new SliderItem();
+                                sliderItem.setImageUrl(document.getString("path"));
+//                                Model_Image model_image = new Model_Image(
+//                                        document.getId(),
+//                                        document.getString("path")
+//                                );
+                                sliderItemList.add(sliderItem);
+                            }
+
+                            adapterSlider.renewItems(sliderItemList);
+//                            Adapter_Image adapter_image = new Adapter_Image(ActivityGallery.this, list);
+//                            recyclerView.setAdapter(adapter_image);
+                        }
+                    }
+                });
+
+
+    }
+
     private void IniViews(View root) {
 
         lay_contactus = root.findViewById(R.id.lay_contactus);
@@ -104,6 +167,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         lay_result = root.findViewById(R.id.lay_result);
         lay_dateSheet = root.findViewById(R.id.lay_dateSheet);
         lay_tiemtable = root.findViewById(R.id.lay_tiemtable);
+        sliderView = root.findViewById(R.id.imageSlider);
 
 
         lay_contactus.setOnClickListener(this);
@@ -223,7 +287,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", cu_email2, null));
-               // i.putExtra(Intent.EXTRA_SUBJECT, SUBJECT);
+                // i.putExtra(Intent.EXTRA_SUBJECT, SUBJECT);
                 //i.putExtra(Intent.EXTRA_TEXT, BODY);
                 startActivity(i);
 

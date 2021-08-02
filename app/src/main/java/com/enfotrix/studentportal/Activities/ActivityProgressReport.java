@@ -14,5 +14,6 @@ public class ActivityProgressReport extends AppCompatActivity {
         setContentView(R.layout.activity_progress_report);
 
         getSupportActionBar().hide();
+
     }
 }

@@ -4,7 +4,7 @@ import android.app.WallpaperManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -15,9 +15,6 @@ import androidx.appcompat.widget.AppCompatButton;
 import com.bumptech.glide.Glide;
 import com.enfotrix.studentportal.R;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -25,7 +22,7 @@ public class Activity_full_image_container extends AppCompatActivity {
 
     private ImageView fullImage;
     private AppCompatButton apply, btn_download;
-    OutputStream outputStream;
+    OutputStream outputStream = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,28 +55,16 @@ public class Activity_full_image_container extends AppCompatActivity {
 
         BitmapDrawable drawable = (BitmapDrawable) fullImage.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
-        File filepath = Environment.getExternalStorageDirectory();
-        File dir = new File(filepath.getAbsolutePath() + "/demo/");
-        dir.mkdir();
-        File file = new File(dir, System.currentTimeMillis() + ".jpg");
-        try {
-            outputStream = new FileOutputStream(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
 
-        }
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+        String savedImageURL = MediaStore.Images.Media.insertImage(
+                getContentResolver(),
+                bitmap,
+                "Bird",
+                "Image of bird"
+        );
+
         Toast.makeText(this, "Image Downloaded", Toast.LENGTH_SHORT).show();
-        try {
-            outputStream.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            outputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
         //MediaStore.Images.Media.insertImage(getContentResolver(), fullImage,"Image title"  , yourDescription);
     }
 

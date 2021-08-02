@@ -1,63 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
     tools:context=".Activities.ActivityLogin">
 
     <ImageView
         android:id="@+id/img_logo"
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="@dimen/_100sdp"
-        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_weight="2"
         android:src="@drawable/slogo" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_below="@+id/img_logo"
-        android:layout_marginTop="@dimen/_30sdp">
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_weight="8">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="13">
 
 
             <RelativeLayout
                 android:id="@+id/lay_log"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_80sdp"
+                android:layout_height="0dp"
+                android:layout_weight="1.5"
                 android:orientation="horizontal">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="@dimen/_70sdp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/_20sdp"
-                    app:cardBackgroundColor="@color/blue_dark"
-                    app:cardCornerRadius="999dp"
-                    app:cardElevation="@dimen/_10sdp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/str_login"
-                        android:textColor="@color/black_m"
-                        android:textSize="@dimen/_18ssp" />
-
-
-                </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
+                    android:layout_centerInParent="true"
                     android:layout_marginRight="@dimen/_20sdp"
-                    android:fontFamily="monospace"
+                    android:fontFamily="@font/roboto"
                     android:text="@string/str_welcome_back"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_18ssp"
@@ -67,9 +53,10 @@
             <LinearLayout
                 android:id="@+id/lay_inputf"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_below="@+id/lay_log"
                 android:layout_marginTop="@dimen/_30sdp"
+                android:layout_weight="6"
                 android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -123,67 +110,70 @@
 
             </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/lay_fb"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_below="@id/lay_inputf"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:orientation="horizontal">
+                android:layout_weight="4.5"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/text_forgetpass"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/_20sdp"
-                    android:padding="@dimen/_8sdp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginRight="@dimen/_15sdp"
                     android:text="@string/str_forgotPassword"
                     android:textColor="@color/blue_dark"
-                    android:textSize="@dimen/_14ssp" />
+                    android:textSize="@dimen/_12ssp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_login"
-                    android:layout_width="@dimen/_100sdp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginRight="@dimen/_20sdp"
                     android:background="@drawable/btn_bg"
                     android:text="@string/str_login"
-                    android:textColor="@color/black_m" />
-            </RelativeLayout>
+                    android:textColor="@color/black_m"
+                    android:textSize="@dimen/_14ssp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_below="@+id/lay_fb"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_weight="1"
                 android:gravity="center">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Have Any Queries ?   "
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp" />
 
                 <TextView
                     android:id="@+id/text_contactus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/_8sdp"
                     android:text="@string/str_contact_us"
                     android:textColor="@color/blue_dark"
-                    android:textSize="@dimen/_14ssp" />
+                    android:textSize="@dimen/_12ssp" />
 
 
             </LinearLayout>
 
-        </RelativeLayout>
+        </LinearLayout>
 
 
     </ScrollView>
 
 
-</RelativeLayout>
+</LinearLayout>

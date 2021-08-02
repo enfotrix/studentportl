@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,8 +30,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -49,7 +46,7 @@ public class DashboardFragment extends Fragment {
     private TextView txt_studentAddress, txt_studentPhoneNo, txt_progressReport;
     private TextView txt_studentEmail, txt_studentDOB, txt_logout;
     private CircleImageView imageView;
-    private Button  btn_attendance;
+    private Button btn_attendance;
     private FirebaseFirestore db;
     private Utils utils;
     private LinearLayout lay_attendance;
@@ -88,7 +85,7 @@ public class DashboardFragment extends Fragment {
         txt_studentPhoneNo = root.findViewById(R.id.txt_studentPhoneNo);
         txt_studentDOB = root.findViewById(R.id.txt_studentDOB);
         txt_studentEmail = root.findViewById(R.id.txt_studentEmail);
-        imageView  = root.findViewById(R.id.imageView);
+        imageView = root.findViewById(R.id.imageView);
         utils = new Utils(getContext());
 
         txt_logout = root.findViewById(R.id.txt_logout);
@@ -97,7 +94,7 @@ public class DashboardFragment extends Fragment {
 
         db = FirebaseFirestore.getInstance();
 
-        utils=new Utils(getContext());
+        utils = new Utils(getContext());
 
 
         //------ logout link click event
@@ -128,7 +125,7 @@ public class DashboardFragment extends Fragment {
 //        });
 
         //fetch data of specific student from db
-       getData();
+        getData();
         return root;
     }
 
@@ -150,11 +147,13 @@ public class DashboardFragment extends Fragment {
             }
         });
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
+
     public void getData() {
         final lottiedialog lottie = new lottiedialog(getContext());
         lottie.show();
@@ -178,7 +177,7 @@ public class DashboardFragment extends Fragment {
                         txt_studentAddress.setText(student_homeAddressFromDb);
                         txt_studentFatherName.setText(student_FatherNameFromDb);
                         txt_studentPhoneNo.setText(student_PhoneNoFromDb);
-                        txt_studentFullName.setText(student_FullNameFromDb+" "+student_LastNameFromDb);
+                        txt_studentFullName.setText(student_FullNameFromDb + " " + student_LastNameFromDb);
                         txt_studentEmail.setText(student_EmailFromDb);
                         txt_studentDOB.setText(student_DOBFromDb);
                         Glide.with(imageView)
@@ -188,15 +187,15 @@ public class DashboardFragment extends Fragment {
 
                     }
                 })
-        .addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull @NotNull Exception e) {
-                Toast.makeText(getContext(), "Connection Error", Toast.LENGTH_SHORT).show();
-                lottie.dismiss();
-            }
-        });
-        }
-
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+                        Toast.makeText(getContext(), "Connection Error", Toast.LENGTH_SHORT).show();
+                        lottie.dismiss();
+                    }
+                });
     }
+
+}
 
 
