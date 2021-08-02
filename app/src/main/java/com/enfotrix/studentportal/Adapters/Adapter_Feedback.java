@@ -39,7 +39,7 @@ public class Adapter_Feedback extends RecyclerView.Adapter<Adapter_Feedback.View
         holder.txt_name.setText(model_Feedback.get(position).getHeading());
         holder.txt_notifi.setText(model_Feedback.get(position).getData());
 
-        holder.layout_Feedback.setBackgroundColor(Color.TRANSPARENT);// setBackgroundColor(Color.parseColor("#9F000000"));
+        //holder.layout_Feedback.setBackgroundColor(Color.TRANSPARENT);// setBackgroundColor(Color.parseColor("#9F000000"));
 
 //        holder.layout_Withdraw_req.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -68,7 +68,7 @@ public class Adapter_Feedback extends RecyclerView.Adapter<Adapter_Feedback.View
             this.txt_date = (TextView) itemView.findViewById(R.id.txt_date);
             this.txt_name = (TextView) itemView.findViewById(R.id.txt_header_notify);
             this.txt_notifi = (TextView) itemView.findViewById(R.id.txt_notifi);
-            layout_Feedback = (LinearLayout)itemView.findViewById(R.id.layout_Notify);
+            //layout_Feedback = (LinearLayout)itemView.findViewById(R.id.layout_Notify);
         }
 
     }

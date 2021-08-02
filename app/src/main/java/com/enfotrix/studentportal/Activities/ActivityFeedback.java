@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -48,7 +49,8 @@ public class ActivityFeedback extends AppCompatActivity {
     RecyclerView recyc_Feedback;
 
 
-    private EditText edt_head, edt_feedback;
+    private EditText edt_head;
+    private TextInputLayout edt_feedback;
 
 
     @Override
@@ -140,9 +142,9 @@ public class ActivityFeedback extends AppCompatActivity {
 
 
         Map<String, Object> map = new HashMap<>();
-        map.put("data", edt_feedback.getText().toString());
+        map.put("data", edt_feedback.getEditText().getText().toString());
         map.put("date", getDate());
-        map.put("heading", edt_head.getText().toString());
+        map.put("heading", "Feedback");
 
 
         firestore.collection("Students").document(token).collection("Feedback").add(map)
