@@ -16,6 +16,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.enfotrix.studentportal.Activities.ActivityAnnouncement;
 import com.enfotrix.studentportal.Activities.ActivityFeedback;
 import com.enfotrix.studentportal.Activities.ActivityGallery;
+import com.enfotrix.studentportal.Activities.ActivityResult;
+import com.enfotrix.studentportal.Activities.ActivityTimeTable;
+import com.enfotrix.studentportal.Activities.Activity_DateSheet;
 import com.enfotrix.studentportal.Models.HomeViewModel;
 import com.enfotrix.studentportal.R;
 import com.enfotrix.studentportal.Utils;
@@ -29,7 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
     private Utils utils;
@@ -38,7 +41,8 @@ public class HomeFragment extends Fragment {
     private Button btn_announcement, btn_contactus, btn_feedback, btn_gallery;
 
 
-    RelativeLayout lay_gallery, lay_announcement, lay_feedback, cv_contactus;
+    RelativeLayout lay_gallery, lay_announcement, lay_feedback, lay_contactus,
+            lay_result, lay_dateSheet, lay_tiemtable;
 
 
     private String cu_departmentName1, cu_email1, cu_mobileNo1, cu_whatsapp1, cu_landline1;
@@ -61,37 +65,8 @@ public class HomeFragment extends Fragment {
         firestore = FirebaseFirestore.getInstance();
         utils = new Utils(this.getContext());
 
-        cv_contactus = root.findViewById(R.id.lay_contactus);
-        cv_contactus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                contactUs();
-            }
-        });
-
-        lay_gallery = root.findViewById(R.id.lay_gallery);
-        lay_gallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getContext(), ActivityGallery.class));
-            }
-        });
-
-        lay_feedback = root.findViewById(R.id.lay_feedback);
-        lay_feedback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getContext(), ActivityFeedback.class));
-            }
-        });
-
-        lay_announcement = root.findViewById(R.id.lay_announcement);
-        lay_announcement.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getContext(), ActivityAnnouncement.class));
-            }
-        });
+        //ini views
+        IniViews(root);
 
 //        final TextView textView = binding.textHome;
 //        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -114,6 +89,27 @@ public class HomeFragment extends Fragment {
 
 
         return root;
+    }
+
+    private void IniViews(View root) {
+
+        lay_contactus = root.findViewById(R.id.lay_contactus);
+        lay_gallery = root.findViewById(R.id.lay_gallery);
+        lay_feedback = root.findViewById(R.id.lay_feedback);
+        lay_announcement = root.findViewById(R.id.lay_announcement);
+        lay_result = root.findViewById(R.id.lay_result);
+        lay_dateSheet = root.findViewById(R.id.lay_dateSheet);
+        lay_tiemtable = root.findViewById(R.id.lay_tiemtable);
+
+
+        lay_contactus.setOnClickListener(this);
+        lay_gallery.setOnClickListener(this);
+        lay_feedback.setOnClickListener(this);
+        lay_announcement.setOnClickListener(this);
+        lay_result.setOnClickListener(this);
+        lay_tiemtable.setOnClickListener(this);
+        lay_dateSheet.setOnClickListener(this);
+
     }
 
     @Override
@@ -253,7 +249,6 @@ public class HomeFragment extends Fragment {
 
     }
 
-
     private void fetchContacts() {
 
         final lottiedialog lottie = new lottiedialog(getContext());
@@ -311,5 +306,32 @@ public class HomeFragment extends Fragment {
 
     }
 
-
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.lay_contactus:
+                contactUs();
+                break;
+            case R.id.lay_gallery:
+                startActivity(new Intent(getContext(), ActivityGallery.class));
+                break;
+            case R.id.lay_feedback:
+                startActivity(new Intent(getContext(), ActivityFeedback.class));
+                break;
+            case R.id.lay_announcement:
+                startActivity(new Intent(getContext(), ActivityAnnouncement.class));
+                break;
+            case R.id.lay_result:
+                startActivity(new Intent(getContext(), ActivityResult.class));
+                break;
+            case R.id.lay_tiemtable:
+                startActivity(new Intent(getContext(), ActivityTimeTable.class));
+                break;
+            case R.id.lay_dateSheet:
+                startActivity(new Intent(getContext(), Activity_DateSheet.class));
+                break;
+            default:
+                break;
+        }
+    }
 }

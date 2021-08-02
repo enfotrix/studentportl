@@ -13,6 +13,7 @@ public class ActivityResult extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
+        getSupportActionBar().hide();
 
     }
 }
