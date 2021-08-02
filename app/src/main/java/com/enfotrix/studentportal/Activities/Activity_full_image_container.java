@@ -5,9 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -26,7 +24,7 @@ import java.io.OutputStream;
 public class Activity_full_image_container extends AppCompatActivity {
 
     private ImageView fullImage;
-    private AppCompatButton apply,btn_download;
+    private AppCompatButton apply, btn_download;
     OutputStream outputStream;
 
     @Override
@@ -61,18 +59,27 @@ public class Activity_full_image_container extends AppCompatActivity {
         BitmapDrawable drawable = (BitmapDrawable) fullImage.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
         File filepath = Environment.getExternalStorageDirectory();
-        File dir = new File(filepath.getAbsolutePath()+"/demo/");
+        File dir = new File(filepath.getAbsolutePath() + "/demo/");
         dir.mkdir();
-        File file = new File(dir, System.currentTimeMillis()+".jpg");
+        File file = new File(dir, System.currentTimeMillis() + ".jpg");
         try {
             outputStream = new FileOutputStream(file);
-        }
-        catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
 
         }
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
         Toast.makeText(this, "Image Downloaded", Toast.LENGTH_SHORT).show();
+        try {
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //MediaStore.Images.Media.insertImage(getContentResolver(), fullImage,"Image title"  , yourDescription);
     }
 
