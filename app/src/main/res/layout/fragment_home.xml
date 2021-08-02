@@ -305,7 +305,7 @@
                                     android:layout_alignParentRight="true"
                                     android:layout_alignParentBottom="true"
                                     android:paddingTop="@dimen/_20sdp"
-                                    android:src="@drawable/feedbaack" />
+                                    android:src="@drawable/feedback" />
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -381,7 +381,7 @@
                                     android:layout_alignParentRight="true"
                                     android:layout_alignParentBottom="true"
                                     android:paddingTop="@dimen/_20sdp"
-                                    android:src="@drawable/conatctusimg" />
+                                    android:src="@drawable/contacticon" />
 
                                 <TextView
                                     android:layout_width="match_parent"
