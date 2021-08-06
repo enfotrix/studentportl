@@ -28,7 +28,7 @@
         android:layout_below="@+id/text_gal"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_5sdp"
-        android:src="@drawable/galleryimg" />
+        android:src="@drawable/appicon" />
 
     <LinearLayout
         android:layout_width="match_parent"

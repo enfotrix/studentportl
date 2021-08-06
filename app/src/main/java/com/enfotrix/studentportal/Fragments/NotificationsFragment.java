@@ -43,6 +43,7 @@ public class NotificationsFragment extends Fragment {
     RecyclerView recyc_Notifi;
     //recyc_eNotifi;
 
+
     private NotificationsViewModel notificationsViewModel;
     private FragmentNotificationsBinding binding;
 

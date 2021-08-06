@@ -64,31 +64,35 @@ public class ActivityResetPassword extends AppCompatActivity {
         btn_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkEmpty())       update(documentID);
+                if (checkEmpty()) update(documentID);
             }
         });
     }
+
     // ---------------- check empty fields
     private Boolean checkEmpty() {
         Boolean isEmpty = false;
-        if(edt_password_lay.getEditText().getText().toString().isEmpty())   edt_password_lay.setError("Please Enter Password");
-        else if(edt_re_pass_lay.getEditText().getText().toString().isEmpty())     edt_re_pass_lay.setError("Please Enter Re Password");
-        else if(!edt_password_lay.getEditText().getText().toString().equals(edt_re_pass_lay.getEditText().getText().toString()))     edt_re_pass_lay.setError("Passwords Don't Match");
+        if (edt_password_lay.getEditText().getText().toString().isEmpty())
+            edt_password_lay.setError("Please Enter Password");
+        else if (edt_re_pass_lay.getEditText().getText().toString().isEmpty())
+            edt_re_pass_lay.setError("Please Enter Re Password");
+        else if (!edt_password_lay.getEditText().getText().toString().equals(edt_re_pass_lay.getEditText().getText().toString()))
+            edt_re_pass_lay.setError("Passwords Don't Match");
         else isEmpty = true;
         return isEmpty;
     }
 
     private void update(String documentID) {
-        final lottiedialog lottie=new lottiedialog(this);
+        final lottiedialog lottie = new lottiedialog(this);
         lottie.show();
         Map<String, Object> map = new HashMap<>();
-        map.put("student_password",edt_password_lay.getEditText().getText().toString().trim());
+        map.put("student_password", edt_password_lay.getEditText().getText().toString().trim());
         db.collection("Students").document(documentID).update(map).
                 addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                         //Toast.makeText(ActivityResetPassword.this, ""+txt_newPassword, Toast.LENGTH_SHORT).show();
-                       lottie.dismiss();
+                        lottie.dismiss();
                         Toast.makeText(ActivityResetPassword.this, "Password Updated", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ActivityResetPassword.this, ActivityLogin.class);
                         startActivity(intent);
@@ -99,7 +103,7 @@ public class ActivityResetPassword extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull @NotNull Exception e) {
                         lottie.dismiss();
-                        Toast.makeText(ActivityResetPassword.this, ""+getResources().getString(R.string.str_somethingWentWrong), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivityResetPassword.this, "" + getResources().getString(R.string.str_somethingWentWrong), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

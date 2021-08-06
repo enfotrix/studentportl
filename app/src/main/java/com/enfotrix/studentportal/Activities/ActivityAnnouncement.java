@@ -42,7 +42,7 @@ public class ActivityAnnouncement extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_announcement);
 
-
+        getSupportActionBar().hide();
 
         firestore = FirebaseFirestore.getInstance();
         utils = new Utils(this);

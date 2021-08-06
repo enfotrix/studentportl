@@ -48,7 +48,7 @@ public class Adapter_Month extends RecyclerView.Adapter<Adapter_Month.ViewHolder
         holder.tv_monthname.setTextColor(context.getResources().getColor(R.color.black_m));
 
         if (selectedItem == position) {
-            holder.tv_monthname.setTextColor(context.getResources().getColor(R.color.blue_dark));
+            holder.tv_monthname.setTextColor(context.getResources().getColor(R.color.black_gray));
         }
     }
 

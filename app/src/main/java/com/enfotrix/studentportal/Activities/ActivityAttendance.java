@@ -1,6 +1,8 @@
 package com.enfotrix.studentportal.Activities;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +20,7 @@ public class ActivityAttendance extends AppCompatActivity {
     RecyclerView rv_month;
     ArrayList<Model_Month> monthArrayList;
     Adapter_Month adapterMonth;
+    AutoCompleteTextView autoCompletetxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +30,26 @@ public class ActivityAttendance extends AppCompatActivity {
         getSupportActionBar().hide();
 
         // ---------------------------- variables initialization
+        autoCompletetxt = findViewById(R.id.autoCompletetxt);
         rv_month = findViewById(R.id.rv_month);
         rv_month.setHasFixedSize(true);
         rv_month.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         monthArrayList = new ArrayList<>();
 
+        dropdownmenue();
         setmonthstatic();
+
+    }
+
+    private void dropdownmenue() {
+
+        String[] session = {"2017-2018", "2018-2019", "2019-2020", "2020-2021"};
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.dropdown_list, session);
+        autoCompletetxt.setText(arrayAdapter.getItem(0).toString(), false);
+        autoCompletetxt.setAdapter(arrayAdapter);
+
 
     }
 

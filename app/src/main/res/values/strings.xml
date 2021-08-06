@@ -21,6 +21,7 @@
     <string name="str_forgotPassword"><u>Forgot Password?</u></string>
     <string name="str_login">login</string>
     <string name="str_welcome_back">Welcome to Login</string>
+    <string name="str_query">Have Any Queries ? </string>
     <string name="str_contact_us"><u>Contact Us</u></string>
 
 
@@ -36,14 +37,13 @@
 
     <!--    Activity Forget Password Strings-->
     <string name="str_studentFatherCNIC">Father CNIC</string>
-    <string name="str_forget">FORGET</string>
-    <string name="str_password">PASSWORD</string>
+    <string name="str_forget">FORGET PASSWORD</string>
     <string name="verify">Verify</string>
 
 
     <!--    Activity Reset Password Strings-->
-    <string name="str_new">NEW</string>
-    <string name="str_credential">CREDENTIAL</string>
+    <string name="str_new">NEW CREDENTIAL</string>
+    <string name="str_password">PASSWORD</string>
     <string name="str_newcred">Your identity has been verfified! Set Your new Password</string>
     <string name="str_re_password">Re Password</string>
     <string name="str_update">update</string>
@@ -53,6 +53,27 @@
     <string name="str_notifications">Notifications</string>
     <string name="str_earlier">Earlier</string>
 
+    <!--   Activity password updated successfully Strings-->
+    <string name="str_pu">Your password updated successfully</string>
+    <string name="str_updated">UPDATED</string>
+
+    <!--   Home Strings-->
+    <string name="str_result">Result</string>
+    <string name="str_datesheet">Date Sheet</string>
+    <string name="str_timetable">Time Table</string>
+    <string name="str_news">News</string>
+    <string name="str_academics">Academics</string>
+    <string name="str_welcome">Welcome</string>
+    <string name="str_to">To</string>
+    <string name="str_schooln">Mehtab Public High School</string>
+
+    <!--   Profile Strings-->
+    <string name="str_name">Name</string>
+    <string name="str_s_o">S/O</string>
+    <string name="str_class">Class</string>
+    <string name="str_feedback">FeedBack</string>
+    <string name="str_attendance">Attendance</string>
+    <string name="str_report">Report</string>
 
 
 </resources>

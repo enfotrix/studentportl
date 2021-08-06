@@ -18,8 +18,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.enfotrix.studentportal.Activities.ActivityAnnouncement;
-import com.enfotrix.studentportal.Activities.ActivityFeedback;
-import com.enfotrix.studentportal.Activities.ActivityGallery;
 import com.enfotrix.studentportal.Activities.ActivityResult;
 import com.enfotrix.studentportal.Activities.ActivityTimeTable;
 import com.enfotrix.studentportal.Activities.Activity_DateSheet;
@@ -56,11 +54,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private Button btn_announcement, btn_contactus, btn_feedback, btn_gallery;
 
 
-    RelativeLayout lay_gallery, lay_announcement, lay_feedback, lay_contactus,
-            lay_result, lay_dateSheet, lay_tiemtable;
+    RelativeLayout lay_result, lay_dateSheet, lay_tiemtable;
 
     private SliderView sliderView;
     private SliderAdapterExample adapterSlider;
+
+    private ImageView iv_announcement, im_contactus, im_settings;
 
 
     private String cu_departmentName1, cu_email1, cu_mobileNo1, cu_whatsapp1, cu_landline1;
@@ -90,6 +89,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         // sildercall
         getSliderImage();
+
+//        sliderView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(getContext(), ActivityGallery.class));
+//            }
+//        });
 
 //        final TextView textView = binding.textHome;
 
@@ -149,34 +155,33 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                             }
 
                             adapterSlider.renewItems(sliderItemList);
+
 //                            Adapter_Image adapter_image = new Adapter_Image(ActivityGallery.this, list);
 //                            recyclerView.setAdapter(adapter_image);
                         }
                     }
                 });
 
-
     }
 
     private void IniViews(View root) {
 
-        lay_contactus = root.findViewById(R.id.lay_contactus);
-        lay_gallery = root.findViewById(R.id.lay_gallery);
-        lay_feedback = root.findViewById(R.id.lay_feedback);
-        lay_announcement = root.findViewById(R.id.lay_announcement);
         lay_result = root.findViewById(R.id.lay_result);
         lay_dateSheet = root.findViewById(R.id.lay_dateSheet);
         lay_tiemtable = root.findViewById(R.id.lay_tiemtable);
+
+        im_settings = root.findViewById(R.id.im_settings);
+        iv_announcement = root.findViewById(R.id.iv_announcement);
+        im_contactus = root.findViewById(R.id.im_contactus);
+
         sliderView = root.findViewById(R.id.imageSlider);
 
-
-        lay_contactus.setOnClickListener(this);
-        lay_gallery.setOnClickListener(this);
-        lay_feedback.setOnClickListener(this);
-        lay_announcement.setOnClickListener(this);
         lay_result.setOnClickListener(this);
         lay_tiemtable.setOnClickListener(this);
         lay_dateSheet.setOnClickListener(this);
+        im_settings.setOnClickListener(this);
+        iv_announcement.setOnClickListener(this);
+        im_contactus.setOnClickListener(this);
 
     }
 
@@ -410,17 +415,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.lay_contactus:
+            case R.id.im_contactus:
                 contactUs();
                 break;
-            case R.id.lay_gallery:
-                startActivity(new Intent(getContext(), ActivityGallery.class));
-                break;
-            case R.id.lay_feedback:
-                startActivity(new Intent(getContext(), ActivityFeedback.class));
-                break;
-            case R.id.lay_announcement:
+            case R.id.iv_announcement:
                 startActivity(new Intent(getContext(), ActivityAnnouncement.class));
+                break;
+            case R.id.im_settings:
+
                 break;
             case R.id.lay_result:
                 startActivity(new Intent(getContext(), ActivityResult.class));

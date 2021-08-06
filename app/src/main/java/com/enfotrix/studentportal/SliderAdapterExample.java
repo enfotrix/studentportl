@@ -1,6 +1,7 @@
 package com.enfotrix.studentportal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.enfotrix.studentportal.Activities.ActivityGallery;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
 import java.util.ArrayList;
@@ -58,8 +60,8 @@ public class SliderAdapterExample extends SliderViewAdapter<SliderAdapterExample
             public void onClick(View v) {
 
 
-//                Intent intent = new Intent(context, GroceryItems.class);
-//                context.startActivity(intent);
+                Intent intent = new Intent(context, ActivityGallery.class);
+                context.startActivity(intent);
             }
         });
     }

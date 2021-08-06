@@ -6,7 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.enfotrix.studentportal.Activities.ActivityAttendance;
+import com.enfotrix.studentportal.Activities.ActivityFeedback;
 import com.enfotrix.studentportal.Activities.ActivityLogin;
 import com.enfotrix.studentportal.Activities.ActivityProgressReport;
 import com.enfotrix.studentportal.Models.DashboardViewModel;
@@ -33,8 +35,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.jetbrains.annotations.NotNull;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class DashboardFragment extends Fragment {
 
     private DashboardViewModel dashboardViewModel;
@@ -43,13 +43,12 @@ public class DashboardFragment extends Fragment {
 
     //------------------ variables initialization
     private TextView txt_studentRegNo, txt_studentFullName, txt_studentFatherName;
-    private TextView txt_studentAddress, txt_studentPhoneNo, txt_progressReport;
-    private TextView txt_studentEmail, txt_studentDOB, txt_logout;
-    private CircleImageView imageView;
+    private TextView txt_studentClass;
+    private ImageView imageView, iv_logout;
+    private RelativeLayout lay_feedback, lay_progressreport, lay_attendance;
     private Button btn_attendance;
     private FirebaseFirestore db;
     private Utils utils;
-    private LinearLayout lay_attendance;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -69,6 +68,25 @@ public class DashboardFragment extends Fragment {
             }
         });*/
 
+
+        txt_studentRegNo = root.findViewById(R.id.txt_studentRegNo);
+        txt_studentFullName = root.findViewById(R.id.txt_studentFullName);
+        txt_studentFatherName = root.findViewById(R.id.txt_studentFatherName);
+//        txt_studentAddress = root.findViewById(R.id.txt_studentAddress);
+//        txt_studentPhoneNo = root.findViewById(R.id.txt_studentPhoneNo);
+//        txt_studentDOB = root.findViewById(R.id.txt_studentDOB);
+//        txt_studentEmail = root.findViewById(R.id.txt_studentEmail);
+        imageView = root.findViewById(R.id.imageView);
+        utils = new Utils(getContext());
+
+        iv_logout = root.findViewById(R.id.iv_logout);
+        lay_progressreport = root.findViewById(R.id.lay_progressreport);
+//        btn_attendance = root.findViewById(R.id.btn_attendance);
+
+        db = FirebaseFirestore.getInstance();
+
+        utils = new Utils(getContext());
+
         lay_attendance = root.findViewById(R.id.lay_attendance);
         lay_attendance.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,27 +96,17 @@ public class DashboardFragment extends Fragment {
             }
         });
 
-        txt_studentRegNo = root.findViewById(R.id.txt_studentRegNo);
-        txt_studentFullName = root.findViewById(R.id.txt_studentFullName);
-        txt_studentFatherName = root.findViewById(R.id.txt_studentFatherName);
-        txt_studentAddress = root.findViewById(R.id.txt_studentAddress);
-        txt_studentPhoneNo = root.findViewById(R.id.txt_studentPhoneNo);
-        txt_studentDOB = root.findViewById(R.id.txt_studentDOB);
-        txt_studentEmail = root.findViewById(R.id.txt_studentEmail);
-        imageView = root.findViewById(R.id.imageView);
-        utils = new Utils(getContext());
-
-        txt_logout = root.findViewById(R.id.txt_logout);
-        txt_progressReport = root.findViewById(R.id.txt_progressReport);
-//        btn_attendance = root.findViewById(R.id.btn_attendance);
-
-        db = FirebaseFirestore.getInstance();
-
-        utils = new Utils(getContext());
-
+        lay_feedback = root.findViewById(R.id.lay_feedback);
+        lay_feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ActivityFeedback.class);
+                startActivity(intent);
+            }
+        });
 
         //------ logout link click event
-        txt_logout.setOnClickListener(new View.OnClickListener() {
+        iv_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 utils.logout();
@@ -109,7 +117,7 @@ public class DashboardFragment extends Fragment {
         });
 
         //------ progress report link click event
-        txt_progressReport.setOnClickListener(new View.OnClickListener() {
+        lay_progressreport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ActivityProgressReport.class);
@@ -174,12 +182,12 @@ public class DashboardFragment extends Fragment {
                         String student_profilePicFromDb = document.getString("student_profilePic");
 
                         txt_studentRegNo.setText(student_RegNoFromDb);
-                        txt_studentAddress.setText(student_homeAddressFromDb);
+//                        txt_studentAddress.setText(student_homeAddressFromDb);
                         txt_studentFatherName.setText(student_FatherNameFromDb);
-                        txt_studentPhoneNo.setText(student_PhoneNoFromDb);
+//                        txt_studentPhoneNo.setText(student_PhoneNoFromDb);
                         txt_studentFullName.setText(student_FullNameFromDb + " " + student_LastNameFromDb);
-                        txt_studentEmail.setText(student_EmailFromDb);
-                        txt_studentDOB.setText(student_DOBFromDb);
+//                        txt_studentEmail.setText(student_EmailFromDb);
+//                        txt_studentDOB.setText(student_DOBFromDb);
                         Glide.with(imageView)
                                 .load(student_profilePicFromDb)
                                 .fitCenter().into(imageView);
