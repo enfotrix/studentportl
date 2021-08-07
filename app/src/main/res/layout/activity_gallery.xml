@@ -9,26 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
-        android:src="@drawable/nature" />
-
-    <TextView
-        android:id="@+id/text_gal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:text="Gallery"
-        android:textColor="@color/black_gray"
-        android:textSize="@dimen/_16ssp"
-        android:textStyle="bold" />
-
-    <ImageView
-        android:layout_width="@dimen/_45sdp"
-        android:layout_height="@dimen/_45sdp"
-        android:layout_below="@+id/text_gal"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:src="@drawable/appicon" />
+        android:src="@drawable/image_background" />
 
     <LinearLayout
         android:layout_width="match_parent"

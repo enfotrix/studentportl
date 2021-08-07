@@ -33,9 +33,7 @@
                     android:layout_height="@dimen/_50sdp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_20sdp"
-                    android:src="@drawable/slogo"
-                    app:civ_border_color="@color/blue_dark"
-                    app:civ_border_width="@dimen/_1sdp" />
+                    android:src="@drawable/appicon" />
 
 
                 <TextView
@@ -45,6 +43,8 @@
                     android:layout_marginHorizontal="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_toRightOf="@+id/img_logo"
+                    android:fontFamily="@font/happy_monkey"
+                    android:gravity="center_horizontal"
                     android:text="Mehtab Public High School Chak No 86 Sb Sargodha"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_16ssp" />
@@ -93,6 +93,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/text_ple"
+                android:fontFamily="@font/roboto"
                 android:gravity="center_horizontal"
                 android:text="Principal"
                 android:textColor="@color/black_gray"
@@ -113,7 +114,7 @@
                     android:layout_weight="1"
                     app:cardCornerRadius="@dimen/_12sdp">
 
-                     <ImageView
+                    <ImageView
                         android:id="@+id/img_cu_call1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -181,25 +182,26 @@
                 android:weightSum="5">
 
                 <View
-                    android:layout_width="@dimen/_80sdp"
+                    android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/shape_line" />
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="@dimen/_65sdp"
-                    android:layout_height="@dimen/_65sdp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/_8sdp"
+                <TextView
+                    android:id="@+id/txt_admin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:src="@drawable/slogo"
-                    app:civ_border_color="@color/blue_dark"
-                    app:civ_border_width="@dimen/_1sdp" />
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center_horizontal"
+                    android:text="Administration"
+                    android:textColor="@color/black_gray"
+                    android:textSize="@dimen/_18ssp" />
 
                 <View
-                    android:layout_width="@dimen/_80sdp"
+                    android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="5dp"
@@ -207,21 +209,11 @@
                     android:background="@drawable/shape_line" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/txt_admin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/text_admins"
-                android:gravity="center_horizontal"
-                android:text="Administration"
-                android:textColor="@color/black_gray"
-                android:textSize="@dimen/_18ssp" />
-
             <LinearLayout
                 android:id="@+id/lay_admin_conatct"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_60sdp"
-                android:layout_below="@+id/txt_admin"
+                android:layout_below="@+id/text_admins"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:orientation="horizontal">
 
@@ -302,25 +294,26 @@
                 android:weightSum="5">
 
                 <View
-                    android:layout_width="@dimen/_80sdp"
+                    android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/shape_line" />
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="@dimen/_65sdp"
-                    android:layout_height="@dimen/_65sdp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/_8sdp"
+                <TextView
+                    android:id="@+id/txt_acc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:src="@drawable/slogo"
-                    app:civ_border_color="@color/blue_dark"
-                    app:civ_border_width="@dimen/_1sdp" />
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center_horizontal"
+                    android:text="Account"
+                    android:textColor="@color/black_gray"
+                    android:textSize="@dimen/_18ssp" />
 
                 <View
-                    android:layout_width="@dimen/_80sdp"
+                    android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="5dp"
@@ -328,21 +321,12 @@
                     android:background="@drawable/shape_line" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/txt_acc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/text_account"
-                android:gravity="center_horizontal"
-                android:text="Account"
-                android:textColor="@color/black_gray"
-                android:textSize="@dimen/_18ssp" />
 
             <LinearLayout
                 android:id="@+id/lay_admin_account"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_60sdp"
-                android:layout_below="@+id/txt_acc"
+                android:layout_below="@+id/text_account"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginBottom="@dimen/_20sdp"
                 android:orientation="horizontal">

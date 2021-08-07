@@ -20,7 +20,7 @@ import com.bumptech.glide.Glide;
 import com.enfotrix.studentportal.Activities.ActivityAttendance;
 import com.enfotrix.studentportal.Activities.ActivityFeedback;
 import com.enfotrix.studentportal.Activities.ActivityLogin;
-import com.enfotrix.studentportal.Activities.ActivityProgressReport;
+import com.enfotrix.studentportal.Activities.ActivityResult;
 import com.enfotrix.studentportal.Models.DashboardViewModel;
 import com.enfotrix.studentportal.R;
 import com.enfotrix.studentportal.Utils;
@@ -45,7 +45,7 @@ public class DashboardFragment extends Fragment {
     private TextView txt_studentRegNo, txt_studentFullName, txt_studentFatherName;
     private TextView txt_studentClass;
     private ImageView imageView, iv_logout;
-    private RelativeLayout lay_feedback, lay_progressreport, lay_attendance;
+    private RelativeLayout lay_feedback, lay_result, lay_attendance;
     private Button btn_attendance;
     private FirebaseFirestore db;
     private Utils utils;
@@ -80,7 +80,7 @@ public class DashboardFragment extends Fragment {
         utils = new Utils(getContext());
 
         iv_logout = root.findViewById(R.id.iv_logout);
-        lay_progressreport = root.findViewById(R.id.lay_progressreport);
+        lay_result = root.findViewById(R.id.lay_result);
 //        btn_attendance = root.findViewById(R.id.btn_attendance);
 
         db = FirebaseFirestore.getInstance();
@@ -117,11 +117,10 @@ public class DashboardFragment extends Fragment {
         });
 
         //------ progress report link click event
-        lay_progressreport.setOnClickListener(new View.OnClickListener() {
+        lay_result.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ActivityProgressReport.class);
-                startActivity(intent);
+                startActivity(new Intent(getContext(), ActivityResult.class));
             }
         });
 
@@ -143,6 +142,10 @@ public class DashboardFragment extends Fragment {
         View vie = getLayoutInflater().inflate(R.layout.bottam_sheet_attendance, null);
 
         AppCompatButton btn_earlier = vie.findViewById(R.id.btn_earlier);
+        TextView text_schoolName = vie.findViewById(R.id.text_schoolName);
+        TextView tv_date = vie.findViewById(R.id.tv_date);
+        TextView tv_status = vie.findViewById(R.id.tv_status);
+
 
         dialog.setContentView(vie);
         dialog.setCancelable(true);

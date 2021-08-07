@@ -72,7 +72,7 @@ public class Adapter_Result extends RecyclerView.Adapter<Adapter_Result.ViewHold
 
     private static int getcolore() {
 
-        int[] color = new int[]{Color.parseColor("#ffeb99"), Color.parseColor("#b3ffb3")};
+        int[] color = new int[]{Color.parseColor("#ffeb99"), Color.parseColor("#b3ffb3"), Color.parseColor("#62C2CC"), Color.parseColor("#9568D3"), Color.parseColor("#6675CF"), Color.parseColor("#D16596"), Color.parseColor("#CF6565")};
         int lenghth = color.length;
 
         Random random = new Random();

@@ -1,6 +1,7 @@
 package com.enfotrix.studentportal.Activities;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +19,8 @@ public class ActivityResult extends AppCompatActivity {
     RecyclerView rv_result;
     ArrayList<Model_Result> resultArrayList;
     Adapter_Result adapterResult;
+
+    private TextView tv_resultObtainMarks, tv_examType, tv_resultDate, tv_resultGrade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,12 @@ public class ActivityResult extends AppCompatActivity {
     private void IniViews() {
 
         rv_result = findViewById(R.id.rv_result);
+
+        tv_resultObtainMarks = findViewById(R.id.tv_resultObtainMarks);
+        tv_examType = findViewById(R.id.tv_examType);
+        tv_resultDate = findViewById(R.id.tv_resultDate);
+        tv_resultGrade = findViewById(R.id.tv_resultGrade);
+
 
     }
 }

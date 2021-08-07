@@ -15,7 +15,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_weight="2"
-        android:src="@drawable/slogo" />
+        android:src="@drawable/appicon" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_15sdp"
                 android:layout_marginRight="@dimen/_15sdp"
+                android:focusable="false"
                 android:hint="@string/str_studentRegNo"
                 app:errorEnabled="true"
                 app:helperText="Required*"
@@ -85,9 +86,9 @@
                 android:layout_marginLeft="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginRight="@dimen/_15sdp"
+                android:focusable="false"
                 android:hint="@string/str_studentPassword"
                 app:errorEnabled="true"
-                app:hintAnimationEnabled="true"
                 app:hintTextColor="@color/black"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/blue_dark"
@@ -97,6 +98,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:inputType="textPassword"
                     android:singleLine="true"
                     android:textColor="@color/black" />
 

@@ -65,6 +65,7 @@
     <string name="str_academics">Academics</string>
     <string name="str_welcome">Welcome</string>
     <string name="str_to">To</string>
+    <string name="str_announcement">Announcement</string>
     <string name="str_schooln">Mehtab Public High School</string>
 
     <!--   Profile Strings-->
@@ -75,5 +76,25 @@
     <string name="str_attendance">Attendance</string>
     <string name="str_report">Report</string>
 
+    <!--   Activity Feedback  Strings-->
+    <string name="str_feedbackus">Your Feedback Important for Us</string>
+    <string name="str_dearuser">Dear Parents, we heartily appreciated your feedback and your loving words.</string>
+
+    <!--   Activity Result  Strings-->
+    <string name="str_obtain_marks">Obtain Marks</string>
+    <string name="str_subject">Subject</string>
+    <string name="str_marks">Marks</string>
+    <string name="str_grade">Grade</string>
+
+    <!--   Activity Report  Strings-->
+    <string name="str_hello">Hello</string>
+    <string name="str_parent_of">Parent Of</string>
+
+    <!--   bootomseet attenadnce  Strings-->
+    <string name="str_schoolname">Mehtab Public High School Chak No 86 Sb Sargodha</string>
+    <string name="str_today">Today</string>
+    <string name="str_date">Date</string>
+    <string name="str_attendance_status">Attendance Status</string>
+    <string name="str_status">Status</string>
 
 </resources>

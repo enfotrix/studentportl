@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private Button btn_announcement, btn_contactus, btn_feedback, btn_gallery;
 
 
-    RelativeLayout lay_result, lay_dateSheet, lay_tiemtable;
+    RelativeLayout lay_result, lay_dateSheet, lay_tiemtable, lay_ann;
 
     private SliderView sliderView;
     private SliderAdapterExample adapterSlider;
@@ -166,21 +166,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void IniViews(View root) {
 
-        lay_result = root.findViewById(R.id.lay_result);
+//        lay_result = root.findViewById(R.id.lay_result);
         lay_dateSheet = root.findViewById(R.id.lay_dateSheet);
         lay_tiemtable = root.findViewById(R.id.lay_tiemtable);
 
         im_settings = root.findViewById(R.id.im_settings);
-        iv_announcement = root.findViewById(R.id.iv_announcement);
+        lay_ann = root.findViewById(R.id.lay_ann);
         im_contactus = root.findViewById(R.id.im_contactus);
 
         sliderView = root.findViewById(R.id.imageSlider);
 
-        lay_result.setOnClickListener(this);
+//        lay_result.setOnClickListener(this);
         lay_tiemtable.setOnClickListener(this);
         lay_dateSheet.setOnClickListener(this);
         im_settings.setOnClickListener(this);
-        iv_announcement.setOnClickListener(this);
+        lay_ann.setOnClickListener(this);
         im_contactus.setOnClickListener(this);
 
     }
@@ -206,7 +206,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         ImageView img_cu_whatsapp1 = vie.findViewById(R.id.img_cu_whatsapp1);
 
         TextView txt_cu_departmentName2 = vie.findViewById(R.id.txt_admin);
-        txt_cu_departmentName2.setText(cu_departmentName2);
+//        txt_cu_departmentName2.setText(cu_departmentName2);
         ImageView img_cu_call2 = vie.findViewById(R.id.img_cu_call2);
         ImageView img_cu_landline2 = vie.findViewById(R.id.img_cu_landline2);
         ImageView img_cu_mail2 = vie.findViewById(R.id.img_cu_mail2);
@@ -214,7 +214,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
         TextView txt_cu_departmentName3 = vie.findViewById(R.id.txt_acc);
-        txt_cu_departmentName3.setText(cu_departmentName3);
+//        txt_cu_departmentName3.setText(cu_departmentName3);
         ImageView img_cu_call3 = vie.findViewById(R.id.img_cu_call3);
         ImageView img_cu_landline3 = vie.findViewById(R.id.img_cu_landline3);
         ImageView img_cu_mail3 = vie.findViewById(R.id.img_cu_mail3);
@@ -418,7 +418,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             case R.id.im_contactus:
                 contactUs();
                 break;
-            case R.id.iv_announcement:
+            case R.id.lay_ann:
                 startActivity(new Intent(getContext(), ActivityAnnouncement.class));
                 break;
             case R.id.im_settings:

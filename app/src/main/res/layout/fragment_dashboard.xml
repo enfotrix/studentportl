@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/bg_image"
+    android:background="@drawable/image_background"
     android:paddingBottom="?attr/actionBarSize"
     tools:context=".Fragments.DashboardFragment">
 
@@ -14,55 +14,61 @@
         android:orientation="vertical"
         android:weightSum="2">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.7">
+            android:layout_weight="0.7"
+            android:orientation="vertical">
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/animationView"
+            <LinearLayout
+                android:id="@+id/tbr"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginHorizontal="@dimen/_16sdp"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/splashanim" />
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/blue_dark"
+                android:orientation="horizontal">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginHorizontal="@dimen/_16sdp"
-                android:layout_marginVertical="@dimen/_16sdp"
-                app:cardCornerRadius="@dimen/_8sdp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto"
+                    android:text="Profile"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_18ssp" />
 
-                <LinearLayout
+
+                <ImageView
+                    android:id="@+id/iv_logout"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:src="@drawable/log_out"
+                    app:tint="@color/white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animationView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_below="@id/tbr"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/profileanim" />
 
-                    <ImageView
-                        android:id="@+id/iv_logout"
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:padding="@dimen/_4sdp"
-                        android:src="@drawable/log_out"
-                        app:tint="#E60707" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/_4sdp"
-                        android:text="LogOut"
-                        android:textColor="@color/black" />
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
+            </LinearLayout>
 
 
-        </RelativeLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_8sdp"
-                app:cardBackgroundColor="#5EBCC6"
+                app:cardBackgroundColor="@color/cv_color"
                 app:cardCornerRadius="@dimen/_20sdp">
 
                 <LinearLayout
@@ -245,7 +251,7 @@
                     app:cardCornerRadius="@dimen/_12sdp">
 
                     <RelativeLayout
-                        android:id="@+id/lay_progressreport"
+                        android:id="@+id/lay_result"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -258,7 +264,7 @@
                             android:layout_marginTop="@dimen/_10sdp"
                             android:padding="@dimen/_5sdp"
                             android:scaleType="fitEnd"
-                            android:src="@drawable/progressicon" />
+                            android:src="@drawable/exam" />
 
                         <TextView
                             android:id="@+id/tv_ds"
@@ -269,7 +275,7 @@
                             android:layout_marginTop="@dimen/_4sdp"
                             android:fontFamily="@font/roboto"
                             android:gravity="left"
-                            android:text="@string/str_report"
+                            android:text="@string/str_result"
                             android:textColor="@color/black_gray"
                             android:textSize="@dimen/_12ssp" />
 
@@ -321,6 +327,7 @@
             </GridLayout>
 
         </LinearLayout>
+
     </LinearLayout>
 
     <include layout="@layout/bottam_sheet_attendance" />

@@ -9,9 +9,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.enfotrix.studentportal.Adapters.Adapter_Feedback;
 import com.enfotrix.studentportal.Models.Model_Feedback;
@@ -52,6 +52,8 @@ public class ActivityFeedback extends AppCompatActivity {
     private EditText edt_head;
     private TextInputLayout edt_feedback;
 
+    private AppCompatButton btn_earler;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,13 +65,22 @@ public class ActivityFeedback extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         utils = new Utils(this);
 
-        recyc_Feedback = findViewById(R.id.list_Feedback);
-        recyc_Feedback.setHasFixedSize(true);
-        recyc_Feedback.setLayoutManager(new LinearLayoutManager(this));
+        btn_earler = findViewById(R.id.btn_earler);
+
+//        recyc_Feedback = findViewById(R.id.list_Feedback);
+//        recyc_Feedback.setHasFixedSize(true);
+//        recyc_Feedback.setLayoutManager(new LinearLayoutManager(this));
+
         edt_feedback = findViewById(R.id.edit_annBody);
 //        edt_head = findViewById(R.id.edit_annHead);
 
 
+        btn_earler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), EarlierFeedbackActivity.class));
+            }
+        });
         Button btn_announ = findViewById(R.id.btn_announcement);
         btn_announ.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,17 +93,17 @@ public class ActivityFeedback extends AppCompatActivity {
             }
         });
 
-        fetchFeedback(utils.getToken());
-
-
-        final SwipeRefreshLayout pullToRefresh = findViewById(R.id.swiperefresh);
-        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-//                fetchFeedback(utils.getToken());
-                pullToRefresh.setRefreshing(false);
-            }
-        });
+//        fetchFeedback(utils.getToken());
+//
+//
+//        final SwipeRefreshLayout pullToRefresh = findViewById(R.id.swiperefresh);
+//        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+////                fetchFeedback(utils.getToken());
+//                pullToRefresh.setRefreshing(false);
+//            }
+//        });
 
 
     }
