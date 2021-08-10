@@ -1,10 +1,13 @@
 package com.enfotrix.studentportal.Fragments;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -32,8 +35,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 
 public class DashboardFragment extends Fragment {
 
@@ -49,6 +57,12 @@ public class DashboardFragment extends Fragment {
     private Button btn_attendance;
     private FirebaseFirestore db;
     private Utils utils;
+    private AutoCompleteTextView autoCompletetxt, text_examtype;
+    private AppCompatButton btn_login;
+
+    private ArrayList<String> sessions, examtype;
+    private String classid;
+    private String classgrade;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -68,7 +82,6 @@ public class DashboardFragment extends Fragment {
             }
         });*/
 
-
         txt_studentRegNo = root.findViewById(R.id.txt_studentRegNo);
         txt_studentFullName = root.findViewById(R.id.txt_studentFullName);
         txt_studentFatherName = root.findViewById(R.id.txt_studentFatherName);
@@ -78,6 +91,7 @@ public class DashboardFragment extends Fragment {
 //        txt_studentEmail = root.findViewById(R.id.txt_studentEmail);
         imageView = root.findViewById(R.id.imageView);
         utils = new Utils(getContext());
+
 
         iv_logout = root.findViewById(R.id.iv_logout);
         lay_result = root.findViewById(R.id.lay_result);
@@ -120,7 +134,8 @@ public class DashboardFragment extends Fragment {
         lay_result.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), ActivityResult.class));
+                resultdialog();
+//                startActivity(new Intent(getContext(), ActivityResult.class));
             }
         });
 
@@ -133,7 +148,120 @@ public class DashboardFragment extends Fragment {
 
         //fetch data of specific student from db
         getData();
+        fetchsession();
+        fetchresult();
         return root;
+    }
+
+    private void fetchresult() {
+        db.collection("ExamTypes").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            examtype = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                examtype.add(document.getId());
+
+                                //Toast.makeText(getContext(), "Debug", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getContext(), "" + document.getId(), Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                    }
+                });
+    }
+
+    private void fetchsession() {
+
+
+        db.collection("Sessions").orderBy("sessionID", Query.Direction.DESCENDING).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            sessions = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                //sesion =fd ;
+
+                                sessions.add(document.getId());
+
+//
+                                //Toast.makeText(getContext(), "Debug", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getContext(), "" + document.getId(), Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        }
+                    }
+                });
+
+
+//        db.collection("Exams").get()
+//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//                        if (queryDocumentSnapshots.isEmpty()) {
+//                            Log.d("TAG", "onSuccess: LIST EMPTY");
+//                            return;
+//                        } else {
+//
+//
+//                            Toast.makeText(getContext(), "" + queryDocumentSnapshots.toString(),
+//                            Toast.LENGTH_SHORT).show();
+//
+//                        }
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull @NotNull Exception e) {
+//                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+
+    }
+
+    private void resultdialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        View view = getLayoutInflater().inflate(R.layout.result_dialog, null);
+
+        autoCompletetxt = view.findViewById(R.id.autoCompletetxt);
+        text_examtype = view.findViewById(R.id.text_examtype);
+        btn_login = view.findViewById(R.id.btn_login);
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), R.layout.dropdown_session, sessions);
+        autoCompletetxt.setText(arrayAdapter.getItem(0).toString(), false);
+        autoCompletetxt.setAdapter(arrayAdapter);
+
+        ArrayAdapter Adapter = new ArrayAdapter(getContext(), R.layout.dropdown_examtype, examtype);
+        text_examtype.setText(Adapter.getItem(0).toString(), false);
+        text_examtype.setAdapter(Adapter);
+
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent resultIntent = new Intent(getActivity().getApplicationContext(), ActivityResult.class);
+                resultIntent.putExtra("session", autoCompletetxt.getText().toString());
+                resultIntent.putExtra("examtype", text_examtype.getText().toString());
+                resultIntent.putExtra("classid", classid);
+                resultIntent.putExtra("classgrade", classgrade);
+                getActivity().finish();
+                startActivity(resultIntent);
+            }
+        });
+
+        builder.setView(view);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+
     }
 
     private void attendancedialog() {
@@ -184,6 +312,9 @@ public class DashboardFragment extends Fragment {
                         String student_DOBFromDb = document.getString("student_dob");
                         String student_profilePicFromDb = document.getString("student_profilePic");
 
+                        classid = document.getString("student_classID");
+                        classgrade = document.getString("class_grade");
+
                         txt_studentRegNo.setText(student_RegNoFromDb);
 //                        txt_studentAddress.setText(student_homeAddressFromDb);
                         txt_studentFatherName.setText(student_FatherNameFromDb);
@@ -207,6 +338,10 @@ public class DashboardFragment extends Fragment {
                 });
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
 }
 
 

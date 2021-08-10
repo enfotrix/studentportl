@@ -4,10 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/bg_image"
+    android:background="@drawable/blue_img"
     android:orientation="vertical"
     android:weightSum="2"
     tools:context=".Activities.ActivitySplash">
+
+    <ImageView
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_90sdp"
+        android:src="@drawable/appicon" />
 
     <View
         android:layout_width="match_parent"

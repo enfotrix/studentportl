@@ -96,7 +96,7 @@ public class NotificationsFragment extends Fragment {
 
         list_Notifi.clear();
         firestore.collection("Students").document(token)
-                .collection("Notifications").orderBy("student_nDate", Query.Direction.DESCENDING)
+                .collection("Notification").orderBy("date", Query.Direction.DESCENDING)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -105,9 +105,9 @@ public class NotificationsFragment extends Fragment {
 
                         Model_Notifi model_Notifi = new Model_Notifi(
                                 document.getId(),
-                                document.getString("student_nData"),
-                                document.getString("student_nDate"),
-                                document.getString("student_nHeading"));
+                                document.getString("data"),
+                                document.getString("date"),
+                                document.getString("heading"));
                         list_Notifi.add(model_Notifi);
                     }
                     Adapter_Notifi adapter_notifi = new Adapter_Notifi(list_Notifi);

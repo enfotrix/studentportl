@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private Button btn_announcement, btn_contactus, btn_feedback, btn_gallery;
 
 
-    RelativeLayout lay_result, lay_dateSheet, lay_tiemtable, lay_ann;
+    RelativeLayout lay_settings, lay_dateSheet, lay_tiemtable, lay_ann, lay_contactus;
 
     private SliderView sliderView;
     private SliderAdapterExample adapterSlider;
@@ -170,18 +170,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         lay_dateSheet = root.findViewById(R.id.lay_dateSheet);
         lay_tiemtable = root.findViewById(R.id.lay_tiemtable);
 
-        im_settings = root.findViewById(R.id.im_settings);
+        lay_contactus = root.findViewById(R.id.lay_contactus);
         lay_ann = root.findViewById(R.id.lay_ann);
-        im_contactus = root.findViewById(R.id.im_contactus);
+        lay_settings = root.findViewById(R.id.lay_settings);
 
         sliderView = root.findViewById(R.id.imageSlider);
 
 //        lay_result.setOnClickListener(this);
         lay_tiemtable.setOnClickListener(this);
         lay_dateSheet.setOnClickListener(this);
-        im_settings.setOnClickListener(this);
+        lay_settings.setOnClickListener(this);
         lay_ann.setOnClickListener(this);
-        im_contactus.setOnClickListener(this);
+        lay_contactus.setOnClickListener(this);
 
     }
 
@@ -415,13 +415,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.im_contactus:
+            case R.id.lay_contactus:
                 contactUs();
                 break;
             case R.id.lay_ann:
                 startActivity(new Intent(getContext(), ActivityAnnouncement.class));
                 break;
-            case R.id.im_settings:
+            case R.id.lay_settings:
 
                 break;
             case R.id.lay_result:
