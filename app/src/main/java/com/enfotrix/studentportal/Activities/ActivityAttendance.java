@@ -3,24 +3,48 @@ package com.enfotrix.studentportal.Activities;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enfotrix.studentportal.Adapters.Adapter_Month;
 import com.enfotrix.studentportal.Models.Model_Month;
 import com.enfotrix.studentportal.R;
+import com.enfotrix.studentportal.Utils;
+import com.enfotrix.studentportal.lottiedialog;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
-public class ActivityAttendance extends AppCompatActivity {
+public class ActivityAttendance extends AppCompatActivity implements Adapter_Month.OnItemClickListener {
 
     // --------------------------     variables declaration
     RecyclerView rv_month;
     ArrayList<Model_Month> monthArrayList;
     Adapter_Month adapterMonth;
     AutoCompleteTextView autoCompletetxt;
+    private Calendar calendar;
+    private AutoCompleteTextView txtattendance;
+    private AppCompatButton btn_attendance;
+    private ImageView imgCalender;
+    private TextView tvSelectedDate;
+    private String fromatedate;
+    private String attenadnce_session, attenadnce_date, section_ID;
+    private FirebaseFirestore db;
+    private Utils utils;
+    private String month;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +59,70 @@ public class ActivityAttendance extends AppCompatActivity {
         rv_month.setHasFixedSize(true);
         rv_month.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        monthArrayList = new ArrayList<>();
+        db = FirebaseFirestore.getInstance();
+        utils = new Utils(this);
 
-        dropdownmenue();
+        monthArrayList = new ArrayList<>();
+        calendar = Calendar.getInstance();
+
+        attenadnce_session = getIntent().getStringExtra("attendanceSession");
+        attenadnce_date = getIntent().getStringExtra("date");
+        section_ID = getIntent().getStringExtra("classid");
+
+        //Toast.makeText(this, "" + attenadnce_session + attenadnce_date, Toast.LENGTH_SHORT).show();
+
+
+//        dropdownmenue();
         setmonthstatic();
+//        fetchattendance(attenadnce_session, attenadnce_date, section_ID);
+
+        //Toast.makeText(this, section_ID, Toast.LENGTH_SHORT).show();
+        fetchattendance(getIntent().getStringExtra("attendanceSession"), "01");
+
 
     }
+
+    private void fetchattendance(String attenadnce_session, String month) {
+
+        final lottiedialog lottie = new lottiedialog(this);
+
+
+        int days = 1;
+        String tempday = "";
+
+        while (days <= 31) {
+            if (days < 10) tempday = "0" + days;
+            else tempday = "" + days;
+            String date = tempday + "-" + month + "-" + attenadnce_session.substring(0, 4);
+
+            db.collection("Attendance").document(attenadnce_session)
+                    .collection("Date").document(date)
+                    .collection("Class").document(getIntent().getStringExtra("classid"))
+                    .collection("Attende").document(utils.getToken())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                //Toast.makeText(ActivityAttendance.this, "Debug", Toast.LENGTH_SHORT).show();
+                                DocumentSnapshot document = task.getResult();
+                                String status = "";
+                                status = document.getString("status");
+                                if (status != null)
+                                    Toast.makeText(ActivityAttendance.this, status, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+            days++;
+            //lottie.dismiss();
+
+
+        }
+
+
+    }
+
 
     private void dropdownmenue() {
 
@@ -105,8 +187,22 @@ public class ActivityAttendance extends AppCompatActivity {
 
         adapterMonth = new Adapter_Month(getApplicationContext(), monthArrayList);
         rv_month.setAdapter(adapterMonth);
+        adapterMonth.setOnItemClickListener(this);
         adapterMonth.notifyDataSetChanged();
 
 
+    }
+
+    @Override
+    public void onItemClicks(int position) {
+        final Model_Month model_month = monthArrayList.get(position);
+
+        position++;
+        if (position < 10) month = "0" + position;
+        else month = "" + position;
+
+        fetchattendance(attenadnce_session, month);
+
+        //Toast.makeText(this, "" + position, Toast.LENGTH_SHORT).show();
     }
 }

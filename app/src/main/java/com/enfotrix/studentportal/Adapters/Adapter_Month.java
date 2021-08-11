@@ -23,6 +23,16 @@ public class Adapter_Month extends RecyclerView.Adapter<Adapter_Month.ViewHolder
 
     private int selectedItem;
 
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void onItemClicks(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
+
     public Adapter_Month(Context context, ArrayList<Model_Month> monthArrayList) {
         this.context = context;
         this.monthArrayList = monthArrayList;
@@ -65,19 +75,24 @@ public class Adapter_Month extends RecyclerView.Adapter<Adapter_Month.ViewHolder
 
             tv_monthname = itemView.findViewById(R.id.tv_monthname);
 
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (mListener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            mListener.onItemClicks(position);
 
 
-                    int position = getAdapterPosition();
+                            int previousItem = selectedItem;
+                            selectedItem = position;
 
-                    int previousItem = selectedItem;
-                    selectedItem = position;
+                            notifyItemChanged(previousItem);
+                            notifyItemChanged(position);
 
-                    notifyItemChanged(previousItem);
-                    notifyItemChanged(position);
-
+                        }
+                    }
                 }
             });
 

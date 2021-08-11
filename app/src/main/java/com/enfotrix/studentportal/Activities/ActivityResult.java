@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.enfotrix.studentportal.Adapters.Adapter_Result;
 import com.enfotrix.studentportal.Models.Model_Result;
 import com.enfotrix.studentportal.R;
+import com.enfotrix.studentportal.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -32,8 +33,9 @@ public class ActivityResult extends AppCompatActivity {
     private FirebaseFirestore db;
 
     private TextView tv_resultObtainMarks, tv_examType, tv_resultDate, tv_resultGrade;
-    private String classID, sectionId;
+    private String classID, sectionId, sessionname, examtype;
     List<String> sub_list;
+    private Utils utils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +48,20 @@ public class ActivityResult extends AppCompatActivity {
 
         // ini db
         db = FirebaseFirestore.getInstance();
+        utils = new Utils(this);
         sub_list = new ArrayList<>();
 
-        String sessionname = getIntent().getStringExtra("session");
-        String examtype = getIntent().getStringExtra("examtype");
+
+        sessionname = getIntent().getStringExtra("session");
+        examtype = getIntent().getStringExtra("examtype");
         sectionId = getIntent().getStringExtra("classid");
         classID = getIntent().getStringExtra("classgrade");
+
+        rv_result.setHasFixedSize(true);
+        rv_result.setHasFixedSize(true);
+        rv_result.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+        resultArrayList = new ArrayList<>();
 
 
 //        Toast.makeText(this, "" + sessionname + examtype + classid, Toast.LENGTH_SHORT).show();
@@ -63,9 +73,9 @@ public class ActivityResult extends AppCompatActivity {
     }
 
     private void fetchsubjects(String sectionId, String classID) {
-
-        Toast.makeText(this, "" + sectionId, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "" + classID, Toast.LENGTH_SHORT).show();
+//
+//        Toast.makeText(this, "" + sectionId, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "" + classID, Toast.LENGTH_SHORT).show();
 
         db.collection("Class").document(classID)
                 .collection("Section").document(sectionId).get()
@@ -79,8 +89,36 @@ public class ActivityResult extends AppCompatActivity {
 //                            Toast.makeText(ActivityResult.this, "yess", Toast.LENGTH_SHORT).show();
 
                             sub_list = (List<String>) document.get("Subjects");
+//
+//                            Toast.makeText(ActivityResult.this, "" + sub_list, Toast.LENGTH_SHORT).show();
 
-                            Toast.makeText(ActivityResult.this, ""+sub_list, Toast.LENGTH_SHORT).show();
+
+                            for (int i = 0; i < sub_list.size(); i++) {
+
+                                db.collection("Exams").document(sessionname)
+                                        .collection("Type").document(examtype)
+                                        .collection("classes").document(sectionId)
+                                        .collection("Subjects").document(sub_list.get(i))
+                                        .collection("Students").document(utils.getToken())
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    DocumentSnapshot documentSnapshot = task.getResult();
+
+                                                    String obtainmarks = documentSnapshot.getString("obtainMarks");
+                                                    String totalmarks = documentSnapshot.getString("totalMarks");
+
+
+                                                    Toast.makeText(ActivityResult.this, "" + obtainmarks + totalmarks, Toast.LENGTH_SHORT).show();
+
+                                                }
+                                            }
+                                        });
+
+                            }
+
 
                         }
 
@@ -97,11 +135,6 @@ public class ActivityResult extends AppCompatActivity {
 
     private void ResultAdapter() {
 
-        rv_result.setHasFixedSize(true);
-        rv_result.setHasFixedSize(true);
-        rv_result.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
-        resultArrayList = new ArrayList<>();
 
         Model_Result model_result = new Model_Result();
         model_result.setSub_name("English");
@@ -115,9 +148,6 @@ public class ActivityResult extends AppCompatActivity {
         model_result1.setSub_grade("A+");
         resultArrayList.add(model_result1);
 
-        adapterResult = new Adapter_Result(getApplicationContext(), resultArrayList);
-        rv_result.setAdapter(adapterResult);
-        adapterResult.notifyDataSetChanged();
 
     }
 

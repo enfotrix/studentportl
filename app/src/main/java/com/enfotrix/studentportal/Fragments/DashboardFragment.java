@@ -1,6 +1,7 @@
 package com.enfotrix.studentportal.Fragments;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -41,28 +42,33 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class DashboardFragment extends Fragment {
 
     private DashboardViewModel dashboardViewModel;
     private FragmentDashboardBinding binding;
 
-
     //------------------ variables initialization
     private TextView txt_studentRegNo, txt_studentFullName, txt_studentFatherName;
-    private TextView txt_studentClass;
-    private ImageView imageView, iv_logout;
+    private TextView txt_studentClass, tvSelectedDate;
+    private ImageView imageView, iv_logout, imgCalender;
     private RelativeLayout lay_feedback, lay_result, lay_attendance;
-    private Button btn_attendance;
     private FirebaseFirestore db;
     private Utils utils;
-    private AutoCompleteTextView autoCompletetxt, text_examtype;
-    private AppCompatButton btn_login;
+    private AutoCompleteTextView autoCompletetxt, text_examtype, txtattendance;
+    private AppCompatButton btn_login, btn_attendance;
 
     private ArrayList<String> sessions, examtype;
     private String classid;
     private String classgrade;
+    private String date;
+    private Calendar calendar;
+    private SimpleDateFormat dateFormat;
+    private String fromatedate;
+    private String currentVar;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -91,6 +97,11 @@ public class DashboardFragment extends Fragment {
 //        txt_studentEmail = root.findViewById(R.id.txt_studentEmail);
         imageView = root.findViewById(R.id.imageView);
         utils = new Utils(getContext());
+        calendar = Calendar.getInstance();
+
+        dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        date = dateFormat.format(calendar.getTime());
+//        Toast.makeText(getContext(), "" + date, Toast.LENGTH_SHORT).show();
 
 
         iv_logout = root.findViewById(R.id.iv_logout);
@@ -150,7 +161,32 @@ public class DashboardFragment extends Fragment {
         getData();
         fetchsession();
         fetchresult();
+        //fetchcurrentdaate();
         return root;
+    }
+
+    private void fetchcurrentdaate(String session) {
+
+        //Toast.makeText(getContext(), "" + session, Toast.LENGTH_SHORT).show();
+        db.collection("Attendance").document(session)
+                .collection("Date").document(date)
+                .collection("Class").document(classid)
+                .collection("Attende").document(utils.getToken())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            //Toast.makeText(ActivityAttendance.this, "Debug", Toast.LENGTH_SHORT).show();
+                            DocumentSnapshot document = task.getResult();
+                            String status = "";
+                            status = document.getString("status");
+                            if (status != null)
+                                Toast.makeText(getContext(), status, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
     }
 
     private void fetchresult() {
@@ -189,6 +225,10 @@ public class DashboardFragment extends Fragment {
                                 //sesion =fd ;
 
                                 sessions.add(document.getId());
+                                //currentVar = document.getId();
+
+                                fetchcurrentdaate(document.getId());
+
 
 //
                                 //Toast.makeText(getContext(), "Debug", Toast.LENGTH_SHORT).show();
@@ -199,6 +239,10 @@ public class DashboardFragment extends Fragment {
                         }
                     }
                 });
+        //Toast.makeText(getContext(), ""+currentVar, Toast.LENGTH_SHORT).show();
+
+
+        //fetchcurrentdaate();
 
 
 //        db.collection("Exams").get()
@@ -266,7 +310,7 @@ public class DashboardFragment extends Fragment {
 
     private void attendancedialog() {
 
-        BottomSheetDialog dialog = new BottomSheetDialog(getContext());
+        BottomSheetDialog dialog = new BottomSheetDialog(this.getContext());
         View vie = getLayoutInflater().inflate(R.layout.bottam_sheet_attendance, null);
 
         AppCompatButton btn_earlier = vie.findViewById(R.id.btn_earlier);
@@ -275,16 +319,83 @@ public class DashboardFragment extends Fragment {
         TextView tv_status = vie.findViewById(R.id.tv_status);
 
 
-        dialog.setContentView(vie);
-        dialog.setCancelable(true);
-        dialog.show();
-
         btn_earlier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), ActivityAttendance.class));
+
+//                startActivity(new Intent(getContext(), ActivityAttendance.class));
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+                View attendancedialog = getLayoutInflater().inflate(R.layout.attendance_dialog, null);
+
+                txtattendance = attendancedialog.findViewById(R.id.txtattendance);
+                btn_attendance = attendancedialog.findViewById(R.id.btn_attendance);
+                imgCalender = attendancedialog.findViewById(R.id.imgCalender);
+                tvSelectedDate = attendancedialog.findViewById(R.id.tvSelectedDate);
+
+                ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), R.layout.dropdown_attendancesession, sessions);
+                txtattendance.setText(arrayAdapter.getItem(0).toString(), false);
+                txtattendance.setAdapter(arrayAdapter);
+
+
+                DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                          int dayOfMonth) {
+                        // TODO Auto-generated method stub
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, monthOfYear);
+                        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        updateLabel();
+                    }
+
+                };
+
+                imgCalender.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        new DatePickerDialog(getContext(), date, calendar
+                                .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                                calendar.get(Calendar.DAY_OF_MONTH)).show();
+                    }
+                });
+
+                btn_attendance.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getContext(), ActivityAttendance.class);
+                        intent.putExtra("attendanceSession", txtattendance.getText().toString());
+                        intent.putExtra("date", fromatedate);
+                        intent.putExtra("classid", classid);
+                        getActivity().finish();
+                        startActivity(intent);
+
+                    }
+                });
+
+                builder.setView(attendancedialog);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
             }
         });
+
+        dialog.setContentView(vie);
+        dialog.setCancelable(true);
+        dialog.show();
+    }
+
+    private void updateLabel() {
+
+        String myFormat = "dd-MM-yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
+
+        fromatedate = sdf.format(calendar.getTime());
+
+        tvSelectedDate.setText(sdf.format(calendar.getTime()));
+
     }
 
     @Override
