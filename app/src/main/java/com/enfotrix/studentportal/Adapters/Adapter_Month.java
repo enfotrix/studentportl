@@ -1,9 +1,11 @@
 package com.enfotrix.studentportal.Adapters;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -54,11 +56,13 @@ public class Adapter_Month extends RecyclerView.Adapter<Adapter_Month.ViewHolder
         final Model_Month model_month = monthArrayList.get(position);
 
         holder.tv_monthname.setText(model_month.getMonth_name());
+        Drawable drawable = context.getResources().getDrawable(R.drawable.month_selector);
 
         holder.tv_monthname.setTextColor(context.getResources().getColor(R.color.black_m));
 
         if (selectedItem == position) {
-            holder.tv_monthname.setTextColor(context.getResources().getColor(R.color.black_gray));
+            holder.tv_monthname.setTextColor(context.getResources().getColor(R.color.black));
+//            holder.lay_select.setBackground(drawable);
         }
     }
 
@@ -69,11 +73,13 @@ public class Adapter_Month extends RecyclerView.Adapter<Adapter_Month.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_monthname;
+        LinearLayout lay_select;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
 
             tv_monthname = itemView.findViewById(R.id.tv_monthname);
+            lay_select = itemView.findViewById(R.id.lay_select);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {

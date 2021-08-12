@@ -43,8 +43,8 @@ public class Adapter_Result extends RecyclerView.Adapter<Adapter_Result.ViewHold
         final Model_Result model_result = resultArrayList.get(position);
 
         holder.tv_sub.setText(model_result.getSub_name());
-        holder.tv_marks.setText(model_result.getSub_marks());
-        holder.tv_grade.setText(model_result.getSub_grade());
+        holder.tv_t_marks.setText(model_result.getSub_marks());
+        holder.tv_o_marks.setText(model_result.getSub_grade());
     }
 
     @Override
@@ -53,15 +53,15 @@ public class Adapter_Result extends RecyclerView.Adapter<Adapter_Result.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_sub, tv_marks, tv_grade;
+        TextView tv_sub, tv_t_marks, tv_o_marks;
         CardView cv_result;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
 
             tv_sub = itemView.findViewById(R.id.tv_sub);
-            tv_marks = itemView.findViewById(R.id.tv_marks);
-            tv_grade = itemView.findViewById(R.id.tv_grade);
+            tv_t_marks = itemView.findViewById(R.id.tv_t_marks);
+            tv_o_marks = itemView.findViewById(R.id.tv_o_marks);
             cv_result = itemView.findViewById(R.id.cv_result);
 
             cv_result.setCardBackgroundColor(getcolore());

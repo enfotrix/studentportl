@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/bg_image"
+    android:background="@drawable/splash_img"
     android:orientation="vertical"
-    android:weightSum="2"
     tools:context=".Activities.ActivitySplash">
 
 
-    <View
+    <ImageView
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/appicon" />
+
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.9" />
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animationView"
-        android:layout_width="@dimen/_200sdp"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/_8sdp"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="@dimen/_40sdp"
         android:layout_marginBottom="@dimen/_100sdp"
-        android:layout_weight="0.1"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/splashanim" />
+        android:background="@color/blue_dark" />
 
 
-</LinearLayout>
+</RelativeLayout>

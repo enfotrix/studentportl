@@ -10,7 +10,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enfotrix.studentportal.Adapters.Adapter_Feedback;
@@ -36,6 +35,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import dev.shreyaspatil.MaterialDialog.MaterialDialog;
+import dev.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 
 public class ActivityFeedback extends AppCompatActivity {
 
@@ -87,7 +89,7 @@ public class ActivityFeedback extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                addFeedback(utils.getToken());
+                logout();
 
 
             }
@@ -106,6 +108,34 @@ public class ActivityFeedback extends AppCompatActivity {
 //        });
 
 
+    }
+
+    public void logout() {
+        MaterialDialog mDialog = new MaterialDialog.Builder(this)
+                .setTitle("Logout")
+                .setMessage("Are you sure want to Submit!")
+                .setCancelable(false)
+                .setPositiveButton("Submit", R.drawable.ic_baseline_logout_24, new MaterialDialog.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.dismiss();
+
+                        addFeedback(utils.getToken());
+//                        utils.logout();
+//                        startActivity(new Intent(getApplicationContext(), ActivityLogin.class));
+//                        finish();
+                    }
+                })
+                .setNegativeButton("Cancel", R.drawable.ic_baseline_cancel_presentation_24, new MaterialDialog.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .build();
+
+        // Show Dialog
+        mDialog.show();
     }
 
     private void fetchFeedback(String token) {

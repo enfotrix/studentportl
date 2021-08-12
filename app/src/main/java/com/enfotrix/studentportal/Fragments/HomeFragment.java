@@ -1,5 +1,6 @@
 package com.enfotrix.studentportal.Fragments;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -14,10 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.enfotrix.studentportal.Activities.ActivityAnnouncement;
+import com.enfotrix.studentportal.Activities.ActivityFeedback;
 import com.enfotrix.studentportal.Activities.ActivityResult;
 import com.enfotrix.studentportal.Activities.ActivityTimeTable;
 import com.enfotrix.studentportal.Activities.Activity_DateSheet;
@@ -32,6 +37,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -54,7 +60,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private Button btn_announcement, btn_contactus, btn_feedback, btn_gallery;
 
 
-    RelativeLayout lay_settings, lay_dateSheet, lay_tiemtable, lay_ann, lay_contactus;
+    RelativeLayout lay_settings, lay_dateSheet, lay_feedback,
+            lay_tiemtable, lay_ann, lay_contactus;
 
     private SliderView sliderView;
     private SliderAdapterExample adapterSlider;
@@ -62,13 +69,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private ImageView iv_announcement, im_contactus, im_settings;
 
 
-    private String cu_departmentName1, cu_email1, cu_mobileNo1, cu_whatsapp1, cu_landline1;
+    private String tittle, cu_email1, cu_mobileNo1, cu_whatsapp1, cu_landline1;
     private String cu_departmentName2, cu_email2, cu_mobileNo2, cu_whatsapp2, cu_landline2;
     private String cu_departmentName3, cu_email3, cu_mobileNo3, cu_whatsapp3, cu_landline3;
 
 
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
+    private ArrayList<String> departmentname;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -82,6 +90,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         firestore = FirebaseFirestore.getInstance();
         db = FirebaseFirestore.getInstance();
         utils = new Utils(this.getContext());
+        departmentname = new ArrayList<>();
 
         //ini views
         IniViews(root);
@@ -116,9 +125,35 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
 //        fetchContacts();
+        fetchdepartment();
 
 
         return root;
+    }
+
+    private void fetchdepartment() {
+
+        db.collection("ContactUs").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+
+                        if (task.isSuccessful()) {
+
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                departmentname.add(document.getId());
+
+                                // Toast.makeText(getContext(), ""+departmentname, Toast.LENGTH_SHORT).show();
+
+                                //Toast.makeText(getContext(), "Debug", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getContext(), "" + document.getId(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    }
+                });
     }
 
     private void getSliderImage() {
@@ -169,6 +204,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //        lay_result = root.findViewById(R.id.lay_result);
         lay_dateSheet = root.findViewById(R.id.lay_dateSheet);
         lay_tiemtable = root.findViewById(R.id.lay_tiemtable);
+        lay_feedback = root.findViewById(R.id.lay_feedback);
 
         lay_contactus = root.findViewById(R.id.lay_contactus);
         lay_ann = root.findViewById(R.id.lay_ann);
@@ -178,6 +214,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 //        lay_result.setOnClickListener(this);
         lay_tiemtable.setOnClickListener(this);
+        lay_feedback.setOnClickListener(this);
         lay_dateSheet.setOnClickListener(this);
         lay_settings.setOnClickListener(this);
         lay_ann.setOnClickListener(this);
@@ -193,32 +230,71 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void contactUs() {
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        View attendancedialog = getLayoutInflater().inflate(R.layout.department_dialog, null);
+
+        AutoCompleteTextView txtContact = attendancedialog.findViewById(R.id.txtContact);
+        AppCompatButton btn_Contact = attendancedialog.findViewById(R.id.btn_Contact);
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), R.layout.dropdown_department, departmentname);
+//        txtContact.setText(arrayAdapter.getItem(0).toString(), false);
+        txtContact.setAdapter(arrayAdapter);
+
+        btn_Contact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomsheetcontact(txtContact.getText().toString().trim());
+
+            }
+        });
+
+        builder.setView(attendancedialog);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
+    private void bottomsheetcontact(String dptName) {
 
         BottomSheetDialog dialog = new BottomSheetDialog(getContext());
         View vie = getLayoutInflater().inflate(R.layout.bottam_sheet_contacts, null);
 
 
         TextView txt_cu_departmentName1 = vie.findViewById(R.id.txt_pri);
-        txt_cu_departmentName1.setText(cu_departmentName1);
         ImageView img_cu_call1 = vie.findViewById(R.id.img_cu_call1);
         ImageView img_cu_landline1 = vie.findViewById(R.id.img_cu_landline1);
         ImageView img_cu_mail1 = vie.findViewById(R.id.img_cu_mail1);
         ImageView img_cu_whatsapp1 = vie.findViewById(R.id.img_cu_whatsapp1);
 
-        TextView txt_cu_departmentName2 = vie.findViewById(R.id.txt_admin);
-//        txt_cu_departmentName2.setText(cu_departmentName2);
-        ImageView img_cu_call2 = vie.findViewById(R.id.img_cu_call2);
-        ImageView img_cu_landline2 = vie.findViewById(R.id.img_cu_landline2);
-        ImageView img_cu_mail2 = vie.findViewById(R.id.img_cu_mail2);
-        ImageView img_cu_whatsapp2 = vie.findViewById(R.id.img_cu_whatsapp2);
+        db.collection("ContactUs").document(dptName)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
+
+                        if (task.isSuccessful()) {
+
+                            DocumentSnapshot documentSnapshot = task.getResult();
+
+                            cu_mobileNo1 = documentSnapshot.getString("cell");
+                            if (cu_mobileNo1 != null) {
+
+                            } else {
+
+                            }
+                            cu_email1 = documentSnapshot.getString("email");
+                            cu_whatsapp1 = documentSnapshot.getString("whatsapp");
+                            cu_landline1 = documentSnapshot.getString("landline");
+                            tittle = documentSnapshot.getString("tittle");
+                            txt_cu_departmentName1.setText(tittle);
 
 
-        TextView txt_cu_departmentName3 = vie.findViewById(R.id.txt_acc);
-//        txt_cu_departmentName3.setText(cu_departmentName3);
-        ImageView img_cu_call3 = vie.findViewById(R.id.img_cu_call3);
-        ImageView img_cu_landline3 = vie.findViewById(R.id.img_cu_landline3);
-        ImageView img_cu_mail3 = vie.findViewById(R.id.img_cu_mail3);
-        ImageView img_cu_whatsapp3 = vie.findViewById(R.id.img_cu_whatsapp3);
+//                            Toast.makeText(getContext(), "" + cellnumber + email + landline + tittle + whatsapp, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
 
         dialog.setContentView(vie);
         dialog.setCancelable(true);
@@ -228,30 +304,48 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         img_cu_call1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String contact = cu_mobileNo1; // use country code with your phone number
-                Intent i = new Intent(Intent.ACTION_DIAL);
-                i.setData(Uri.parse("tel:" + contact));
-                startActivity(i);
+                String contact = cu_mobileNo1;
+                // use country code with your phone number
+                if (contact != null) {
+                    Intent i = new Intent(Intent.ACTION_DIAL);
+                    i.setData(Uri.parse("tel:" + contact));
+                    startActivity(i);
+                } else {
+                    img_cu_call1.setVisibility(View.GONE);
+                }
+
             }
         });
 
         img_cu_landline1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String contact = cu_landline1; // use country code with your phone number
-                Intent i = new Intent(Intent.ACTION_DIAL);
-                i.setData(Uri.parse("tel:" + contact));
-                startActivity(i);
+                String contact = cu_landline1;
+                // use country code with your phone number
+                if (contact != null) {
+                    Intent i = new Intent(Intent.ACTION_DIAL);
+                    i.setData(Uri.parse("tel:" + contact));
+                    startActivity(i);
+                } else {
+                    img_cu_landline1.setVisibility(View.GONE);
+                }
+
             }
         });
 
         img_cu_mail1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", cu_email1, null));
-                //i.putExtra(Intent.EXTRA_SUBJECT, SUBJECT);
-                //i.putExtra(Intent.EXTRA_TEXT, BODY);
-                startActivity(i);
+                String contact = cu_email1;
+                if (contact != null) {
+                    Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", contact, null));
+                    //i.putExtra(Intent.EXTRA_SUBJECT, SUBJECT);
+                    //i.putExtra(Intent.EXTRA_TEXT, BODY);
+                    startActivity(i);
+                } else {
+                    img_cu_landline1.setVisibility(View.GONE);
+                }
+
 
             }
         });
@@ -261,95 +355,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             public void onClick(View view) {
 
                 String contact = cu_whatsapp1; // use country code with your phone number
-                String url = "https://api.whatsapp.com/send?phone=" + contact;
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            }
-        });
+                if (contact != null) {
+                    String url = "https://api.whatsapp.com/send?phone=" + contact;
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                } else {
+                    img_cu_landline1.setVisibility(View.GONE);
+                }
 
-        img_cu_call2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String contact = cu_mobileNo2; // use country code with your phone number
-                Intent i = new Intent(Intent.ACTION_DIAL);
-                i.setData(Uri.parse("tel:" + contact));
-                startActivity(i);
-            }
-        });
-
-        img_cu_landline2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String contact = cu_landline2; // use country code with your phone number
-                Intent i = new Intent(Intent.ACTION_DIAL);
-                i.setData(Uri.parse("tel:" + contact));
-                startActivity(i);
-            }
-        });
-
-        img_cu_mail2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", cu_email2, null));
-                // i.putExtra(Intent.EXTRA_SUBJECT, SUBJECT);
-                //i.putExtra(Intent.EXTRA_TEXT, BODY);
-                startActivity(i);
-
-            }
-        });
-
-        img_cu_whatsapp2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String contact = cu_whatsapp2; // use country code with your phone number
-                String url = "https://api.whatsapp.com/send?phone=" + contact;
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            }
-        });
-        img_cu_call3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String contact = cu_mobileNo3; // use country code with your phone number
-                Intent i = new Intent(Intent.ACTION_DIAL);
-                i.setData(Uri.parse("tel:" + contact));
-                startActivity(i);
-            }
-        });
-
-        img_cu_landline3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String contact = cu_landline3; // use country code with your phone number
-                Intent i = new Intent(Intent.ACTION_DIAL);
-                i.setData(Uri.parse("tel:" + contact));
-                startActivity(i);
-            }
-        });
-
-        img_cu_mail3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", cu_email3, null));
-                //i.putExtra(Intent.EXTRA_SUBJECT, SUBJECT);
-                //i.putExtra(Intent.EXTRA_TEXT, BODY);
-                startActivity(i);
-
-            }
-        });
-
-        img_cu_whatsapp3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String contact = cu_whatsapp3; // use country code with your phone number
-                String url = "https://api.whatsapp.com/send?phone=" + contact;
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
             }
         });
 
@@ -370,7 +384,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                                 if (document.getString("cu_departmentName").equals("Principal")) {
 
-                                    cu_departmentName1 = document.getString("cu_departmentName");
+                                    // cu_departmentName1 = document.getString("cu_departmentName");
                                     cu_email1 = document.getString("cu_email");
                                     cu_mobileNo1 = document.getString("cu_mobileNo");
                                     cu_whatsapp1 = document.getString("cu_whatsapp");
@@ -426,6 +440,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.lay_result:
                 startActivity(new Intent(getContext(), ActivityResult.class));
+                break;
+            case R.id.lay_feedback:
+                startActivity(new Intent(getContext(), ActivityFeedback.class));
                 break;
             case R.id.lay_tiemtable:
                 startActivity(new Intent(getContext(), ActivityTimeTable.class));

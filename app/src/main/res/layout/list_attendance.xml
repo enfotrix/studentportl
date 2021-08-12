@@ -1,33 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_result"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/_8sdp"
+    android:layout_marginTop="@dimen/_5sdp"
+    android:orientation="vertical"
+    app:cardCornerRadius="@dimen/_10sdp">
 
-    <TextView
-        android:id="@+id/tv_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:paddingLeft="@dimen/_20sdp"
-        android:text="2021/1/1"
-        android:textSize="@dimen/_16ssp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/_20sdp"
-        android:paddingLeft="@dimen/_20sdp"
-        android:text="Present"
-        android:textColor="#0091EA"
-        android:textSize="@dimen/_16ssp" />
-
-    <View
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_1sdp"
-        android:layout_below="@+id/tv_date"
-        android:layout_marginTop="@dimen/_3sdp"
-        android:background="@drawable/shape_line" />
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        android:layout_marginVertical="@dimen/_8sdp">
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="@dimen/_20sdp"
+            android:text="2021/1/1"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16ssp" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:paddingLeft="@dimen/_20sdp"
+            android:text="Present"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16ssp" />
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

@@ -66,6 +66,8 @@
     <string name="str_welcome">Welcome</string>
     <string name="str_to">To</string>
     <string name="str_announcement">Announcement</string>
+    <string name="str_settings">Settings</string>
+    <string name="str_contact">Contact Us</string>
     <string name="str_schooln">Mehtab Public High School</string>
 
     <!--   Profile Strings-->
@@ -83,8 +85,8 @@
     <!--   Activity Result  Strings-->
     <string name="str_obtain_marks">Obtain Marks</string>
     <string name="str_subject">Subject</string>
-    <string name="str_marks">Marks</string>
-    <string name="str_grade">Grade</string>
+    <string name="str_marks">Total</string>
+    <string name="str_grade">Obtain</string>
 
     <!--   Activity Report  Strings-->
     <string name="str_hello">Hello</string>

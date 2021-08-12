@@ -36,6 +36,9 @@ public class ActivityResult extends AppCompatActivity {
     private String classID, sectionId, sessionname, examtype;
     List<String> sub_list;
     private Utils utils;
+    private int totalObtainMarks = 0;
+    private int totalsubjmarks = 0;
+    private float percentage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,9 @@ public class ActivityResult extends AppCompatActivity {
         sectionId = getIntent().getStringExtra("classid");
         classID = getIntent().getStringExtra("classgrade");
 
+        tv_examType.setText(examtype);
+        tv_resultDate.setText(sessionname);
+
         rv_result.setHasFixedSize(true);
         rv_result.setHasFixedSize(true);
         rv_result.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -67,7 +73,7 @@ public class ActivityResult extends AppCompatActivity {
 //        Toast.makeText(this, "" + sessionname + examtype + classid, Toast.LENGTH_SHORT).show();
 
         fetchsubjects(sectionId, classID);
-        ResultAdapter();
+//        ResultAdapter();
 
 
     }
@@ -95,6 +101,7 @@ public class ActivityResult extends AppCompatActivity {
 
                             for (int i = 0; i < sub_list.size(); i++) {
 
+                                percentage = 0;
                                 db.collection("Exams").document(sessionname)
                                         .collection("Type").document(examtype)
                                         .collection("classes").document(sectionId)
@@ -109,15 +116,51 @@ public class ActivityResult extends AppCompatActivity {
 
                                                     String obtainmarks = documentSnapshot.getString("obtainMarks");
                                                     String totalmarks = documentSnapshot.getString("totalMarks");
+                                                    String sub_name = documentSnapshot.getString("subject");
+
+                                                    if (obtainmarks != null && totalmarks != null) {
+
+                                                        Model_Result model_result = new Model_Result();
+                                                        model_result.setSub_name(sub_name);
+                                                        model_result.setSub_marks(totalmarks);
+                                                        model_result.setSub_grade(obtainmarks);
+                                                        resultArrayList.add(model_result);
+
+                                                        int marks = Integer.parseInt(obtainmarks);
+                                                        int total = Integer.parseInt(totalmarks);
+
+                                                        totalObtainMarks = totalObtainMarks + marks;
+
+                                                        totalsubjmarks = totalsubjmarks + total;
+
+                                                        percentage = (totalObtainMarks * 100) / totalsubjmarks;
+
+                                                        tv_resultObtainMarks.setText(String.valueOf(totalObtainMarks));
+
+                                                        tv_resultGrade.setText(String.valueOf(percentage) + " %");
 
 
-                                                    Toast.makeText(ActivityResult.this, "" + obtainmarks + totalmarks, Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(ActivityResult.this, "" + percentage, Toast.LENGTH_SHORT).show();
+
+                                                        // Toast.makeText(ActivityResult.this, "" + totalObtainMarks, Toast.LENGTH_SHORT).show();
+
+                                                    }
+                                                    // Toast.makeText(ActivityResult.this, "" + obtainmarks + totalmarks, Toast.LENGTH_SHORT).show();
 
                                                 }
+
+                                                adapterResult = new Adapter_Result(getApplicationContext(), resultArrayList);
+                                                rv_result.setAdapter(adapterResult);
+                                                adapterResult.notifyDataSetChanged();
+
+
                                             }
                                         });
 
                             }
+
+
+                            //Toast.makeText(ActivityResult.this, ""+totalsubjmarks, Toast.LENGTH_SHORT).show();
 
 
                         }
@@ -134,19 +177,6 @@ public class ActivityResult extends AppCompatActivity {
     }
 
     private void ResultAdapter() {
-
-
-        Model_Result model_result = new Model_Result();
-        model_result.setSub_name("English");
-        model_result.setSub_marks("70/100");
-        model_result.setSub_grade("B");
-        resultArrayList.add(model_result);
-
-        Model_Result model_result1 = new Model_Result();
-        model_result1.setSub_name("Math");
-        model_result1.setSub_marks("90");
-        model_result1.setSub_grade("A+");
-        resultArrayList.add(model_result1);
 
 
     }

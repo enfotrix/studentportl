@@ -1,7 +1,6 @@
 package com.enfotrix.studentportal.Fragments;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,7 +20,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.enfotrix.studentportal.Activities.ActivityAttendance;
-import com.enfotrix.studentportal.Activities.ActivityFeedback;
 import com.enfotrix.studentportal.Activities.ActivityLogin;
 import com.enfotrix.studentportal.Activities.ActivityResult;
 import com.enfotrix.studentportal.Models.DashboardViewModel;
@@ -46,6 +43,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import dev.shreyaspatil.MaterialDialog.MaterialDialog;
+import dev.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
+
 public class DashboardFragment extends Fragment {
 
     private DashboardViewModel dashboardViewModel;
@@ -53,9 +53,9 @@ public class DashboardFragment extends Fragment {
 
     //------------------ variables initialization
     private TextView txt_studentRegNo, txt_studentFullName, txt_studentFatherName;
-    private TextView txt_studentClass, tvSelectedDate;
+    private TextView tv_status, tvSelectedDate;
     private ImageView imageView, iv_logout, imgCalender;
-    private RelativeLayout lay_feedback, lay_result, lay_attendance;
+    private RelativeLayout lay_logout, lay_result, lay_attendance;
     private FirebaseFirestore db;
     private Utils utils;
     private AutoCompleteTextView autoCompletetxt, text_examtype, txtattendance;
@@ -68,7 +68,7 @@ public class DashboardFragment extends Fragment {
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
     private String fromatedate;
-    private String currentVar;
+    private String status = "";
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -104,13 +104,15 @@ public class DashboardFragment extends Fragment {
 //        Toast.makeText(getContext(), "" + date, Toast.LENGTH_SHORT).show();
 
 
-        iv_logout = root.findViewById(R.id.iv_logout);
+//        iv_logout = root.findViewById(R.id.iv_logout);
         lay_result = root.findViewById(R.id.lay_result);
 //        btn_attendance = root.findViewById(R.id.btn_attendance);
 
         db = FirebaseFirestore.getInstance();
-
         utils = new Utils(getContext());
+
+        sessions = new ArrayList<>();
+        examtype = new ArrayList<>();
 
         lay_attendance = root.findViewById(R.id.lay_attendance);
         lay_attendance.setOnClickListener(new View.OnClickListener() {
@@ -121,25 +123,32 @@ public class DashboardFragment extends Fragment {
             }
         });
 
-        lay_feedback = root.findViewById(R.id.lay_feedback);
-        lay_feedback.setOnClickListener(new View.OnClickListener() {
+        lay_logout = root.findViewById(R.id.lay_logout);
+        lay_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ActivityFeedback.class);
-                startActivity(intent);
+
+                logout();
+//                utils.logout();
+//                Intent intent = new Intent(getActivity(), ActivityLogin.class);
+//                startActivity(intent);
+//                getActivity().finish();
+
+//                Intent intent = new Intent(getActivity(), ActivityFeedback.class);
+//                startActivity(intent);
             }
         });
 
         //------ logout link click event
-        iv_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                utils.logout();
-                Intent intent = new Intent(getActivity(), ActivityLogin.class);
-                startActivity(intent);
-                getActivity().finish();
-            }
-        });
+//        iv_logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                utils.logout();
+//                Intent intent = new Intent(getActivity(), ActivityLogin.class);
+//                startActivity(intent);
+//                getActivity().finish();
+//            }
+//        });
 
         //------ progress report link click event
         lay_result.setOnClickListener(new View.OnClickListener() {
@@ -149,13 +158,6 @@ public class DashboardFragment extends Fragment {
 //                startActivity(new Intent(getContext(), ActivityResult.class));
             }
         });
-
-//        btn_attendance.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                AttendanceSheet();
-//            }
-//        });
 
         //fetch data of specific student from db
         getData();
@@ -167,8 +169,8 @@ public class DashboardFragment extends Fragment {
 
     private void fetchcurrentdaate(String session) {
 
-        //Toast.makeText(getContext(), "" + session, Toast.LENGTH_SHORT).show();
-        db.collection("Attendance").document(session)
+        // Toast.makeText(getContext(), "" + classid, Toast.LENGTH_SHORT).show();
+       /* db.collection("Attendance").document(session)
                 .collection("Date").document(date)
                 .collection("Class").document(classid)
                 .collection("Attende").document(utils.getToken())
@@ -179,14 +181,42 @@ public class DashboardFragment extends Fragment {
                         if (task.isSuccessful()) {
                             //Toast.makeText(ActivityAttendance.this, "Debug", Toast.LENGTH_SHORT).show();
                             DocumentSnapshot document = task.getResult();
-                            String status = "";
+
                             status = document.getString("status");
-                            if (status != null)
+                            if (status != null){
+
+                            }
                                 Toast.makeText(getContext(), status, Toast.LENGTH_SHORT).show();
                         }
                     }
-                });
+                });*/
 
+    }
+
+    public void logout() {
+        MaterialDialog mDialog = new MaterialDialog.Builder(this.getActivity())
+                .setTitle("Logout")
+                .setMessage("Are you sure want to logout!")
+                .setCancelable(false)
+                .setPositiveButton("Logout", R.drawable.ic_baseline_logout_24, new MaterialDialog.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.dismiss();
+                        utils.logout();
+                        startActivity(new Intent(getContext(), ActivityLogin.class));
+                        getActivity().finish();
+                    }
+                })
+                .setNegativeButton("Cancel", R.drawable.ic_baseline_cancel_presentation_24, new MaterialDialog.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .build();
+
+        // Show Dialog
+        mDialog.show();
     }
 
     private void fetchresult() {
@@ -196,7 +226,6 @@ public class DashboardFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
 
-                            examtype = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                 examtype.add(document.getId());
@@ -219,7 +248,7 @@ public class DashboardFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
 
-                            sessions = new ArrayList<>();
+
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                 //sesion =fd ;
@@ -227,7 +256,7 @@ public class DashboardFragment extends Fragment {
                                 sessions.add(document.getId());
                                 //currentVar = document.getId();
 
-                                fetchcurrentdaate(document.getId());
+                                //fetchcurrentdaate(document.getId());
 
 
 //
@@ -316,7 +345,59 @@ public class DashboardFragment extends Fragment {
         AppCompatButton btn_earlier = vie.findViewById(R.id.btn_earlier);
         TextView text_schoolName = vie.findViewById(R.id.text_schoolName);
         TextView tv_date = vie.findViewById(R.id.tv_date);
-        TextView tv_status = vie.findViewById(R.id.tv_status);
+        tv_status = vie.findViewById(R.id.tv_stats);
+
+
+        ///////////////////////////////////////////////////
+        db.collection("Sessions").orderBy("sessionID", Query.Direction.DESCENDING).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                //sesion =fd ;
+
+                                //sessions.add(document.getId());
+
+
+                                db.collection("Attendance").document(document.getId())
+                                        .collection("Date").document(date)
+                                        .collection("Class").document(classid)
+                                        .collection("Attende").document(utils.getToken())
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    //Toast.makeText(getContext(), "debug", Toast.LENGTH_SHORT).show();
+                                                    //Toast.makeText(ActivityAttendance.this, "Debug", Toast.LENGTH_SHORT).show();
+                                                    DocumentSnapshot document = task.getResult();
+
+                                                    status = document.getString("status");
+                                                    if (status != null) {
+                                                        tv_status.setText(status);
+                                                    } else tv_status.setText("Pending");
+                                                    //Toast.makeText(getContext(), status, Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+
+
+                                //Toast.makeText(getContext(), "" + document.getId(), Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        }
+                    }
+                });
+        /////////////////////////////////////////////////
+
+
+        tv_date.setText(date);
+//        tv_status.setText(status);
 
 
         btn_earlier.setOnClickListener(new View.OnClickListener() {
@@ -331,43 +412,16 @@ public class DashboardFragment extends Fragment {
 
                 txtattendance = attendancedialog.findViewById(R.id.txtattendance);
                 btn_attendance = attendancedialog.findViewById(R.id.btn_attendance);
-                imgCalender = attendancedialog.findViewById(R.id.imgCalender);
-                tvSelectedDate = attendancedialog.findViewById(R.id.tvSelectedDate);
 
                 ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), R.layout.dropdown_attendancesession, sessions);
                 txtattendance.setText(arrayAdapter.getItem(0).toString(), false);
                 txtattendance.setAdapter(arrayAdapter);
-
-
-                DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                          int dayOfMonth) {
-                        // TODO Auto-generated method stub
-                        calendar.set(Calendar.YEAR, year);
-                        calendar.set(Calendar.MONTH, monthOfYear);
-                        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        updateLabel();
-                    }
-
-                };
-
-                imgCalender.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        new DatePickerDialog(getContext(), date, calendar
-                                .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                                calendar.get(Calendar.DAY_OF_MONTH)).show();
-                    }
-                });
 
                 btn_attendance.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(getContext(), ActivityAttendance.class);
                         intent.putExtra("attendanceSession", txtattendance.getText().toString());
-                        intent.putExtra("date", fromatedate);
                         intent.putExtra("classid", classid);
                         getActivity().finish();
                         startActivity(intent);
@@ -385,17 +439,6 @@ public class DashboardFragment extends Fragment {
         dialog.setContentView(vie);
         dialog.setCancelable(true);
         dialog.show();
-    }
-
-    private void updateLabel() {
-
-        String myFormat = "dd-MM-yyyy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
-
-        fromatedate = sdf.format(calendar.getTime());
-
-        tvSelectedDate.setText(sdf.format(calendar.getTime()));
-
     }
 
     @Override

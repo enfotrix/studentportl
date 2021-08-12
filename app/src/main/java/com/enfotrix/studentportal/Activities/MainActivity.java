@@ -21,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // hide actionbar and statusBar
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Home");
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

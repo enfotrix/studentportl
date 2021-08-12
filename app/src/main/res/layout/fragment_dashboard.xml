@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/image_background"
+    android:background="@drawable/blue_img"
     android:paddingBottom="?attr/actionBarSize"
     tools:context=".Fragments.DashboardFragment">
 
@@ -21,36 +21,6 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/tbr"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/blue_dark"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/roboto"
-                    android:text="Profile"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_18ssp" />
-
-
-                <ImageView
-                    android:id="@+id/iv_logout"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_gravity="center_vertical|right"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:src="@drawable/log_out"
-                    app:tint="@color/white" />
-
-            </LinearLayout>
-
-            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -58,7 +28,6 @@
                     android:id="@+id/animationView"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_100sdp"
-                    android:layout_below="@id/tbr"
                     android:layout_gravity="center_vertical"
                     android:layout_marginHorizontal="@dimen/_16sdp"
                     app:lottie_autoPlay="true"
@@ -210,31 +179,28 @@
                     app:cardCornerRadius="@dimen/_12sdp">
 
                     <RelativeLayout
-                        android:id="@+id/lay_feedback"
+                        android:id="@+id/lay_logout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
                         <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/tv_res"
+                            android:layout_height="match_parent"
                             android:layout_alignParentRight="true"
                             android:layout_alignParentBottom="true"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:padding="@dimen/_5sdp"
                             android:scaleType="fitEnd"
-                            android:src="@drawable/feedback" />
+                            android:src="@drawable/logout" />
 
                         <TextView
                             android:id="@+id/tv_res"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentTop="true"
-                            android:layout_marginHorizontal="@dimen/_12sdp"
+                            android:layout_marginLeft="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_4sdp"
                             android:fontFamily="@font/roboto"
                             android:gravity="left"
-                            android:text="@string/str_feedback"
+                            android:text="Log Out"
                             android:textColor="@color/black_gray"
                             android:textSize="@dimen/_12ssp" />
 
@@ -257,21 +223,18 @@
 
                         <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/tv_ds"
+                            android:layout_height="match_parent"
                             android:layout_alignParentRight="true"
                             android:layout_alignParentBottom="true"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:padding="@dimen/_5sdp"
                             android:scaleType="fitEnd"
-                            android:src="@drawable/exam" />
+                            android:src="@drawable/resulticon" />
 
                         <TextView
                             android:id="@+id/tv_ds"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentTop="true"
-                            android:layout_marginHorizontal="@dimen/_12sdp"
+                            android:layout_marginLeft="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_4sdp"
                             android:fontFamily="@font/roboto"
                             android:gravity="left"
@@ -298,21 +261,18 @@
 
                         <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/tv_tb"
+                            android:layout_height="match_parent"
                             android:layout_alignParentRight="true"
                             android:layout_alignParentBottom="true"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:padding="@dimen/_5sdp"
                             android:scaleType="fitEnd"
-                            android:src="@drawable/attendance" />
+                            android:src="@drawable/attend" />
 
                         <TextView
                             android:id="@+id/tv_tb"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentTop="true"
-                            android:layout_marginHorizontal="@dimen/_12sdp"
+                            android:layout_marginLeft="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_4sdp"
                             android:fontFamily="@font/roboto"
                             android:gravity="left"

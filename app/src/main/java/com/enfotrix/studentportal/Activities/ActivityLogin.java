@@ -1,9 +1,12 @@
 package com.enfotrix.studentportal.Activities;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,11 +23,14 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 
 public class ActivityLogin extends AppCompatActivity {
 
@@ -41,6 +47,7 @@ public class ActivityLogin extends AppCompatActivity {
     private String cu_departmentName1, cu_email1, cu_mobileNo1, cu_whatsapp1, cu_landline1;
     private String cu_departmentName2, cu_email2, cu_mobileNo2, cu_whatsapp2, cu_landline2;
     private String cu_departmentName3, cu_email3, cu_mobileNo3, cu_whatsapp3, cu_landline3;
+    private ArrayList<String> departmentname;
 
 
     @Override
@@ -60,12 +67,16 @@ public class ActivityLogin extends AppCompatActivity {
 
         utils = new Utils(this);
         firestore = FirebaseFirestore.getInstance();
+        departmentname = new ArrayList<>();
+
+        fetchdepartment();
 
 
         text_contactus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bottomsheet();
+                contactUs();
+//                bottomsheet();
             }
         });
 
@@ -162,34 +173,95 @@ public class ActivityLogin extends AppCompatActivity {
 
     }
 
-    private void bottomsheet() {
+    private void fetchdepartment() {
 
+        db.collection("ContactUs").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+
+                        if (task.isSuccessful()) {
+
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                departmentname.add(document.getId());
+
+
+                                Toast.makeText(getApplicationContext(), "" + departmentname, Toast.LENGTH_SHORT).show();
+
+                                //Toast.makeText(getContext(), "Debug", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getContext(), "" + document.getId(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    }
+                });
+    }
+
+    private void contactUs() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        View attendancedialog = getLayoutInflater().inflate(R.layout.department_dialog, null);
+
+        AutoCompleteTextView txtContact = attendancedialog.findViewById(R.id.txtContact);
+        AppCompatButton btn_Contact = attendancedialog.findViewById(R.id.btn_Contact);
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), R.layout.dropdown_department, departmentname);
+//        txtContact.setText(arrayAdapter.getItem(0).toString(), false);
+        txtContact.setAdapter(arrayAdapter);
+
+        btn_Contact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomsheet(txtContact.getText().toString().trim());
+
+            }
+        });
+
+        builder.setView(attendancedialog);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
+    private void bottomsheet(String dptName) {
 
         BottomSheetDialog dialog = new BottomSheetDialog(this);
         View vie = getLayoutInflater().inflate(R.layout.bottam_sheet_contacts, null);
 
 
         TextView txt_cu_departmentName1 = vie.findViewById(R.id.txt_pri);
-        txt_cu_departmentName1.setText(cu_departmentName1);
         ImageView img_cu_call1 = vie.findViewById(R.id.img_cu_call1);
         ImageView img_cu_landline1 = vie.findViewById(R.id.img_cu_landline1);
         ImageView img_cu_mail1 = vie.findViewById(R.id.img_cu_mail1);
         ImageView img_cu_whatsapp1 = vie.findViewById(R.id.img_cu_whatsapp1);
 
-        TextView txt_cu_departmentName2 = vie.findViewById(R.id.txt_admin);
-//        txt_cu_departmentName2.setText(cu_departmentName2);
-        ImageView img_cu_call2 = vie.findViewById(R.id.img_cu_call2);
-        ImageView img_cu_landline2 = vie.findViewById(R.id.img_cu_landline2);
-        ImageView img_cu_mail2 = vie.findViewById(R.id.img_cu_mail2);
-        ImageView img_cu_whatsapp2 = vie.findViewById(R.id.img_cu_whatsapp2);
 
+        db.collection("ContactUs").document(dptName)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
 
-        TextView txt_cu_departmentName3 = vie.findViewById(R.id.txt_acc);
-//        txt_cu_departmentName3.setText(cu_departmentName3);
-        ImageView img_cu_call3 = vie.findViewById(R.id.img_cu_call3);
-        ImageView img_cu_landline3 = vie.findViewById(R.id.img_cu_landline3);
-        ImageView img_cu_mail3 = vie.findViewById(R.id.img_cu_mail3);
-        ImageView img_cu_whatsapp3 = vie.findViewById(R.id.img_cu_whatsapp3);
+                        if (task.isSuccessful()) {
+
+                            DocumentSnapshot documentSnapshot = task.getResult();
+                            cu_mobileNo1 = documentSnapshot.getString("cell");
+                            cu_email1 = documentSnapshot.getString("email");
+                            cu_landline1 = documentSnapshot.getString("landline");
+
+                            cu_departmentName1 = documentSnapshot.getString("tittle");
+                            txt_cu_departmentName1.setText(cu_departmentName1);
+
+                            cu_whatsapp1 = documentSnapshot.getString("whatsapp");
+
+//                            Toast.makeText(getContext(), "" + cellnumber + email + landline + tittle + whatsapp, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
 
         dialog.setContentView(vie);
         dialog.setCancelable(true);
@@ -199,31 +271,45 @@ public class ActivityLogin extends AppCompatActivity {
         img_cu_call1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String contact = cu_mobileNo1; // use country code with your phone number
-                Intent i = new Intent(Intent.ACTION_DIAL);
-                i.setData(Uri.parse("tel:" + contact));
-                startActivity(i);
+                String contact = cu_mobileNo1;
+                // use country code with your phone number
+                if (contact != null) {
+                    Intent i = new Intent(Intent.ACTION_DIAL);
+                    i.setData(Uri.parse("tel:" + contact));
+                    startActivity(i);
+                } else {
+                    img_cu_call1.setVisibility(View.GONE);
+                }
             }
         });
 
         img_cu_landline1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String contact = cu_landline1; // use country code with your phone number
-                Intent i = new Intent(Intent.ACTION_DIAL);
-                i.setData(Uri.parse("tel:" + contact));
-                startActivity(i);
+                String contact = cu_landline1;
+                // use country code with your phone number
+                if (contact != null) {
+                    Intent i = new Intent(Intent.ACTION_DIAL);
+                    i.setData(Uri.parse("tel:" + contact));
+                    startActivity(i);
+                } else {
+                    img_cu_landline1.setVisibility(View.GONE);
+                }
             }
         });
 
         img_cu_mail1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", cu_email1, null));
-                //i.putExtra(Intent.EXTRA_SUBJECT, SUBJECT);
-                //i.putExtra(Intent.EXTRA_TEXT, BODY);
-                startActivity(i);
-
+                String contact = cu_email1;
+                if (contact != null) {
+                    Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", contact, null));
+                    //i.putExtra(Intent.EXTRA_SUBJECT, SUBJECT);
+                    //i.putExtra(Intent.EXTRA_TEXT, BODY);
+                    startActivity(i);
+                } else {
+                    img_cu_landline1.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -232,97 +318,18 @@ public class ActivityLogin extends AppCompatActivity {
             public void onClick(View view) {
 
                 String contact = cu_whatsapp1; // use country code with your phone number
-                String url = "https://api.whatsapp.com/send?phone=" + contact;
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
+                if (contact != null) {
+                    String url = "https://api.whatsapp.com/send?phone=" + contact;
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                } else {
+                    img_cu_landline1.setVisibility(View.GONE);
+                }
             }
         });
 
-        img_cu_call2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String contact = cu_mobileNo2; // use country code with your phone number
-                Intent i = new Intent(Intent.ACTION_DIAL);
-                i.setData(Uri.parse("tel:" + contact));
-                startActivity(i);
-            }
-        });
 
-        img_cu_landline2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String contact = cu_landline2; // use country code with your phone number
-                Intent i = new Intent(Intent.ACTION_DIAL);
-                i.setData(Uri.parse("tel:" + contact));
-                startActivity(i);
-            }
-        });
-
-        img_cu_mail2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", cu_email2, null));
-                // i.putExtra(Intent.EXTRA_SUBJECT, SUBJECT);
-                //i.putExtra(Intent.EXTRA_TEXT, BODY);
-                startActivity(i);
-
-            }
-        });
-
-        img_cu_whatsapp2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String contact = cu_whatsapp2; // use country code with your phone number
-                String url = "https://api.whatsapp.com/send?phone=" + contact;
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            }
-        });
-        img_cu_call3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String contact = cu_mobileNo3; // use country code with your phone number
-                Intent i = new Intent(Intent.ACTION_DIAL);
-                i.setData(Uri.parse("tel:" + contact));
-                startActivity(i);
-            }
-        });
-
-        img_cu_landline3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String contact = cu_landline3; // use country code with your phone number
-                Intent i = new Intent(Intent.ACTION_DIAL);
-                i.setData(Uri.parse("tel:" + contact));
-                startActivity(i);
-            }
-        });
-
-        img_cu_mail3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", cu_email3, null));
-                //i.putExtra(Intent.EXTRA_SUBJECT, SUBJECT);
-                //i.putExtra(Intent.EXTRA_TEXT, BODY);
-                startActivity(i);
-
-            }
-        });
-
-        img_cu_whatsapp3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String contact = cu_whatsapp3; // use country code with your phone number
-                String url = "https://api.whatsapp.com/send?phone=" + contact;
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            }
-        });
     }
 
     //-------------- check empty fields

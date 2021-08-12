@@ -14,14 +14,14 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_12sdp"
-        android:hint="Select Session"
+        android:hint="Select Department"
         android:textColorHint="@color/black"
         app:hintTextColor="@color/black"
         app:startIconDrawable="@drawable/ic_baseline_class_24"
         app:startIconTint="@color/black">
 
         <AutoCompleteTextView
-            android:id="@+id/txtattendance"
+            android:id="@+id/txtContact"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:enabled="false"
@@ -30,13 +30,13 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_attendance"
+        android:id="@+id/btn_Contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_15sdp"
         android:layout_marginVertical="@dimen/_12sdp"
         android:background="@drawable/btn_bg"
-        android:text="Get Attendance"
+        android:text="Contact"
         android:textColor="@color/black_m"
         android:textSize="@dimen/_14ssp" />
 

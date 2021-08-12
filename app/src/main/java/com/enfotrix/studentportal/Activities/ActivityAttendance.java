@@ -1,11 +1,9 @@
 package com.enfotrix.studentportal.Activities;
 
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enfotrix.studentportal.Adapters.Adapter_Month;
+import com.enfotrix.studentportal.Adapters.Adapter_attendance;
+import com.enfotrix.studentportal.Models.Model_Attendance;
 import com.enfotrix.studentportal.Models.Model_Month;
 import com.enfotrix.studentportal.R;
 import com.enfotrix.studentportal.Utils;
@@ -31,20 +31,25 @@ import java.util.Calendar;
 public class ActivityAttendance extends AppCompatActivity implements Adapter_Month.OnItemClickListener {
 
     // --------------------------     variables declaration
-    RecyclerView rv_month;
-    ArrayList<Model_Month> monthArrayList;
-    Adapter_Month adapterMonth;
-    AutoCompleteTextView autoCompletetxt;
+    private RecyclerView rv_month, rv_attendance;
+    private ArrayList<Model_Month> monthArrayList;
+    private ArrayList<Model_Attendance> attendanceArrayList;
+    private Adapter_Month adapterMonth;
+    private Adapter_attendance adapterAttendance;
+    private AutoCompleteTextView autoCompletetxt;
     private Calendar calendar;
     private AutoCompleteTextView txtattendance;
     private AppCompatButton btn_attendance;
     private ImageView imgCalender;
-    private TextView tvSelectedDate;
+    private TextView tv_totalPresent, tv_totalAbsent, tv_totalLeave;
     private String fromatedate;
     private String attenadnce_session, attenadnce_date, section_ID;
     private FirebaseFirestore db;
     private Utils utils;
     private String month;
+    private int total_p = 0;
+    private int total_a = 0;
+    private int total_l = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,14 +60,24 @@ public class ActivityAttendance extends AppCompatActivity implements Adapter_Mon
 
         // ---------------------------- variables initialization
         autoCompletetxt = findViewById(R.id.autoCompletetxt);
+        tv_totalPresent = findViewById(R.id.tv_totalPresent);
+        tv_totalAbsent = findViewById(R.id.tv_totalAbsent);
+        tv_totalLeave = findViewById(R.id.tv_totalLeave);
         rv_month = findViewById(R.id.rv_month);
         rv_month.setHasFixedSize(true);
         rv_month.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        rv_attendance = findViewById(R.id.rv_attendance);
+        rv_attendance.setHasFixedSize(true);
+        rv_attendance.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
 
         db = FirebaseFirestore.getInstance();
         utils = new Utils(this);
 
         monthArrayList = new ArrayList<>();
+        attendanceArrayList = new ArrayList<>();
+
         calendar = Calendar.getInstance();
 
         attenadnce_session = getIntent().getStringExtra("attendanceSession");
@@ -86,6 +101,15 @@ public class ActivityAttendance extends AppCompatActivity implements Adapter_Mon
 
         final lottiedialog lottie = new lottiedialog(this);
 
+        total_p = 0;
+        total_a = 0;
+        total_l = 0;
+        tv_totalAbsent.setText("0");
+        tv_totalPresent.setText("0");
+        tv_totalLeave.setText("0");
+
+        attendanceArrayList.clear();
+
 
         int days = 1;
         String tempday = "";
@@ -108,9 +132,36 @@ public class ActivityAttendance extends AppCompatActivity implements Adapter_Mon
                                 DocumentSnapshot document = task.getResult();
                                 String status = "";
                                 status = document.getString("status");
-                                if (status != null)
-                                    Toast.makeText(ActivityAttendance.this, status, Toast.LENGTH_SHORT).show();
+                                if (status != null) {
+
+                                    Model_Attendance model_attendance = new Model_Attendance();
+                                    model_attendance.setDate(date);
+                                    model_attendance.setStatus(status);
+                                    attendanceArrayList.add(model_attendance);
+
+                                    if (document.getString("status").equals("Present")) {
+                                        total_p++;
+                                        tv_totalPresent.setText(String.valueOf(total_p));
+
+                                    }
+
+                                    if (document.getString("status").equals("Leave")) {
+                                        tv_totalLeave.setText(String.valueOf(total_l));
+
+                                    }
+
+                                    if (document.getString("status").equals("Absent")) {
+                                        tv_totalAbsent.setText(String.valueOf(total_a));
+                                        total_a++;
+                                    }
+
+                                }
+                                //Toast.makeText(ActivityAttendance.this, status, Toast.LENGTH_SHORT).show();
                             }
+
+                            adapterAttendance = new Adapter_attendance(getApplicationContext(), attendanceArrayList);
+                            rv_attendance.setAdapter(adapterAttendance);
+                            adapterAttendance.notifyDataSetChanged();
                         }
                     });
 
@@ -119,18 +170,6 @@ public class ActivityAttendance extends AppCompatActivity implements Adapter_Mon
 
 
         }
-
-
-    }
-
-
-    private void dropdownmenue() {
-
-        String[] session = {"2017-2018", "2018-2019", "2019-2020", "2020-2021"};
-
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.dropdown_list, session);
-        autoCompletetxt.setText(arrayAdapter.getItem(0).toString(), false);
-        autoCompletetxt.setAdapter(arrayAdapter);
 
 
     }
