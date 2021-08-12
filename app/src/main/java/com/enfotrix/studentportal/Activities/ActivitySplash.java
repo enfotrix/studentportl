@@ -2,9 +2,6 @@ package com.enfotrix.studentportal.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
@@ -12,11 +9,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.enfotrix.studentportal.R;
 import com.enfotrix.studentportal.Utils;
-import com.google.android.material.progressindicator.LinearProgressIndicator;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ActivitySplash extends AppCompatActivity {
     private Utils utils;
     ProgressBar progressBar;
+    int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,22 +37,36 @@ public class ActivitySplash extends AppCompatActivity {
 
     private void delay() {
 
-        progressBar.setVisibility(View.VISIBLE);
-
-        final Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(new Runnable() {
+        Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                if (utils.isLoggedIn()) {
-                    Intent intent = new Intent(ActivitySplash.this, MainActivity.class);
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(ActivitySplash.this, ActivityLogin.class);
-                    startActivity(intent);
+
+                counter++;
+                progressBar.setProgress(counter);
+
+                if (counter == 100) {
+                    if (utils.isLoggedIn()) {
+
+                        Intent intent = new Intent(ActivitySplash.this, MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(ActivitySplash.this, ActivityLogin.class);
+                        startActivity(intent);
+                    }
+                    finish();
                 }
-                finish();
             }
-        }, 3000);
+        };
+        timer.schedule(timerTask, 0, 100);
+
+//        final Handler handler = new Handler(Looper.getMainLooper());
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//            }
+//        }, 3000);
 
     }
 }

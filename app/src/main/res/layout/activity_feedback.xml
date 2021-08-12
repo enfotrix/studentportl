@@ -31,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
+            app:cardBackgroundColor="@color/white_d"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
@@ -99,6 +100,7 @@
                     app:hintTextColor="@color/black">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tv_feedbck"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/black" />
@@ -107,8 +109,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/_12sdp">
+                    android:layout_height="wrap_content">
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_announcement"
@@ -116,6 +117,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_gravity="right"
+                        android:layout_marginVertical="@dimen/_12sdp"
                         android:layout_marginRight="@dimen/_20sdp"
                         android:background="@drawable/btn_bg"
                         android:text="Submit"
@@ -127,6 +129,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_gravity="right"
+                        android:layout_marginVertical="@dimen/_12sdp"
                         android:layout_marginLeft="@dimen/_20sdp"
                         android:background="@drawable/btn_bg"
                         android:text="Earlier"

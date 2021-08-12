@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -77,6 +78,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
     private ArrayList<String> departmentname;
+    private String contact_num, contact_email, contact_landline, contact_whatsapp;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -238,7 +240,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         AppCompatButton btn_Contact = attendancedialog.findViewById(R.id.btn_Contact);
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), R.layout.dropdown_department, departmentname);
-//        txtContact.setText(arrayAdapter.getItem(0).toString(), false);
+        txtContact.setText(arrayAdapter.getItem(0).toString(), false);
         txtContact.setAdapter(arrayAdapter);
 
         btn_Contact.setOnClickListener(new View.OnClickListener() {
@@ -266,6 +268,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         ImageView img_cu_landline1 = vie.findViewById(R.id.img_cu_landline1);
         ImageView img_cu_mail1 = vie.findViewById(R.id.img_cu_mail1);
         ImageView img_cu_whatsapp1 = vie.findViewById(R.id.img_cu_whatsapp1);
+        CardView cv_mobile = vie.findViewById(R.id.cv_mobile);
+        CardView cv_landline = vie.findViewById(R.id.cv_landline);
+        CardView cv_whatsapp = vie.findViewById(R.id.cv_whatsapp);
+        CardView cv_email = vie.findViewById(R.id.cv_email);
 
         db.collection("ContactUs").document(dptName)
                 .get()
@@ -278,16 +284,36 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                             DocumentSnapshot documentSnapshot = task.getResult();
 
                             cu_mobileNo1 = documentSnapshot.getString("cell");
-                            if (cu_mobileNo1 != null) {
-
-                            } else {
-
-                            }
                             cu_email1 = documentSnapshot.getString("email");
                             cu_whatsapp1 = documentSnapshot.getString("whatsapp");
                             cu_landline1 = documentSnapshot.getString("landline");
                             tittle = documentSnapshot.getString("tittle");
                             txt_cu_departmentName1.setText(tittle);
+
+                            /////////////////////////////////////////
+                            if (cu_mobileNo1 != null) {
+                                contact_num = cu_mobileNo1;
+                            } else {
+                                cv_mobile.setVisibility(View.GONE);
+                            }
+                            ////////////////////////////////////////////
+                            if (cu_email1 != null) {
+                                contact_email = cu_email1;
+                            } else {
+                                cv_email.setVisibility(View.GONE);
+                            }
+                            /////////////////////////////////////////////
+                            if (cu_whatsapp1 != null) {
+                                contact_whatsapp = cu_whatsapp1;
+                            } else {
+                                cv_whatsapp.setVisibility(View.GONE);
+                            }
+                            /////////////////////////////////////////
+                            if (cu_landline1 != null) {
+                                contact_landline = cu_landline1;
+                            } else {
+                                cv_landline.setVisibility(View.GONE);
+                            }
 
 
 //                            Toast.makeText(getContext(), "" + cellnumber + email + landline + tittle + whatsapp, Toast.LENGTH_SHORT).show();
@@ -304,15 +330,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         img_cu_call1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String contact = cu_mobileNo1;
                 // use country code with your phone number
-                if (contact != null) {
-                    Intent i = new Intent(Intent.ACTION_DIAL);
-                    i.setData(Uri.parse("tel:" + contact));
-                    startActivity(i);
-                } else {
-                    img_cu_call1.setVisibility(View.GONE);
-                }
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:" + contact_num));
+                startActivity(i);
 
             }
         });
@@ -320,32 +341,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         img_cu_landline1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String contact = cu_landline1;
-                // use country code with your phone number
-                if (contact != null) {
-                    Intent i = new Intent(Intent.ACTION_DIAL);
-                    i.setData(Uri.parse("tel:" + contact));
-                    startActivity(i);
-                } else {
-                    img_cu_landline1.setVisibility(View.GONE);
-                }
 
+                Intent i = new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:" + contact_landline));
+                startActivity(i);
             }
         });
 
         img_cu_mail1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String contact = cu_email1;
-                if (contact != null) {
-                    Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", contact, null));
-                    //i.putExtra(Intent.EXTRA_SUBJECT, SUBJECT);
-                    //i.putExtra(Intent.EXTRA_TEXT, BODY);
-                    startActivity(i);
-                } else {
-                    img_cu_landline1.setVisibility(View.GONE);
-                }
-
+                Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", contact_email, null));
+                //i.putExtra(Intent.EXTRA_SUBJECT, SUBJECT);
+                //i.putExtra(Intent.EXTRA_TEXT, BODY);
 
             }
         });
@@ -354,15 +362,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View view) {
 
-                String contact = cu_whatsapp1; // use country code with your phone number
-                if (contact != null) {
-                    String url = "https://api.whatsapp.com/send?phone=" + contact;
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
-                } else {
-                    img_cu_landline1.setVisibility(View.GONE);
-                }
+                String url = "https://api.whatsapp.com/send?phone=" + contact_whatsapp;
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
 
             }
         });

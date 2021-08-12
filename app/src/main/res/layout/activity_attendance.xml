@@ -43,6 +43,7 @@
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:layout_marginRight="@dimen/_20sdp"
+                app:cardBackgroundColor="@color/white_d"
                 app:cardCornerRadius="@dimen/_20sdp">
 
                 <LinearLayout

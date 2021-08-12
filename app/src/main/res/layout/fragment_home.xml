@@ -94,6 +94,7 @@
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
                     android:layout_margin="@dimen/_5sdp"
+                    app:cardBackgroundColor="@color/white_d"
                     app:cardCornerRadius="@dimen/_12sdp">
 
                     <RelativeLayout
@@ -132,6 +133,7 @@
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
                     android:layout_margin="@dimen/_5sdp"
+                    app:cardBackgroundColor="@color/white_d"
                     app:cardCornerRadius="@dimen/_12sdp">
 
                     <RelativeLayout
@@ -170,6 +172,7 @@
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
                     android:layout_margin="@dimen/_5sdp"
+                    app:cardBackgroundColor="@color/white_d"
                     app:cardCornerRadius="@dimen/_12sdp">
 
                     <RelativeLayout
@@ -208,6 +211,7 @@
                     android:layout_rowWeight="2"
                     android:layout_columnWeight="1"
                     android:layout_margin="@dimen/_5sdp"
+                    app:cardBackgroundColor="@color/white_d"
                     app:cardCornerRadius="@dimen/_12sdp">
 
                     <RelativeLayout
@@ -246,7 +250,7 @@
                     android:layout_rowWeight="2"
                     android:layout_columnWeight="1"
                     android:layout_margin="@dimen/_5sdp"
-                    app:cardBackgroundColor="#F1EEEE"
+                    app:cardBackgroundColor="#F6F5F5"
                     app:cardCornerRadius="@dimen/_12sdp">
 
                     <RelativeLayout
@@ -255,6 +259,7 @@
                         android:layout_height="match_parent">
 
                         <ImageView
+                            android:layout_below="@id/tv_t"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_alignParentRight="true"
@@ -285,7 +290,7 @@
                     android:layout_rowWeight="2"
                     android:layout_columnWeight="1"
                     android:layout_margin="@dimen/_5sdp"
-                    app:cardBackgroundColor="#F1EEEE"
+                    app:cardBackgroundColor="@color/white_d"
                     app:cardCornerRadius="@dimen/_12sdp">
 
                     <RelativeLayout
@@ -294,6 +299,7 @@
                         android:layout_height="match_parent">
 
                         <ImageView
+                            android:layout_below="@id/tv_ff"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_alignParentRight="true"
@@ -302,6 +308,7 @@
                             android:src="@drawable/feedicon" />
 
                         <TextView
+                            android:id="@+id/tv_ff"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentTop="true"

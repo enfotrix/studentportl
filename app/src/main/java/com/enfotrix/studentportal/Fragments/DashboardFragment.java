@@ -344,7 +344,7 @@ public class DashboardFragment extends Fragment {
 
         AppCompatButton btn_earlier = vie.findViewById(R.id.btn_earlier);
         TextView text_schoolName = vie.findViewById(R.id.text_schoolName);
-        TextView tv_date = vie.findViewById(R.id.tv_date);
+//        TextView tv_date = vie.findViewById(R.id.tv_date);
         tv_status = vie.findViewById(R.id.tv_stats);
 
 
@@ -396,7 +396,7 @@ public class DashboardFragment extends Fragment {
         /////////////////////////////////////////////////
 
 
-        tv_date.setText(date);
+//        tv_date.setText(date);
 //        tv_status.setText(status);
 
 

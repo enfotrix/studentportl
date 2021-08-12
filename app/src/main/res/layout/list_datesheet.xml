@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_120sdp"
-    android:layout_marginHorizontal="@dimen/_8sdp"
+    android:layout_marginHorizontal="@dimen/_5sdp"
     android:layout_marginTop="@dimen/_8sdp"
-    app:cardBackgroundColor="@color/black_m"
+    app:cardBackgroundColor="@color/white_d"
     app:cardCornerRadius="@dimen/_20sdp">
 
     <LinearLayout

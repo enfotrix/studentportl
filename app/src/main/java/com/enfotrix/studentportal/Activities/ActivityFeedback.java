@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -53,6 +54,7 @@ public class ActivityFeedback extends AppCompatActivity {
 
     private EditText edt_head;
     private TextInputLayout edt_feedback;
+    private TextInputEditText tv_feedbck;
 
     private AppCompatButton btn_earler;
 
@@ -68,6 +70,7 @@ public class ActivityFeedback extends AppCompatActivity {
         utils = new Utils(this);
 
         btn_earler = findViewById(R.id.btn_earler);
+        tv_feedbck = findViewById(R.id.tv_feedbck);
 
 //        recyc_Feedback = findViewById(R.id.list_Feedback);
 //        recyc_Feedback.setHasFixedSize(true);
@@ -193,9 +196,11 @@ public class ActivityFeedback extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         lottie.dismiss();
+                        tv_feedbck.setText(null);
                         Toast.makeText(ActivityFeedback.this, "Feedback submitted Successfully", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(ActivityFeedback.this, MainActivity.class));
-                        finish();
+//                        startActivity(new Intent(ActivityFeedback.this, MainActivity.class));
+//                        finish();
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

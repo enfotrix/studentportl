@@ -2,7 +2,6 @@ package com.enfotrix.studentportal.Activities;
 
 import android.os.Bundle;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,7 +36,7 @@ public class ActivityGallery extends AppCompatActivity {
         setContentView(R.layout.activity_gallery);
 
         // hide actionbar and statusBar
-        getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Gallery");
 
         list = new ArrayList<Model_Image>();
         recyclerView = findViewById(R.id.recyclerView);

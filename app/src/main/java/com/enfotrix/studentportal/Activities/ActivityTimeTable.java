@@ -7,11 +7,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enfotrix.studentportal.R;
+import com.enfotrix.studentportal.Utils;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ActivityTimeTable extends AppCompatActivity {
 
     private RecyclerView rv_timeTable;
     private TextView tv_class, tv_classSection;
+    private FirebaseFirestore db;
+    private Utils utils;
 
     @Override
 
@@ -24,6 +28,10 @@ public class ActivityTimeTable extends AppCompatActivity {
 
         // ini views
         IniViews();
+
+        db = FirebaseFirestore.getInstance();
+        utils = new Utils(this);
+
 
     }
 

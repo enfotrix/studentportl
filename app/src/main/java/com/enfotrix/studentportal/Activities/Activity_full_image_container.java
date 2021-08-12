@@ -30,7 +30,7 @@ public class Activity_full_image_container extends AppCompatActivity {
         setContentView(R.layout.activity_full_image_container);
 
         // hide actionbar and statusBar
-        getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Image");
 
         fullImage = findViewById(R.id.fullImage);
         apply = findViewById(R.id.apply);

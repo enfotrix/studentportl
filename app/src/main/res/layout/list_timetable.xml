@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_120sdp"
-    android:layout_marginHorizontal="@dimen/_8sdp"
+    android:layout_marginHorizontal="@dimen/_5sdp"
     android:layout_marginTop="@dimen/_8sdp"
     app:cardBackgroundColor="#5EBCC6"
     app:cardCornerRadius="@dimen/_20sdp">
@@ -79,7 +79,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Sir Abdul Wahid Afridi "
-                    android:textColor="@color/blue_dark"
                     android:textSize="@dimen/_14ssp"
                     android:textStyle="bold" />
 
@@ -101,7 +100,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Start Time"
-                        android:textColor="@color/blue_dark"
                         android:textSize="@dimen/_14ssp"
                         android:textStyle="bold" />
 
@@ -109,7 +107,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="End Time"
-                        android:textColor="@color/blue_dark"
                         android:textSize="@dimen/_14ssp"
                         android:textStyle="bold" />
 
@@ -132,7 +129,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_8sdp"
                         android:text="9:00 Am"
-                        android:textColor="@color/blue_dark"
                         android:textSize="@dimen/_14ssp"
                         android:textStyle="bold" />
 
@@ -142,7 +138,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_8sdp"
                         android:text="10:00 Am"
-                        android:textColor="@color/blue_dark"
                         android:textSize="@dimen/_14ssp"
                         android:textStyle="bold" />
 

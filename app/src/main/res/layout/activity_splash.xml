@@ -24,7 +24,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginHorizontal="@dimen/_40sdp"
         android:layout_marginBottom="@dimen/_100sdp"
-        android:background="@color/blue_dark" />
+        android:progressTint="#3E4095" />
 
 
 </RelativeLayout>

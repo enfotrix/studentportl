@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EDEDED"
+    android:background="@drawable/blue_img"
     tools:context=".Activities.Activity_full_image_container">
 
     <ImageView
@@ -12,15 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:scaleType="fitCenter"
-         />
+        android:scaleType="fitCenter" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="@dimen/_120sdp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="-20dp"
-        app:cardBackgroundColor="@color/blue_dark"
+        app:cardBackgroundColor="@color/white_d"
         app:cardCornerRadius="@dimen/_20sdp">
 
         <LinearLayout

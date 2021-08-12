@@ -176,6 +176,7 @@
                     android:layout_rowWeight="0"
                     android:layout_columnWeight="1"
                     android:layout_margin="@dimen/_5sdp"
+                    app:cardBackgroundColor="@color/white_d"
                     app:cardCornerRadius="@dimen/_12sdp">
 
                     <RelativeLayout
@@ -214,6 +215,7 @@
                     android:layout_rowWeight="0"
                     android:layout_columnWeight="1"
                     android:layout_margin="@dimen/_5sdp"
+                    app:cardBackgroundColor="@color/white_d"
                     app:cardCornerRadius="@dimen/_12sdp">
 
                     <RelativeLayout
@@ -252,6 +254,7 @@
                     android:layout_rowWeight="0"
                     android:layout_columnWeight="1"
                     android:layout_margin="@dimen/_5sdp"
+                    app:cardBackgroundColor="@color/white_d"
                     app:cardCornerRadius="@dimen/_12sdp">
 
                     <RelativeLayout
