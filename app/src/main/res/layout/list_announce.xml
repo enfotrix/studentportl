@@ -41,12 +41,12 @@
             </LinearLayout>
 
             <TextView
+                android:layout_marginVertical="@dimen/_5sdp"
                 android:id="@+id/txt_notifi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/lay_header"
                 android:layout_centerVertical="true"
-                android:paddingTop="@dimen/_10sdp"
                 android:text="has beennfjdnf jdsfndsfj nj fj fjfjdfdjfjdfjdsjkfddjfjksdfjkjfdskjjfkjfskjsdfjkdsfjdsfjkdskfj"
                 android:textColor="@color/blue_dark" />
 
@@ -57,7 +57,6 @@
                 android:layout_below="@+id/txt_notifi"
                 android:layout_alignParentRight="true"
                 android:layout_gravity="right"
-                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="10dp"
                 android:text="DATE AND TIME"
                 android:textColor="#615757"

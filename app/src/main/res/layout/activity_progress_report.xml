@@ -19,7 +19,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/_20sdp"
-            android:src="@drawable/boypro" />
+            />
 
         <TextView
             android:id="@+id/tv_hello"
@@ -195,7 +195,7 @@
                             android:layout_marginTop="@dimen/_10sdp"
                             android:padding="@dimen/_5sdp"
                             android:scaleType="fitEnd"
-                            android:src="@drawable/timetable" />
+                             />
 
                         <TextView
                             android:id="@+id/tv_res"

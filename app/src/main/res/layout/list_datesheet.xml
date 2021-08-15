@@ -56,96 +56,42 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_subName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:text="Mathematics "
+                android:textColor="@color/blue_dark"
+                android:textSize="@dimen/_22ssp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tv_subName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:gravity="center_horizontal"
-                    android:text="Mathematics "
-                    android:textColor="@color/blue_dark"
-                    android:textSize="@dimen/_22ssp"
-                    android:textStyle="bold" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_classSection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:orientation="horizontal">
+                android:layout_marginVertical="@dimen/_8sdp"
+                android:text="Mathematics "
+                android:textColor="@color/blue_dark"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_classsession"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mathematics "
+                android:textColor="@color/blue_dark"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Start Time"
-                        android:textColor="@color/blue_dark"
-                        android:textSize="@dimen/_14ssp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="End Time"
-                        android:textColor="@color/blue_dark"
-                        android:textSize="@dimen/_14ssp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="@dimen/_2sdp"
-                    android:layout_height="match_parent"
-                    android:background="@color/blue_dark" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tv_startTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:text="9:00 Am"
-                        android:textColor="@color/blue_dark"
-                        android:textSize="@dimen/_14ssp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tv_endTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:text="10:00 Am"
-                        android:textColor="@color/blue_dark"
-                        android:textSize="@dimen/_14ssp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-
-            </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
+
 
 </androidx.cardview.widget.CardView>

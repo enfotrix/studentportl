@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_8sdp"
-        android:layout_marginVertical="@dimen/_8sdp">
+        android:layout_marginVertical="@dimen/_3sdp">
 
         <TextView
             android:id="@+id/tv_date"

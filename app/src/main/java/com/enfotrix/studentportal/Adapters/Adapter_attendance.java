@@ -66,7 +66,7 @@ public class Adapter_attendance extends RecyclerView.Adapter<Adapter_attendance.
 
             cv_result = itemView.findViewById(R.id.cv_result);
 
-            cv_result.setCardBackgroundColor(getcolore());
+//            cv_result.setCardBackgroundColor(getcolore());
 
         }
     }

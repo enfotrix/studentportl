@@ -18,7 +18,6 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.bumptech.glide.Glide;
 import com.enfotrix.studentportal.Activities.ActivityAttendance;
 import com.enfotrix.studentportal.Activities.ActivityLogin;
 import com.enfotrix.studentportal.Activities.ActivityResult;
@@ -53,8 +52,8 @@ public class DashboardFragment extends Fragment {
 
     //------------------ variables initialization
     private TextView txt_studentRegNo, txt_studentFullName, txt_studentFatherName;
-    private TextView tv_status, tvSelectedDate;
-    private ImageView imageView, iv_logout, imgCalender;
+    private TextView tv_status, txt_studentmedium, txt_studentClass;
+    private ImageView imageprofile, iv_logout, imgCalender;
     private RelativeLayout lay_logout, lay_result, lay_attendance;
     private FirebaseFirestore db;
     private Utils utils;
@@ -62,7 +61,7 @@ public class DashboardFragment extends Fragment {
     private AppCompatButton btn_login, btn_attendance;
 
     private ArrayList<String> sessions, examtype;
-    private String classid;
+    public static String classid;
     private String classgrade;
     private String date;
     private Calendar calendar;
@@ -79,6 +78,8 @@ public class DashboardFragment extends Fragment {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        getActivity().setTitle("Profile");
+
 
         /*final TextView textView = binding.textDashboard;
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -91,11 +92,13 @@ public class DashboardFragment extends Fragment {
         txt_studentRegNo = root.findViewById(R.id.txt_studentRegNo);
         txt_studentFullName = root.findViewById(R.id.txt_studentFullName);
         txt_studentFatherName = root.findViewById(R.id.txt_studentFatherName);
+        txt_studentmedium = root.findViewById(R.id.txt_studentmedium);
+        txt_studentClass = root.findViewById(R.id.txt_studentClass);
 //        txt_studentAddress = root.findViewById(R.id.txt_studentAddress);
 //        txt_studentPhoneNo = root.findViewById(R.id.txt_studentPhoneNo);
 //        txt_studentDOB = root.findViewById(R.id.txt_studentDOB);
 //        txt_studentEmail = root.findViewById(R.id.txt_studentEmail);
-        imageView = root.findViewById(R.id.imageView);
+        imageprofile = root.findViewById(R.id.imageprofile);
         utils = new Utils(getContext());
         calendar = Calendar.getInstance();
 
@@ -119,6 +122,14 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 attendancedialog();
+
+            }
+        });
+
+        imageprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imgProfile();
 
             }
         });
@@ -165,6 +176,51 @@ public class DashboardFragment extends Fragment {
         fetchresult();
         //fetchcurrentdaate();
         return root;
+    }
+
+    private void imgProfile() {
+        MaterialDialog mDialog = new MaterialDialog.Builder(this.getActivity())
+                .setTitle("Upload")
+                .setMessage("Are you sure want to Upload Image!")
+                .setCancelable(false)
+                .setPositiveButton("Upload", R.drawable.ic_baseline_file_upload_24, new MaterialDialog.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+
+                    }
+                })
+                .setNegativeButton("Cancel", R.drawable.ic_baseline_cancel_presentation_24, new MaterialDialog.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .build();
+
+        // Show Dialog
+        mDialog.show();
+    }
+
+    private void fetchclasssection(String classid, String classgrade) {
+
+        db.collection("Class").document(classgrade)
+                .collection("Section").document(classid)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot documentSnapshot = task.getResult();
+                            documentSnapshot.getString("class_medium");
+                            documentSnapshot.getString("class_section");
+                            documentSnapshot.getString("class_grade");
+
+
+                            txt_studentClass.setText(documentSnapshot.getString("class_grade") + "-" + documentSnapshot.getString("class_section"));
+                            txt_studentmedium.setText("" + documentSnapshot.getString("class_medium"));
+                        }
+                    }
+                });
     }
 
     private void fetchcurrentdaate(String session) {
@@ -218,6 +274,7 @@ public class DashboardFragment extends Fragment {
         // Show Dialog
         mDialog.show();
     }
+
 
     private void fetchresult() {
         db.collection("ExamTypes").get()
@@ -325,7 +382,7 @@ public class DashboardFragment extends Fragment {
                 resultIntent.putExtra("examtype", text_examtype.getText().toString());
                 resultIntent.putExtra("classid", classid);
                 resultIntent.putExtra("classgrade", classgrade);
-                getActivity().finish();
+//                getActivity().finish();
                 startActivity(resultIntent);
             }
         });
@@ -423,7 +480,7 @@ public class DashboardFragment extends Fragment {
                         Intent intent = new Intent(getContext(), ActivityAttendance.class);
                         intent.putExtra("attendanceSession", txtattendance.getText().toString());
                         intent.putExtra("classid", classid);
-                        getActivity().finish();
+//                        getActivity().finish();
                         startActivity(intent);
 
                     }
@@ -468,6 +525,7 @@ public class DashboardFragment extends Fragment {
 
                         classid = document.getString("student_classID");
                         classgrade = document.getString("class_grade");
+                        fetchclasssection(document.getString("student_classID"), document.getString("class_grade"));
 
                         txt_studentRegNo.setText(student_RegNoFromDb);
 //                        txt_studentAddress.setText(student_homeAddressFromDb);
@@ -476,9 +534,9 @@ public class DashboardFragment extends Fragment {
                         txt_studentFullName.setText(student_FullNameFromDb + " " + student_LastNameFromDb);
 //                        txt_studentEmail.setText(student_EmailFromDb);
 //                        txt_studentDOB.setText(student_DOBFromDb);
-                        Glide.with(imageView)
-                                .load(student_profilePicFromDb)
-                                .fitCenter().into(imageView);
+//                        Glide.with(imageprofile)
+//                                .load(student_profilePicFromDb)
+//                                .fitCenter().into(imageprofile);
                         lottie.dismiss();
 
                     }

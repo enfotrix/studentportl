@@ -24,7 +24,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.enfotrix.studentportal.Activities.ActivityAnnouncement;
 import com.enfotrix.studentportal.Activities.ActivityFeedback;
-import com.enfotrix.studentportal.Activities.ActivityResult;
 import com.enfotrix.studentportal.Activities.ActivityTimeTable;
 import com.enfotrix.studentportal.Activities.Activity_DateSheet;
 import com.enfotrix.studentportal.Models.HomeViewModel;
@@ -40,6 +39,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
@@ -51,12 +51,17 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.provider.Telephony.TextBasedSmsColumns.BODY;
+import static android.provider.Telephony.TextBasedSmsColumns.SUBJECT;
+
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
     private Utils utils;
     private FirebaseFirestore firestore;
     private FirebaseFirestore db;
+    private ArrayList<String> sessions;
+    private ArrayList<String> examtype;
 
     private Button btn_announcement, btn_contactus, btn_feedback, btn_gallery;
 
@@ -79,6 +84,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private FragmentHomeBinding binding;
     private ArrayList<String> departmentname;
     private String contact_num, contact_email, contact_landline, contact_whatsapp;
+    private AutoCompleteTextView autoCompletetxt, text_examtype;
+    AppCompatButton btn_login;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -94,9 +101,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         utils = new Utils(this.getContext());
         departmentname = new ArrayList<>();
 
+
         //ini views
         IniViews(root);
 
+        sessions = new ArrayList<>();
+        examtype = new ArrayList<>();
 
         // sildercall
         getSliderImage();
@@ -128,9 +138,128 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 //        fetchContacts();
         fetchdepartment();
-
+        fetchsession();
+        fetchresult();
 
         return root;
+    }
+
+    private void resultdialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        View view = getLayoutInflater().inflate(R.layout.result_dialog, null);
+
+        autoCompletetxt = view.findViewById(R.id.autoCompletetxt);
+        text_examtype = view.findViewById(R.id.text_examtype);
+        btn_login = view.findViewById(R.id.btn_login);
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), R.layout.dropdown_session, sessions);
+        autoCompletetxt.setText(arrayAdapter.getItem(0).toString(), false);
+        autoCompletetxt.setAdapter(arrayAdapter);
+
+        ArrayAdapter Adapter = new ArrayAdapter(getContext(), R.layout.dropdown_examtype, examtype);
+        text_examtype.setText(Adapter.getItem(0).toString(), false);
+        text_examtype.setAdapter(Adapter);
+
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent resultIntent = new Intent(getActivity().getApplicationContext(), Activity_DateSheet.class);
+                resultIntent.putExtra("session", autoCompletetxt.getText().toString());
+                resultIntent.putExtra("examtype", text_examtype.getText().toString());
+//                resultIntent.putExtra("classid", classid);
+//                resultIntent.putExtra("classgrade", classgrade);
+//                getActivity().finish();
+                startActivity(resultIntent);
+            }
+        });
+
+        builder.setView(view);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+
+    }
+
+    private void fetchresult() {
+        db.collection("ExamTypes").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                examtype.add(document.getId());
+
+                                //Toast.makeText(getContext(), "Debug", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getContext(), "" + document.getId(), Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                    }
+                });
+    }
+
+    private void fetchsession() {
+
+
+        db.collection("Sessions").orderBy("sessionID", Query.Direction.DESCENDING).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                //sesion =fd ;
+
+                                sessions.add(document.getId());
+                                //currentVar = document.getId();
+
+                                //fetchcurrentdaate(document.getId());
+
+
+//
+                                //Toast.makeText(getContext(), "Debug", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getContext(), "" + document.getId(), Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        }
+                    }
+                });
+        //Toast.makeText(getContext(), ""+currentVar, Toast.LENGTH_SHORT).show();
+
+
+        //fetchcurrentdaate();
+
+
+//        db.collection("Exams").get()
+//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//                        if (queryDocumentSnapshots.isEmpty()) {
+//                            Log.d("TAG", "onSuccess: LIST EMPTY");
+//                            return;
+//                        } else {
+//
+//
+//                            Toast.makeText(getContext(), "" + queryDocumentSnapshots.toString(),
+//                            Toast.LENGTH_SHORT).show();
+//
+//                        }
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull @NotNull Exception e) {
+//                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+
     }
 
     private void fetchdepartment() {
@@ -352,9 +481,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", contact_email, null));
-                //i.putExtra(Intent.EXTRA_SUBJECT, SUBJECT);
-                //i.putExtra(Intent.EXTRA_TEXT, BODY);
-
+                i.putExtra(Intent.EXTRA_SUBJECT, SUBJECT);
+                i.putExtra(Intent.EXTRA_TEXT, BODY);
+                startActivity(i);
             }
         });
 
@@ -439,10 +568,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getContext(), ActivityAnnouncement.class));
                 break;
             case R.id.lay_settings:
-
+                Toast.makeText(getContext(), "Available Soon", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.lay_result:
-                startActivity(new Intent(getContext(), ActivityResult.class));
+//                startActivity(new Intent(getContext(), ActivityResult.class));
                 break;
             case R.id.lay_feedback:
                 startActivity(new Intent(getContext(), ActivityFeedback.class));
@@ -451,10 +580,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getContext(), ActivityTimeTable.class));
                 break;
             case R.id.lay_dateSheet:
-                startActivity(new Intent(getContext(), Activity_DateSheet.class));
+                resultdialog();
+//                startActivity(new Intent(getContext(), Activity_DateSheet.class));
                 break;
             default:
                 break;
         }
     }
+
 }

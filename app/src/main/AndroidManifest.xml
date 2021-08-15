@@ -14,28 +14,70 @@
         android:roundIcon="@drawable/appicon"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentPortal">
-        <activity android:name=".Activities.EarlierFeedbackActivity"></activity>
-        <activity android:name=".Activities.ActivityPUSuccessFully" />
-        <activity android:name=".Activities.ActivityResult" />
-        <activity android:name=".Activities.Activity_DateSheet" />
-        <activity android:name=".Activities.ActivityTimeTable" />
-        <activity android:name=".Activities.Activity_custom_image" />
-        <activity android:name=".Activities.Activity_full_image_container" />
-        <activity android:name=".Activities.ActivityAttendance" />
-        <activity android:name=".Activities.ActivityFeedback" />
-        <activity android:name=".Activities.ActivityProgressReport" />
-        <activity android:name=".Activities.ActivityGallery" />
-        <activity android:name=".Activities.ActivityAnnouncement" />
-        <activity android:name=".Activities.ActivityResetPassword" />
-        <activity android:name=".Activities.ActivityForgetPasswordAuth" />
-        <activity android:name=".Activities.ActivityLogin" />
-        <activity android:name=".Activities.ActivitySplash" />
-        <activity android:name=".Activities.MainActivity">
+        <activity
+            android:name=".Activities.EarlierFeedbackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.ActivityPUSuccessFully"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.ActivityResult"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.Activity_DateSheet"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.ActivityTimeTable"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.Activity_custom_image"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.Activity_full_image_container"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.ActivityAttendance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.ActivityFeedback"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.ActivityProgressReport"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.ActivityGallery"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.ActivityAnnouncement"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.ActivityResetPassword"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.ActivityForgetPasswordAuth"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.ActivityLogin"
+            android:screenOrientation="portrait" >
+
+
+
+        </activity>
+        <activity
+            android:name=".Activities.ActivitySplash"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activities.MainActivity"
+            android:screenOrientation="portrait">
+
+
+
         </activity>
 
         <meta-data

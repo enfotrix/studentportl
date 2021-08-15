@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -23,6 +25,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -42,6 +45,8 @@ public class ActivityLogin extends AppCompatActivity {
     private AppCompatButton btn_login;
     private TextView text_forgetpass, text_contactus;
     private Utils utils;
+    private ImageView img_cLogo;
+    private TextInputEditText edtt_reg;
 
     private FirebaseFirestore firestore;
 
@@ -57,7 +62,7 @@ public class ActivityLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // ---------- hide actionbar and statusBar
-        getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Login");
 
         // ---------------------------- database and variables initialization
         db = FirebaseFirestore.getInstance();
@@ -65,20 +70,44 @@ public class ActivityLogin extends AppCompatActivity {
         edt_registerNumber = findViewById(R.id.edt_registerNumber);
         edt_password = findViewById(R.id.edt_password);
         text_forgetpass = findViewById(R.id.text_forgetpass);
-        text_contactus = findViewById(R.id.text_contactus);
+        img_cLogo = findViewById(R.id.img_cLogo);
+        edtt_reg = findViewById(R.id.edtt_reg);
+//        text_contactus = findViewById(R.id.text_contactus);
 
         utils = new Utils(this);
         firestore = FirebaseFirestore.getInstance();
         departmentname = new ArrayList<>();
 
-        fetchdepartment();
+//        fetchdepartment();
 
 
-        text_contactus.setOnClickListener(new View.OnClickListener() {
+        edtt_reg.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String cnic = charSequence.toString();
+                if (charSequence.length() == 5 || charSequence.length() == 13) {
+                    cnic += "-";
+                    edtt_reg.setText(cnic);
+                    edtt_reg.setSelection(cnic.length());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        img_cLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                contactUs();
-//                bottomsheet();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://enfotrix.com/"));
+                startActivity(browserIntent);
             }
         });
 

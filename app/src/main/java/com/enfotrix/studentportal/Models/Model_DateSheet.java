@@ -5,19 +5,19 @@ public class Model_DateSheet {
     String day;
     String month;
     String subName;
-    String startTime;
-    String endTime;
+    String classsectin;
+    String classsession;
 
     public Model_DateSheet() {
 
     }
 
-    public Model_DateSheet(String day, String month, String subName, String startTime, String endTime) {
+    public Model_DateSheet(String day, String month, String subName, String classsectin, String classsession) {
         this.day = day;
         this.month = month;
         this.subName = subName;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.classsectin = classsectin;
+        this.classsession = classsession;
     }
 
     public String getDay() {
@@ -44,19 +44,19 @@ public class Model_DateSheet {
         this.subName = subName;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public String getClasssectin() {
+        return classsectin;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setClasssectin(String classsectin) {
+        this.classsectin = classsectin;
     }
 
-    public String getEndTime() {
-        return endTime;
+    public String getClasssession() {
+        return classsession;
     }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setClasssession(String classsession) {
+        this.classsession = classsession;
     }
 }

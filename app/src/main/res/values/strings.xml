@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Student Portal</string>
+    <string name="app_name">CGS</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">My Profile</string>
+    <string name="title_dashboard">Profile</string>
     <string name="title_notifications">Notifications</string>
 
     <string name="str_somethingWentWrong">Something went wrong. Try again Later</string>
@@ -15,13 +15,14 @@
 
 
     <!--    Activity Login strings-->
-    <string name="str_studentRegNo">Registration No</string>
+    <string name="str_studentRegNo">Reg # </string>
+    <string name="str_studentReg">Registration Number </string>
     <string name="str_studentPassword">Password</string>
     <string name="str_btnLogin">Login</string>
     <string name="str_forgotPassword"><u>Forgot Password?</u></string>
     <string name="str_login">login</string>
     <string name="str_welcome_back">Welcome to Login</string>
-    <string name="str_query">Have Any Queries ? </string>
+    <string name="str_query">Have Any Queries? </string>
     <string name="str_contact_us"><u>Contact Us</u></string>
 
 
@@ -73,7 +74,7 @@
     <!--   Profile Strings-->
     <string name="str_name">Name</string>
     <string name="str_s_o">S/O</string>
-    <string name="str_class">Class</string>
+    <string name="str_class">Class </string>
     <string name="str_feedback">FeedBack</string>
     <string name="str_attendance">Attendance</string>
     <string name="str_report">Report</string>
@@ -83,7 +84,7 @@
     <string name="str_dearuser">Dear Parents, we heartily appreciated your feedback and your loving words.</string>
 
     <!--   Activity Result  Strings-->
-    <string name="str_obtain_marks">Obtain Marks</string>
+    <string name="str_obtain_marks">Out Of</string>
     <string name="str_subject">Subject</string>
     <string name="str_marks">Total</string>
     <string name="str_grade">Obtain</string>
@@ -98,5 +99,6 @@
     <string name="str_date">Date</string>
     <string name="str_attendance_status">Attendance Status</string>
     <string name="str_status">Status</string>
+    <string name="school_name">Comprehensive Model Boys High School, Sillanwali (Sargodha)</string>
 
 </resources>

@@ -14,9 +14,9 @@
 
 
     <RelativeLayout
-        android:layout_marginBottom="@dimen/_50sdp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_50sdp">
 
 
         <RelativeLayout
@@ -43,9 +43,9 @@
                 android:layout_toRightOf="@+id/img_logo"
                 android:fontFamily="@font/happy_monkey"
                 android:gravity="center_horizontal"
-                android:text="Mehtab Public High School Chak No 86 Sb Sargodha"
+                android:text="@string/school_name"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp" />
+                android:textSize="@dimen/_14ssp" />
 
         </RelativeLayout>
 
@@ -106,7 +106,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="@dimen/_5sdp"
-                    android:src="@drawable/call" />
+                    android:src="@drawable/telephone" />
 
             </androidx.cardview.widget.CardView>
 
@@ -139,8 +139,7 @@
                     android:id="@+id/img_cu_whatsapp1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="@dimen/_10sdp"
-                    android:src="@drawable/whats" />
+                    android:src="@drawable/whatsapp" />
 
             </androidx.cardview.widget.CardView>
 
@@ -157,7 +156,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="@dimen/_10sdp"
-                    android:src="@drawable/emailicon" />
+                    android:src="@drawable/gmail" />
 
             </androidx.cardview.widget.CardView>
 

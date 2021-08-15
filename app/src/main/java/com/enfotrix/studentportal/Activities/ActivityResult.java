@@ -1,5 +1,6 @@
 package com.enfotrix.studentportal.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import com.enfotrix.studentportal.Adapters.Adapter_Result;
 import com.enfotrix.studentportal.Models.Model_Result;
 import com.enfotrix.studentportal.R;
 import com.enfotrix.studentportal.Utils;
+import com.enfotrix.studentportal.lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -79,6 +81,11 @@ public class ActivityResult extends AppCompatActivity {
     }
 
     private void fetchsubjects(String sectionId, String classID) {
+
+        final lottiedialog lottie = new lottiedialog(this);
+        lottie.show();
+
+//        resultArrayList.clear();
 //
 //        Toast.makeText(this, "" + sectionId, Toast.LENGTH_SHORT).show();
 //        Toast.makeText(this, "" + classID, Toast.LENGTH_SHORT).show();
@@ -116,7 +123,7 @@ public class ActivityResult extends AppCompatActivity {
 
                                                     String obtainmarks = documentSnapshot.getString("obtainMarks");
                                                     String totalmarks = documentSnapshot.getString("totalMarks");
-                                                    String sub_name = documentSnapshot.getString("subject");
+                                                    String sub_name = documentSnapshot.getString("subjectName");
 
                                                     if (obtainmarks != null && totalmarks != null) {
 
@@ -152,6 +159,8 @@ public class ActivityResult extends AppCompatActivity {
                                                 adapterResult = new Adapter_Result(getApplicationContext(), resultArrayList);
                                                 rv_result.setAdapter(adapterResult);
                                                 adapterResult.notifyDataSetChanged();
+
+                                                lottie.dismiss();
 
 
                                             }
@@ -191,5 +200,12 @@ public class ActivityResult extends AppCompatActivity {
         tv_resultGrade = findViewById(R.id.tv_resultGrade);
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        finish();
     }
 }

@@ -24,7 +24,6 @@
                 android:layout_height="@dimen/_45sdp"
                 android:layout_centerVertical="true"
                 android:layout_marginHorizontal="@dimen/_5sdp"
-                android:src="@drawable/slogo"
                 android:visibility="gone"
                 app:civ_border_color="@color/blue_dark"
                 app:civ_border_width="@dimen/_1sdp" />

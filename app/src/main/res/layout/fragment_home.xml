@@ -2,8 +2,8 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/blue_img"
     android:orientation="vertical"
     android:paddingBottom="?attr/actionBarSize"
@@ -12,13 +12,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="7">
+        android:orientation="vertical">
 
         <LinearLayout
+            android:layout_marginTop="@dimen/_5sdp"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -64,9 +63,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_3sdp"
-            android:layout_weight="3.8"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_5sdp"
             android:orientation="vertical">
 
             <TextView
@@ -82,6 +80,7 @@
 
 
             <GridLayout
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:columnCount="3"
@@ -91,7 +90,6 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="@dimen/_70sdp"
                     android:layout_height="@dimen/_80sdp"
-                    android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
                     android:layout_margin="@dimen/_5sdp"
                     app:cardBackgroundColor="@color/white_d"
@@ -130,7 +128,6 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="@dimen/_70sdp"
                     android:layout_height="@dimen/_80sdp"
-                    android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
                     android:layout_margin="@dimen/_5sdp"
                     app:cardBackgroundColor="@color/white_d"
@@ -142,6 +139,7 @@
                         android:layout_height="match_parent">
 
                         <ImageView
+                            android:paddingTop="@dimen/_5sdp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_alignParentRight="true"
@@ -169,7 +167,6 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="@dimen/_70sdp"
                     android:layout_height="@dimen/_80sdp"
-                    android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
                     android:layout_margin="@dimen/_5sdp"
                     app:cardBackgroundColor="@color/white_d"
@@ -208,7 +205,6 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="@dimen/_70sdp"
                     android:layout_height="@dimen/_80sdp"
-                    android:layout_rowWeight="2"
                     android:layout_columnWeight="1"
                     android:layout_margin="@dimen/_5sdp"
                     app:cardBackgroundColor="@color/white_d"
@@ -247,7 +243,6 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="@dimen/_70sdp"
                     android:layout_height="@dimen/_80sdp"
-                    android:layout_rowWeight="2"
                     android:layout_columnWeight="1"
                     android:layout_margin="@dimen/_5sdp"
                     app:cardBackgroundColor="#F6F5F5"
@@ -259,13 +254,13 @@
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:layout_below="@id/tv_t"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_alignParentRight="true"
                             android:layout_alignParentBottom="true"
+                            android:paddingTop="@dimen/_8sdp"
                             android:scaleType="fitEnd"
-                            android:src="@drawable/dial" />
+                            android:src="@drawable/conntacticon" />
 
                         <TextView
                             android:id="@+id/tv_t"
@@ -287,7 +282,6 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="@dimen/_70sdp"
                     android:layout_height="@dimen/_80sdp"
-                    android:layout_rowWeight="2"
                     android:layout_columnWeight="1"
                     android:layout_margin="@dimen/_5sdp"
                     app:cardBackgroundColor="@color/white_d"
@@ -299,7 +293,6 @@
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:layout_below="@id/tv_ff"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_alignParentRight="true"

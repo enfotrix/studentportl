@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/blue_img"
     android:orientation="vertical"
     tools:context=".Activities.ActivityTimeTable">
 
@@ -37,20 +38,30 @@
                         android:id="@+id/tv_resultObtainMarks"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
                         android:gravity="center_horizontal"
                         android:text="999"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_40ssp" />
 
                     <TextView
+                        android:id="@+id/outof"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
+                        android:layout_below="@+id/tv_resultObtainMarks"
                         android:layout_marginVertical="@dimen/_4sdp"
                         android:fontFamily="@font/roboto"
                         android:gravity="center_horizontal"
                         android:text="@string/str_obtain_marks"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/outof"
+                        android:fontFamily="@font/roboto"
+                        android:gravity="center_horizontal"
+                        android:text="1000"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12ssp" />
 
@@ -109,7 +120,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/result_bg"
+        android:background="@drawable/blue_img"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -126,9 +137,8 @@
                 android:layout_alignParentLeft="true"
                 android:fontFamily="@font/roboto"
                 android:text="@string/str_subject"
-                android:textColor="@color/blue_dark"
-                android:textSize="@dimen/_16ssp"
-                android:textStyle="bold" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -137,9 +147,8 @@
                 android:layout_weight="2"
                 android:fontFamily="@font/roboto"
                 android:text="@string/str_marks"
-                android:textColor="@color/blue_dark"
-                android:textSize="@dimen/_16ssp"
-                android:textStyle="bold" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -147,9 +156,8 @@
                 android:layout_alignParentRight="true"
                 android:gravity="right"
                 android:text="@string/str_grade"
-                android:textColor="@color/blue_dark"
-                android:textSize="@dimen/_16ssp"
-                android:textStyle="bold" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp" />
 
         </RelativeLayout>
 

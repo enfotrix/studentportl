@@ -2,8 +2,9 @@ package com.enfotrix.studentportal.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import com.enfotrix.studentportal.R;
 import com.enfotrix.studentportal.lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -28,6 +30,7 @@ public class ActivityForgetPasswordAuth extends AppCompatActivity {
     //private EditText txt_regNo;
     //private EditText txt_fatherCNIC;
     private TextInputLayout edt_registerno_lay, edt_Fcnic_lay;
+    private TextInputEditText edt_fcinc, edt_reg;
     private AppCompatButton btn_verify;
 
     @Override
@@ -42,7 +45,52 @@ public class ActivityForgetPasswordAuth extends AppCompatActivity {
         btn_verify = findViewById(R.id.btn_verify);
         edt_registerno_lay = findViewById(R.id.edt_registerno_lay);
         edt_Fcnic_lay = findViewById(R.id.edt_Fcnic_lay);
+        edt_fcinc = findViewById(R.id.edt_fcinc);
+        edt_reg = findViewById(R.id.edt_reg);
 
+
+        edt_reg.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String cnic = charSequence.toString();
+                if (charSequence.length() == 2 || charSequence.length() == 2 ) {
+                    cnic += "-";
+                    edt_reg.setText(cnic);
+                    edt_reg.setSelection(cnic.length());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        edt_fcinc.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String cnic = charSequence.toString();
+                if (charSequence.length() == 5 || charSequence.length() == 13) {
+                    cnic += "-";
+                    edt_fcinc.setText(cnic);
+                    edt_fcinc.setSelection(cnic.length());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         //------hide error message from text layouts on focus
         edt_registerno_lay.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -61,26 +109,29 @@ public class ActivityForgetPasswordAuth extends AppCompatActivity {
         btn_verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkEmpty()){
+                if (checkEmpty()) {
                     auth(edt_registerno_lay.getEditText().getText().toString().trim(), edt_Fcnic_lay.getEditText().getText().toString().trim());
                 }
             }
         });
         //testing
     }
-// ---------------- check empty fields
+
+    // ---------------- check empty fields
     private boolean checkEmpty() {
         Boolean isEmpty = false;
-        if(edt_registerno_lay.getEditText().getText().toString().isEmpty())   edt_registerno_lay.setError("Please Enter Registration #");
-        else if(edt_Fcnic_lay.getEditText().getText().toString().isEmpty())     edt_Fcnic_lay.setError("Please Enter Father CNIC");
-        else isEmpty = true;
+        if (edt_registerno_lay.getEditText().getText().toString().isEmpty())
+            edt_registerno_lay.setError("Please Enter Registration #");
+        else if (edt_Fcnic_lay.getEditText().getText().toString().isEmpty()) {
+            edt_Fcnic_lay.setError("Please Enter Father CNIC");
+        } else isEmpty = true;
         return isEmpty;
     }
 
 
     // ---------------------------- authentication begin
     private void auth(String str_regNoTemp, String str_fatherCNICTemp) {
-        final lottiedialog lottie=new lottiedialog(this);
+        final lottiedialog lottie = new lottiedialog(this);
         lottie.show();
         db.collection("Students").whereEqualTo("student_regNo", str_regNoTemp).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

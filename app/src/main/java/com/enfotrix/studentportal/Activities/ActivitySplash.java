@@ -2,6 +2,8 @@ package com.enfotrix.studentportal.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
@@ -9,9 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.enfotrix.studentportal.R;
 import com.enfotrix.studentportal.Utils;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class ActivitySplash extends AppCompatActivity {
     private Utils utils;
@@ -37,36 +36,22 @@ public class ActivitySplash extends AppCompatActivity {
 
     private void delay() {
 
-        Timer timer = new Timer();
-        TimerTask timerTask = new TimerTask() {
+
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                if (utils.isLoggedIn()) {
 
-                counter++;
-                progressBar.setProgress(counter);
-
-                if (counter == 100) {
-                    if (utils.isLoggedIn()) {
-
-                        Intent intent = new Intent(ActivitySplash.this, MainActivity.class);
-                        startActivity(intent);
-                    } else {
-                        Intent intent = new Intent(ActivitySplash.this, ActivityLogin.class);
-                        startActivity(intent);
-                    }
-                    finish();
+                    Intent intent = new Intent(ActivitySplash.this, MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(ActivitySplash.this, ActivityLogin.class);
+                    startActivity(intent);
                 }
+                finish();
             }
-        };
-        timer.schedule(timerTask, 0, 100);
-
-//        final Handler handler = new Handler(Looper.getMainLooper());
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//            }
-//        }, 3000);
+        }, 3000);
 
     }
 }

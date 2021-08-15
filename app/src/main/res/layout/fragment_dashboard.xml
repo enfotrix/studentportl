@@ -22,17 +22,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:gravity="center">
 
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/animationView"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_100sdp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginHorizontal="@dimen/_16sdp"
-                    app:lottie_autoPlay="true"
-                    app:lottie_loop="true"
-                    app:lottie_rawRes="@raw/profileanim" />
+                <ImageView
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="@dimen/_120sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/appicon" />
 
             </LinearLayout>
 
@@ -69,29 +66,20 @@
                         app:cardCornerRadius="@dimen/_20sdp">
 
                         <ImageView
-                            android:id="@+id/imageView"
+                            android:id="@+id/imageprofile"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/boypro" />
+                            android:scaleType="fitXY" />
 
                     </androidx.cardview.widget.CardView>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_marginVertical="@dimen/_10sdp"
+                        android:gravity="center_vertical"
                         android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto"
-                            android:text="@string/str_name"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10ssp"
-                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/txt_studentFullName"
@@ -120,41 +108,96 @@
                             android:textSize="@dimen/_12ssp"
                             android:textStyle="bold" />
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto"
-                            android:text="@string/str_studentRegNo"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10ssp"
-                            android:textStyle="bold" />
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/txt_studentRegNo"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto"
-                            android:text="5203502570275"
-                            android:textSize="@dimen/_12ssp"
-                            android:textStyle="bold" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/roboto"
+                                android:text="@string/str_studentRegNo"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto"
-                            android:text="@string/str_class"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10ssp"
-                            android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/txt_studentRegNo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:background="@drawable/reg_bg"
+                                android:fontFamily="@font/roboto"
+                                android:paddingHorizontal="@dimen/_8sdp"
+                                android:text="5203502570275"
+                                android:textSize="@dimen/_12ssp"
+                                android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/txt_studentClass"
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto"
-                            android:text="7-B"
-                            android:textSize="@dimen/_12ssp"
-                            android:textStyle="bold" />
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/roboto"
+                                android:text="@string/str_class"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txt_studentClass"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:background="@drawable/reg_bg"
+                                android:fontFamily="@font/roboto"
+                                android:paddingHorizontal="@dimen/_8sdp"
+                                android:text="7-B"
+                                android:textSize="@dimen/_12ssp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/roboto"
+                                android:text="Medium "
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txt_studentmedium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:background="@drawable/reg_bg"
+                                android:fontFamily="@font/roboto"
+                                android:paddingHorizontal="@dimen/_8sdp"
+                                android:text="urdu"
+                                android:textSize="@dimen/_12ssp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
 
                     </LinearLayout>
 
@@ -267,8 +310,9 @@
                             android:layout_height="match_parent"
                             android:layout_alignParentRight="true"
                             android:layout_alignParentBottom="true"
+                            android:paddingTop="@dimen/_8sdp"
                             android:scaleType="fitEnd"
-                            android:src="@drawable/attend" />
+                            android:src="@drawable/attende" />
 
                         <TextView
                             android:id="@+id/tv_tb"

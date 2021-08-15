@@ -1,5 +1,6 @@
 package com.enfotrix.studentportal.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
@@ -50,6 +51,7 @@ public class ActivityAttendance extends AppCompatActivity implements Adapter_Mon
     private int total_p = 0;
     private int total_a = 0;
     private int total_l = 0;
+    private int days;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +102,7 @@ public class ActivityAttendance extends AppCompatActivity implements Adapter_Mon
     private void fetchattendance(String attenadnce_session, String month) {
 
         final lottiedialog lottie = new lottiedialog(this);
+        lottie.show();
 
         total_p = 0;
         total_a = 0;
@@ -111,7 +114,7 @@ public class ActivityAttendance extends AppCompatActivity implements Adapter_Mon
         attendanceArrayList.clear();
 
 
-        int days = 1;
+        days = 1;
         String tempday = "";
 
         while (days <= 31) {
@@ -155,18 +158,24 @@ public class ActivityAttendance extends AppCompatActivity implements Adapter_Mon
                                         total_a++;
                                     }
 
+
                                 }
+
                                 //Toast.makeText(ActivityAttendance.this, status, Toast.LENGTH_SHORT).show();
                             }
+
 
                             adapterAttendance = new Adapter_attendance(getApplicationContext(), attendanceArrayList);
                             rv_attendance.setAdapter(adapterAttendance);
                             adapterAttendance.notifyDataSetChanged();
+                            if (days >= 29)
+                                lottie.dismiss();
                         }
+
                     });
 
+
             days++;
-            //lottie.dismiss();
 
 
         }
@@ -243,5 +252,12 @@ public class ActivityAttendance extends AppCompatActivity implements Adapter_Mon
         fetchattendance(attenadnce_session, month);
 
         //Toast.makeText(this, "" + position, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        finish();
     }
 }

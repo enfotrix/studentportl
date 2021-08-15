@@ -15,16 +15,13 @@
         android:src="@drawable/appicon" />
 
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_8sdp"
+    <ImageView
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginHorizontal="@dimen/_40sdp"
-        android:layout_marginBottom="@dimen/_100sdp"
-        android:progressTint="#3E4095" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:src="@drawable/b_loo" />
 
 
 </RelativeLayout>
