@@ -1,16 +1,20 @@
 package com.enfotrix.studentportal.Fragments;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -35,6 +39,7 @@ import com.enfotrix.studentportal.databinding.FragmentHomeBinding;
 import com.enfotrix.studentportal.lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -42,24 +47,37 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
+import static android.app.Activity.RESULT_OK;
 import static android.provider.Telephony.TextBasedSmsColumns.BODY;
 import static android.provider.Telephony.TextBasedSmsColumns.SUBJECT;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
+
+
+
     private Utils utils;
     private FirebaseFirestore firestore;
     private FirebaseFirestore db;
+
     private ArrayList<String> sessions;
     private ArrayList<String> examtype;
 
@@ -587,5 +605,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
+
+
 
 }

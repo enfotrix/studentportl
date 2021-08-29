@@ -90,7 +90,7 @@ public class ActivityLogin extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String cnic = charSequence.toString();
-                if (charSequence.length() == 5 || charSequence.length() == 13) {
+                if (charSequence.length() == 2 ) {
                     cnic += "-";
                     edtt_reg.setText(cnic);
                     edtt_reg.setSelection(cnic.length());

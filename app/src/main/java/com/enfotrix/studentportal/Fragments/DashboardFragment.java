@@ -1,8 +1,12 @@
 package com.enfotrix.studentportal.Fragments;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +22,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
 import com.enfotrix.studentportal.Activities.ActivityAttendance;
 import com.enfotrix.studentportal.Activities.ActivityLogin;
 import com.enfotrix.studentportal.Activities.ActivityResult;
@@ -28,6 +33,7 @@ import com.enfotrix.studentportal.databinding.FragmentDashboardBinding;
 import com.enfotrix.studentportal.lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -35,20 +41,37 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import dev.shreyaspatil.MaterialDialog.MaterialDialog;
 import dev.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
+
+import static android.app.Activity.RESULT_OK;
 
 public class DashboardFragment extends Fragment {
 
     private DashboardViewModel dashboardViewModel;
     private FragmentDashboardBinding binding;
+
+    private final int PICK_IMAGE_REQUEST = 71;
+    private Uri filePath;
+    private String refUri;
+
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
 
     //------------------ variables initialization
     private TextView txt_studentRegNo, txt_studentFullName, txt_studentFatherName;
@@ -88,6 +111,9 @@ public class DashboardFragment extends Fragment {
                 textView.setText(s);
             }
         });*/
+
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
 
         txt_studentRegNo = root.findViewById(R.id.txt_studentRegNo);
         txt_studentFullName = root.findViewById(R.id.txt_studentFullName);
@@ -187,6 +213,9 @@ public class DashboardFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
 
+
+                        chooseImage();
+                        dialogInterface.dismiss();
                     }
                 })
                 .setNegativeButton("Cancel", R.drawable.ic_baseline_cancel_presentation_24, new MaterialDialog.OnClickListener() {
@@ -521,7 +550,8 @@ public class DashboardFragment extends Fragment {
                         String student_PhoneNoFromDb = document.getString("student_phoneNo");
                         String student_EmailFromDb = document.getString("student_email");
                         String student_DOBFromDb = document.getString("student_dob");
-                        String student_profilePicFromDb = document.getString("student_profilePic");
+                        String student_profilePicFromDb = document.getString("student_picture");
+                        Glide.with(getContext()).load(student_profilePicFromDb).into(imageprofile);
 
                         classid = document.getString("student_classID");
                         classgrade = document.getString("class_grade");
@@ -554,6 +584,118 @@ public class DashboardFragment extends Fragment {
     public void onStop() {
         super.onStop();
     }
+
+
+
+    private void updateUser(Uri filePath) {
+
+
+        final lottiedialog lottie=new lottiedialog(getContext());
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setTitle("Uploading...");
+        progressDialog.show();
+
+
+
+        StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
+        ref.putFile(filePath)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+
+                                Map<String,Object> m= new HashMap<>();
+                                m.put("student_picture",uri.toString());
+
+
+
+
+
+                                db.collection("Students").document(utils.getToken()).update(m)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull  Task<Void> task) {
+
+                                                progressDialog.dismiss();
+                                                lottie.dismiss();
+                                                Toast.makeText(getContext(), "Updated Successfully", Toast.LENGTH_SHORT).show();
+                                                getData();
+
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull  Exception e) {
+                                                lottie.dismiss();
+                                                Toast.makeText(getContext(), "Connection Error", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+
+
+
+                            }
+                        });
+
+
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "Connection Error", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        //Toast.makeText(ActivityNominee.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                        double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                                .getTotalByteCount());
+                        progressDialog.setMessage("Uploading Data "+(int)progress+"%");
+                    }
+                });
+
+
+
+
+    }
+
+
+
+
+
+
+    /////////////////////////  IMAGE  //////////////////
+    private void chooseImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null )
+        {
+            filePath = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
+                imageprofile.setImageBitmap(bitmap);
+
+                updateUser(filePath);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+    ///////////////////////////////////////////////////////////////
 }
 
 
