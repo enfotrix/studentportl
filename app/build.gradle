@@ -8,7 +8,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.enfotrix.studentportal"
+        applicationId "com.enfotrix.cgs"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
@@ -65,6 +65,9 @@ dependencies {
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
 
     implementation 'dev.shreyaspatil.MaterialDialog:MaterialDialog:2.2.2'
+
+    implementation 'com.ramotion.paperonboarding:paper-onboarding:1.1.3'
+
 
 
 }

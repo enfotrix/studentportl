@@ -62,8 +62,8 @@
                 android:layout_marginRight="@dimen/_15sdp"
                 android:focusable="false"
                 android:hint="@string/str_studentReg"
-                app:errorEnabled="true"
                 app:endIconMode="clear_text"
+                app:errorEnabled="true"
                 app:helperText="Required*"
                 app:helperTextTextColor="#D50000"
                 app:hintAnimationEnabled="true"
@@ -72,12 +72,12 @@
                 app:startIconTint="@color/blue_dark">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtt_reg"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="number"
-                    android:maxLength="6"
+                    android:maxLength="7"
                     android:singleLine="true"
-                    android:id="@+id/edtt_reg"
                     android:textColor="@color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -92,8 +92,8 @@
                 android:layout_marginRight="@dimen/_15sdp"
                 android:focusable="false"
                 android:hint="@string/str_studentPassword"
-                app:errorEnabled="true"
                 app:endIconMode="clear_text"
+                app:errorEnabled="true"
                 app:hintTextColor="@color/black"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/blue_dark"
