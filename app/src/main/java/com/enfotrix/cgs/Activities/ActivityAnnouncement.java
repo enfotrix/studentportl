@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.enfotrix.cgs.Adapters.Adapter_Announ;
+import com.enfotrix.cgs.Lottiedialog;
 import com.enfotrix.cgs.Models.Model_Announ;
 import com.enfotrix.cgs.R;
 import com.enfotrix.cgs.Utils;
-import com.enfotrix.cgs.Lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -79,12 +79,16 @@ public class ActivityAnnouncement extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                Model_Announ model_Announ = new Model_Announ(
-                                        document.getId(),
-                                        document.getString("data"),
-                                        document.getString("date"),
-                                        document.getString("heading"));
-                                list_Announ.add(model_Announ);
+                                if (document.getString("status").equals("approved")) {
+
+                                    Model_Announ model_Announ = new Model_Announ(
+                                            document.getId(),
+                                            document.getString("data"),
+                                            document.getString("date"),
+                                            document.getString("heading"));
+                                    list_Announ.add(model_Announ);
+
+                                }
 
                             }
 

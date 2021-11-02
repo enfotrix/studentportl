@@ -177,6 +177,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
+//                                Toast.makeText(getContext(), ""+document.getId(), Toast.LENGTH_SHORT).show();
+
                                 db.collection("Fee").document(document.getId())
                                         .collection("Month").document(currentmonth)
                                         .collection("StudentsFee").document(utils.getToken())

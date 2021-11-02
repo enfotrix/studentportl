@@ -129,7 +129,7 @@ public class ActivityResult extends AppCompatActivity {
                                                     String totalmarks = documentSnapshot.getString("totalMarks");
                                                     String sub_name = documentSnapshot.getString("subjectName");
 
-                                                    Toast.makeText(getApplicationContext(),  + "", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(getApplicationContext(), documentSnapshot.getString("classID") + "", Toast.LENGTH_SHORT).show();
 
                                                     if (obtainmarks != null && totalmarks != null) {
 

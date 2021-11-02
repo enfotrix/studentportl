@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enfotrix.cgs.Adapters.Adapter_DateSheet;
+import com.enfotrix.cgs.Lottiedialog;
 import com.enfotrix.cgs.Models.Model_DateSheet;
 import com.enfotrix.cgs.R;
 import com.enfotrix.cgs.Utils;
-import com.enfotrix.cgs.Lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -71,6 +71,7 @@ public class Activity_DateSheet extends AppCompatActivity {
                         classgrade = document.getString("class_grade");
                         // fetchclasssection(document.getString("student_classID"), document.getString("class_grade"));
                         fetchdatesheet(getIntent().getStringExtra("session"), getIntent().getStringExtra("examtype"), document.getString("student_classID"), document.getString("class_grade"));
+//                        Toast.makeText(getApplicationContext(), "Connection Error" + getIntent().getStringExtra("session") + getIntent().getStringExtra("examtype") + document.getString("student_classID") + document.getString("class_grade"), Toast.LENGTH_SHORT).show();
 
                     }
                 })
@@ -103,7 +104,7 @@ public class Activity_DateSheet extends AppCompatActivity {
 
                         // classsection = document.getString("student_classID") + "-" + document.getString("class_grade");
                         fetchclasssection(document.getString("student_classID"), document.getString("class_grade"));
-
+//                        Toast.makeText(getApplicationContext(), "" + document.getString("student_classID") + document.getString("class_grade"), Toast.LENGTH_SHORT).show();
                         lottie.dismiss();
 
                     }
@@ -191,9 +192,9 @@ public class Activity_DateSheet extends AppCompatActivity {
                                                     //Toast.makeText(Activity_DateSheet.this, "QuerySnapshot", Toast.LENGTH_SHORT).show();
                                                     DocumentSnapshot documentSnapshot = task.getResult();
                                                     String examdate = documentSnapshot.getString("examDate");
-//                                                    String substingdate = examdate.substring(3, 5);
                                                     String subname = documentSnapshot.getString("subjectName");
-//                                                    Toast.makeText(Activity_DateSheet.this, "" + substingdate, Toast.LENGTH_SHORT).show();
+
+                                                    Toast.makeText(getApplicationContext(), ""+subname, Toast.LENGTH_SHORT).show();
 
                                                     if (examdate != null && subname != null) {
                                                         Model_DateSheet model_dateSheet = new Model_DateSheet();
