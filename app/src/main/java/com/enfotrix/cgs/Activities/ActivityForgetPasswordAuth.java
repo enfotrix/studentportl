@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.enfotrix.cgs.R;
-import com.enfotrix.cgs.lottiedialog;
+import com.enfotrix.cgs.Lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -131,7 +131,7 @@ public class ActivityForgetPasswordAuth extends AppCompatActivity {
 
     // ---------------------------- authentication begin
     private void auth(String str_regNoTemp, String str_fatherCNICTemp) {
-        final lottiedialog lottie = new lottiedialog(this);
+        final Lottiedialog lottie = new Lottiedialog(this);
         lottie.show();
 
         db.collection("Students").whereEqualTo("student_regNo", str_regNoTemp).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

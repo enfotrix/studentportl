@@ -20,7 +20,7 @@ import androidx.cardview.widget.CardView;
 
 import com.enfotrix.cgs.R;
 import com.enfotrix.cgs.Utils;
-import com.enfotrix.cgs.lottiedialog;
+import com.enfotrix.cgs.Lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -149,7 +149,7 @@ public class ActivityLogin extends AppCompatActivity {
 
     private void fetchContacts() {
 
-        final lottiedialog lottie = new lottiedialog(this);
+        final Lottiedialog lottie = new Lottiedialog(this);
         lottie.show();
         firestore.collection("ContactUs").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -385,7 +385,7 @@ public class ActivityLogin extends AppCompatActivity {
 
     // ---------------------------- login credentials authentication begin
     private void auth(String str_regNoTemp, String str_passwordTemp) {
-        final lottiedialog lottie = new lottiedialog(this);
+        final Lottiedialog lottie = new Lottiedialog(this);
         lottie.show();
         db.collection("Students").whereEqualTo("student_regNo", str_regNoTemp).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

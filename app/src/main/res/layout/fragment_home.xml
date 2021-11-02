@@ -15,9 +15,9 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_marginTop="@dimen/_5sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -80,9 +80,9 @@
 
 
             <GridLayout
-                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:columnCount="3"
                 android:columnOrderPreserved="false"
                 android:rowCount="1">
@@ -139,11 +139,11 @@
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:paddingTop="@dimen/_5sdp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_alignParentRight="true"
                             android:layout_alignParentBottom="true"
+                            android:paddingTop="@dimen/_5sdp"
                             android:scaleType="fitEnd"
                             android:src="@drawable/datesheeticon" />
 
@@ -218,10 +218,11 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_below="@+id/tv_d"
                             android:layout_alignParentRight="true"
                             android:layout_alignParentBottom="true"
                             android:scaleType="fitEnd"
-                            android:src="@drawable/sett" />
+                            android:src="@drawable/fees" />
 
                         <TextView
                             android:id="@+id/tv_d"

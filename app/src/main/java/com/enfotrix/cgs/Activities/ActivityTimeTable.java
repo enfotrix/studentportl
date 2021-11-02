@@ -1,6 +1,7 @@
 package com.enfotrix.cgs.Activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,12 +14,13 @@ import com.enfotrix.cgs.Adapters.Adapter_TimeTable;
 import com.enfotrix.cgs.Models.Model_TimeTable;
 import com.enfotrix.cgs.R;
 import com.enfotrix.cgs.Utils;
-import com.enfotrix.cgs.lottiedialog;
+import com.enfotrix.cgs.Lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -63,7 +65,7 @@ public class ActivityTimeTable extends AppCompatActivity {
     }
 
     public void getData() {
-        final lottiedialog lottie = new lottiedialog(this);
+        final Lottiedialog lottie = new Lottiedialog(this);
         lottie.show();
         db.collection("Students").document(utils.getToken()).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -110,7 +112,7 @@ public class ActivityTimeTable extends AppCompatActivity {
 
     private void fetchtimetable() {
 
-        final lottiedialog lottie = new lottiedialog(this);
+        final Lottiedialog lottie = new Lottiedialog(this);
         lottie.show();
 
         db.collection("Students").document(utils.getToken()).get()
@@ -121,10 +123,12 @@ public class ActivityTimeTable extends AppCompatActivity {
 
                         String sectionID = document.getString("student_classID");
 
-                        Toast.makeText(ActivityTimeTable.this, "" + sectionID, Toast.LENGTH_SHORT).show();
+                        Log.d("jvnsdjvn", "onComplete: " + sectionID);
+//                        Toast.makeText(ActivityTimeTable.this, "" + sectionID, Toast.LENGTH_SHORT).show();
 
                         db.collection("TimeTable").document(sectionID)
-                                .collection("Slots").get()
+                                .collection("Slots").orderBy("slotNumber", Query.Direction.ASCENDING)
+                                .get()
                                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
@@ -137,7 +141,7 @@ public class ActivityTimeTable extends AppCompatActivity {
                                                 String slotname = Snapshot.getString("slotName");
                                                 String slottime = Snapshot.getString("slotTime");
 
-                                                Toast.makeText(ActivityTimeTable.this, "" + slotnumber + slotname + slottime, Toast.LENGTH_SHORT).show();
+//                                                Toast.makeText(ActivityTimeTable.this, "" + slotnumber + slotname + slottime, Toast.LENGTH_SHORT).show();
 
                                                 Model_TimeTable model_timeTable = new Model_TimeTable();
                                                 model_timeTable.setTv_slotNumber(slotnumber);

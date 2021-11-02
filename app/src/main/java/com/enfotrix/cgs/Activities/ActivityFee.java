@@ -13,7 +13,7 @@ import com.enfotrix.cgs.Adapters.Adapter_fee;
 import com.enfotrix.cgs.Models.Model_Fee;
 import com.enfotrix.cgs.R;
 import com.enfotrix.cgs.Utils;
-import com.enfotrix.cgs.lottiedialog;
+import com.enfotrix.cgs.Lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -72,7 +72,7 @@ public class ActivityFee extends AppCompatActivity {
 
     private void getMonthFee(String attendanceSession, String month) {
 
-        final lottiedialog lottie = new lottiedialog(this);
+        final Lottiedialog lottie = new Lottiedialog(this);
         lottie.show();
 
         firestore.collection("Fee").document(attendanceSession)

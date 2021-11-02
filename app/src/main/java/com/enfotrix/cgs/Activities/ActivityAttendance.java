@@ -18,7 +18,7 @@ import com.enfotrix.cgs.Models.Model_Attendance;
 import com.enfotrix.cgs.Models.Model_Month;
 import com.enfotrix.cgs.R;
 import com.enfotrix.cgs.Utils;
-import com.enfotrix.cgs.lottiedialog;
+import com.enfotrix.cgs.Lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -101,7 +101,7 @@ public class ActivityAttendance extends AppCompatActivity implements Adapter_Mon
 
     private void fetchattendance(String attenadnce_session, String month) {
 
-        final lottiedialog lottie = new lottiedialog(this);
+        final Lottiedialog lottie = new Lottiedialog(this);
         lottie.show();
 
         total_p = 0;

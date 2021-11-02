@@ -18,6 +18,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.enfotrix.cgs.OnBoardAdapter;
 import com.enfotrix.cgs.OnBoardModel;
 import com.enfotrix.cgs.R;
+import com.enfotrix.cgs.Lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -61,10 +62,10 @@ public class ActivityOnBoardingScreen extends AppCompatActivity {
         btn_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (viewPager.getCurrentItem() + 1 < onBoardAdapter.getItemCount()){
+                if (viewPager.getCurrentItem() + 1 < onBoardAdapter.getItemCount()) {
                     viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
-                }else {
-                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                } else {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 }
             }
@@ -74,6 +75,9 @@ public class ActivityOnBoardingScreen extends AppCompatActivity {
     }
 
     private void getmsg() {
+
+        final Lottiedialog lottiedialog = new Lottiedialog(this);
+        lottiedialog.show();
 
         boardModelArrayList.clear();
 
@@ -88,7 +92,7 @@ public class ActivityOnBoardingScreen extends AppCompatActivity {
                         if (document.getString("status").equals("principal")) {
 
                             principalmsg = document.getString("msg");
-                          pimg = document.getString("photo");
+                            pimg = document.getString("photo");
 
 
                             //getDataForonBoarding(principalmsg)
@@ -121,7 +125,7 @@ public class ActivityOnBoardingScreen extends AppCompatActivity {
                     pmsg.setMsg(principalmsg);
                     boardModelArrayList.add(pmsg);
 
-                    onBoardAdapter = new OnBoardAdapter(getApplicationContext(),boardModelArrayList);
+                    onBoardAdapter = new OnBoardAdapter(getApplicationContext(), boardModelArrayList);
                     viewPager.setAdapter(onBoardAdapter);
                     onBoardAdapter.notifyDataSetChanged();
 
@@ -136,6 +140,8 @@ public class ActivityOnBoardingScreen extends AppCompatActivity {
                         }
                     });
 
+                    lottiedialog.dismiss();
+
                 }
 
             }
@@ -144,39 +150,39 @@ public class ActivityOnBoardingScreen extends AppCompatActivity {
 
     }
 
-    private void setindicator(){
+    private void setindicator() {
         ImageView[] incators = new ImageView[onBoardAdapter.getItemCount()];
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
         );
-        layoutParams.setMargins(8,0,8,0);
-        for (int i=0 ; i<incators.length ; i++){
+        layoutParams.setMargins(8, 0, 8, 0);
+        for (int i = 0; i < incators.length; i++) {
             incators[i] = new ImageView(getApplicationContext());
             incators[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext()
-            ,R.drawable.inactive_indicator));
+                    , R.drawable.inactive_indicator));
             incators[i].setLayoutParams(layoutParams);
             lay_dots.addView(incators[i]);
         }
     }
 
-    private void activeindicator(int index){
+    private void activeindicator(int index) {
         int childcount = lay_dots.getChildCount();
-        for (int i=0 ; i<childcount ; i++){
+        for (int i = 0; i < childcount; i++) {
             ImageView imageView = (ImageView) lay_dots.getChildAt(i);
-            if (i == index){
+            if (i == index) {
                 imageView.setImageDrawable(ContextCompat.getDrawable(
-                        getApplicationContext(),R.drawable.active_indicator
+                        getApplicationContext(), R.drawable.active_indicator
                 ));
-            }else {
+            } else {
                 imageView.setImageDrawable(ContextCompat.getDrawable(
-                        getApplicationContext(),R.drawable.inactive_indicator
+                        getApplicationContext(), R.drawable.inactive_indicator
                 ));
             }
         }
 
-        if (index == onBoardAdapter.getItemCount() - 1){
+        if (index == onBoardAdapter.getItemCount() - 1) {
             btn_main.setText("start");
-        }else {
+        } else {
             btn_main.setText("Next");
         }
     }

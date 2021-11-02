@@ -14,7 +14,7 @@ import com.enfotrix.cgs.Adapters.Adapter_DateSheet;
 import com.enfotrix.cgs.Models.Model_DateSheet;
 import com.enfotrix.cgs.R;
 import com.enfotrix.cgs.Utils;
-import com.enfotrix.cgs.lottiedialog;
+import com.enfotrix.cgs.Lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -93,7 +93,7 @@ public class Activity_DateSheet extends AppCompatActivity {
     }
 
     public void getData() {
-        final lottiedialog lottie = new lottiedialog(this);
+        final Lottiedialog lottie = new Lottiedialog(this);
         lottie.show();
         db.collection("Students").document(utils.getToken()).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -171,6 +171,7 @@ public class Activity_DateSheet extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             sub_list = (List<String>) document.get("Subjects");
+
 
                             //Toast.makeText(Activity_DateSheet.this, "" + sub_list, Toast.LENGTH_SHORT).show();
 

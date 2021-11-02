@@ -13,7 +13,7 @@ import com.enfotrix.cgs.Adapters.Adapter_Announ;
 import com.enfotrix.cgs.Models.Model_Announ;
 import com.enfotrix.cgs.R;
 import com.enfotrix.cgs.Utils;
-import com.enfotrix.cgs.lottiedialog;
+import com.enfotrix.cgs.Lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -68,11 +68,11 @@ public class ActivityAnnouncement extends AppCompatActivity {
     private void fetchNotifi(String userID) {
 
 
-        final lottiedialog lottie = new lottiedialog(this);
+        final Lottiedialog lottie = new Lottiedialog(this);
         lottie.show();
 
         list_Announ.clear();
-        firestore.collection("Announcement").orderBy("date", Query.Direction.DESCENDING).get()
+        firestore.collection("Announcement").orderBy("date", Query.Direction.ASCENDING).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {

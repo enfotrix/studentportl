@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.enfotrix.cgs.R;
-import com.enfotrix.cgs.lottiedialog;
+import com.enfotrix.cgs.Lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -83,7 +83,7 @@ public class ActivityResetPassword extends AppCompatActivity {
     }
 
     private void update(String documentID) {
-        final lottiedialog lottie = new lottiedialog(this);
+        final Lottiedialog lottie = new Lottiedialog(this);
         lottie.show();
         Map<String, Object> map = new HashMap<>();
         map.put("student_password", edt_password_lay.getEditText().getText().toString().trim());

@@ -92,7 +92,6 @@
                 android:layout_marginRight="@dimen/_15sdp"
                 android:focusable="false"
                 android:hint="@string/str_studentPassword"
-                app:endIconMode="clear_text"
                 app:errorEnabled="true"
                 app:hintTextColor="@color/black"
                 app:passwordToggleEnabled="true"

@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enfotrix.cgs.Adapters.Adapter_Result;
+import com.enfotrix.cgs.Lottiedialog;
 import com.enfotrix.cgs.Models.Model_Result;
 import com.enfotrix.cgs.R;
 import com.enfotrix.cgs.Utils;
-import com.enfotrix.cgs.lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -56,7 +56,6 @@ public class ActivityResult extends AppCompatActivity {
         utils = new Utils(this);
         sub_list = new ArrayList<>();
 
-
         sessionname = getIntent().getStringExtra("session");
         examtype = getIntent().getStringExtra("examtype");
         sectionId = getIntent().getStringExtra("classid");
@@ -71,24 +70,26 @@ public class ActivityResult extends AppCompatActivity {
 
         resultArrayList = new ArrayList<>();
 
-
-//        Toast.makeText(this, "" + sessionname + examtype + classid, Toast.LENGTH_SHORT).show();
-
-        fetchsubjects(sectionId, classID);
+        fetchsubjects(getIntent().getStringExtra("classid"),
+                getIntent().getStringExtra("classgrade"),
+                getIntent().getStringExtra("session"),
+                getIntent().getStringExtra("examtype"));
 //        ResultAdapter();
 
 
     }
 
-    private void fetchsubjects(String sectionId, String classID) {
+    private void fetchsubjects(String sectionId, String classID, String sessionname, String examtype) {
 
-        final lottiedialog lottie = new lottiedialog(this);
+        final Lottiedialog lottie = new Lottiedialog(this);
         lottie.show();
 
 //        resultArrayList.clear();
 //
 //        Toast.makeText(this, "" + sectionId, Toast.LENGTH_SHORT).show();
 //        Toast.makeText(this, "" + classID, Toast.LENGTH_SHORT).show();
+
+//        Toast.makeText(this, sessionname + "\n" + examtype + "\n" + classID + "\n" + sectionId, Toast.LENGTH_SHORT).show();
 
         db.collection("Class").document(classID)
                 .collection("Section").document(sectionId).get()
@@ -119,11 +120,16 @@ public class ActivityResult extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
                                                 if (task.isSuccessful()) {
+
+                                                    Toast.makeText(getApplicationContext(), "okk", Toast.LENGTH_SHORT).show();
+
                                                     DocumentSnapshot documentSnapshot = task.getResult();
 
                                                     String obtainmarks = documentSnapshot.getString("obtainMarks");
                                                     String totalmarks = documentSnapshot.getString("totalMarks");
                                                     String sub_name = documentSnapshot.getString("subjectName");
+
+                                                    Toast.makeText(getApplicationContext(),  + "", Toast.LENGTH_SHORT).show();
 
                                                     if (obtainmarks != null && totalmarks != null) {
 

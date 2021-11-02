@@ -15,18 +15,26 @@
         android:layout_marginTop="@dimen/_12sdp"
         android:hint="Select Session"
         android:textColorHint="@color/black"
+        android:visibility="gone"
         app:hintTextColor="@color/black"
         app:startIconDrawable="@drawable/ic_baseline_class_24"
         app:startIconTint="@color/black">
 
         <AutoCompleteTextView
-            android:id="@+id/autoCompletetxt"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:enabled="false"
             android:inputType="none" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/autoCompletetxt"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_12sdp" />
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
@@ -36,12 +44,12 @@
         android:layout_marginTop="@dimen/_12sdp"
         android:hint="Select Exam Type"
         android:textColorHint="@color/black"
+        android:visibility="gone"
         app:hintTextColor="@color/black"
         app:startIconDrawable="@drawable/ic_baseline_class_24"
         app:startIconTint="@color/black">
 
         <AutoCompleteTextView
-            android:id="@+id/text_examtype"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:enabled="false"
@@ -49,6 +57,12 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/text_examtype"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_12sdp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_login"

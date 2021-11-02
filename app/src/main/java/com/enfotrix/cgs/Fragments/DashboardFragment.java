@@ -1,5 +1,7 @@
 package com.enfotrix.cgs.Fragments;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -10,6 +12,7 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
@@ -19,6 +22,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -26,11 +30,11 @@ import com.bumptech.glide.Glide;
 import com.enfotrix.cgs.Activities.ActivityAttendance;
 import com.enfotrix.cgs.Activities.ActivityLogin;
 import com.enfotrix.cgs.Activities.ActivityResult;
+import com.enfotrix.cgs.Lottiedialog;
 import com.enfotrix.cgs.Models.DashboardViewModel;
 import com.enfotrix.cgs.R;
 import com.enfotrix.cgs.Utils;
 import com.enfotrix.cgs.databinding.FragmentDashboardBinding;
-import com.enfotrix.cgs.lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -59,8 +63,6 @@ import java.util.UUID;
 import dev.shreyaspatil.MaterialDialog.MaterialDialog;
 import dev.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 
-import static android.app.Activity.RESULT_OK;
-
 public class DashboardFragment extends Fragment {
 
     private DashboardViewModel dashboardViewModel;
@@ -84,13 +86,14 @@ public class DashboardFragment extends Fragment {
     private AppCompatButton btn_login, btn_attendance;
 
     private ArrayList<String> sessions, examtype;
-    public static String classid;
+    public String classid;
     private String classgrade;
     private String date;
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
     private String fromatedate;
     private String status = "";
+    private String txtsession, txtexamtype, sessionstxt;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -166,26 +169,10 @@ public class DashboardFragment extends Fragment {
             public void onClick(View view) {
 
                 logout();
-//                utils.logout();
-//                Intent intent = new Intent(getActivity(), ActivityLogin.class);
-//                startActivity(intent);
-//                getActivity().finish();
 
-//                Intent intent = new Intent(getActivity(), ActivityFeedback.class);
-//                startActivity(intent);
             }
         });
 
-        //------ logout link click event
-//        iv_logout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                utils.logout();
-//                Intent intent = new Intent(getActivity(), ActivityLogin.class);
-//                startActivity(intent);
-//                getActivity().finish();
-//            }
-//        });
 
         //------ progress report link click event
         lay_result.setOnClickListener(new View.OnClickListener() {
@@ -200,8 +187,65 @@ public class DashboardFragment extends Fragment {
         getData();
         fetchsession();
         fetchresult();
+        getattendance();
         //fetchcurrentdaate();
         return root;
+    }
+
+    private void getattendance() {
+
+        final Lottiedialog lottiedialog = new Lottiedialog(getContext());
+        lottiedialog.show();
+
+        ///////////////////////////////////////////////////
+        db.collection("Sessions").orderBy("sessionID", Query.Direction.DESCENDING).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                //sesion =fd ;
+
+                                //sessions.add(document.getId());
+
+
+                                db.collection("Attendance").document(document.getId())
+                                        .collection("Date").document(date)
+                                        .collection("Class").document(classid)
+                                        .collection("Attende").document(utils.getToken())
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    //Toast.makeText(getContext(), "debug", Toast.LENGTH_SHORT).show();
+                                                    //Toast.makeText(ActivityAttendance.this, "Debug", Toast.LENGTH_SHORT).show();
+                                                    DocumentSnapshot document = task.getResult();
+
+                                                    status = document.getString("status");
+
+                                                    //Toast.makeText(getContext(), status, Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+
+
+                                //Toast.makeText(getContext(), "" + document.getId(), Toast.LENGTH_SHORT).show();
+                            }
+
+                            lottiedialog.dismiss();
+
+
+                        }
+                    }
+                });
+
+        /////////////////////////////////////////////////
+
+
     }
 
     private void imgProfile() {
@@ -391,28 +435,60 @@ public class DashboardFragment extends Fragment {
 
         View view = getLayoutInflater().inflate(R.layout.result_dialog, null);
 
-        autoCompletetxt = view.findViewById(R.id.autoCompletetxt);
-        text_examtype = view.findViewById(R.id.text_examtype);
+        AppCompatSpinner spinner = view.findViewById(R.id.autoCompletetxt);
+        AppCompatSpinner spinner1 = view.findViewById(R.id.text_examtype);
         btn_login = view.findViewById(R.id.btn_login);
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), R.layout.dropdown_session, sessions);
-        autoCompletetxt.setText(arrayAdapter.getItem(0).toString(), false);
-        autoCompletetxt.setAdapter(arrayAdapter);
+//        autoCompletetxt.setText(arrayAdapter.getItem(0).toString(), false);
+        spinner.setAdapter(arrayAdapter);
 
         ArrayAdapter Adapter = new ArrayAdapter(getContext(), R.layout.dropdown_examtype, examtype);
-        text_examtype.setText(Adapter.getItem(0).toString(), false);
-        text_examtype.setAdapter(Adapter);
+//        text_examtype.setText(Adapter.getItem(0).toString(), false);
+        spinner1.setAdapter(Adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                txtsession = adapterView.getItemAtPosition(i).toString();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                txtexamtype = adapterView.getItemAtPosition(i).toString();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent resultIntent = new Intent(getActivity().getApplicationContext(), ActivityResult.class);
-                resultIntent.putExtra("session", autoCompletetxt.getText().toString());
-                resultIntent.putExtra("examtype", text_examtype.getText().toString());
+                resultIntent.putExtra("session", txtsession);
+                resultIntent.putExtra("examtype", txtexamtype);
                 resultIntent.putExtra("classid", classid);
                 resultIntent.putExtra("classgrade", classgrade);
 //                getActivity().finish();
                 startActivity(resultIntent);
+
+//                Toast.makeText(getContext(), classid + "\n" + classgrade, Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -433,58 +509,9 @@ public class DashboardFragment extends Fragment {
 //        TextView tv_date = vie.findViewById(R.id.tv_date);
         tv_status = vie.findViewById(R.id.tv_stats);
 
-
-        ///////////////////////////////////////////////////
-        db.collection("Sessions").orderBy("sessionID", Query.Direction.DESCENDING).get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-
-
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-
-                                //sesion =fd ;
-
-                                //sessions.add(document.getId());
-
-
-                                db.collection("Attendance").document(document.getId())
-                                        .collection("Date").document(date)
-                                        .collection("Class").document(classid)
-                                        .collection("Attende").document(utils.getToken())
-                                        .get()
-                                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                            @Override
-                                            public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
-                                                if (task.isSuccessful()) {
-                                                    //Toast.makeText(getContext(), "debug", Toast.LENGTH_SHORT).show();
-                                                    //Toast.makeText(ActivityAttendance.this, "Debug", Toast.LENGTH_SHORT).show();
-                                                    DocumentSnapshot document = task.getResult();
-
-                                                    status = document.getString("status");
-                                                    if (status != null) {
-                                                        tv_status.setText(status);
-                                                    } else tv_status.setText("Pending");
-                                                    //Toast.makeText(getContext(), status, Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        });
-
-
-                                //Toast.makeText(getContext(), "" + document.getId(), Toast.LENGTH_SHORT).show();
-                            }
-
-
-                        }
-                    }
-                });
-        /////////////////////////////////////////////////
-
-
-//        tv_date.setText(date);
-//        tv_status.setText(status);
-
+        if (status != null) {
+            tv_status.setText(status);
+        } else tv_status.setText("Pending");
 
         btn_earlier.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -496,18 +523,30 @@ public class DashboardFragment extends Fragment {
 
                 View attendancedialog = getLayoutInflater().inflate(R.layout.attendance_dialog, null);
 
-                txtattendance = attendancedialog.findViewById(R.id.txtattendance);
+                AppCompatSpinner spinner = attendancedialog.findViewById(R.id.txtattendance);
                 btn_attendance = attendancedialog.findViewById(R.id.btn_attendance);
 
                 ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), R.layout.dropdown_attendancesession, sessions);
-                txtattendance.setText(arrayAdapter.getItem(0).toString(), false);
-                txtattendance.setAdapter(arrayAdapter);
+//                txtattendance.setText(arrayAdapter.getItem(0).toString(), false);
+                spinner.setAdapter(arrayAdapter);
+
+                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        sessionstxt = adapterView.getItemAtPosition(i).toString();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                });
 
                 btn_attendance.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(getContext(), ActivityAttendance.class);
-                        intent.putExtra("attendanceSession", txtattendance.getText().toString());
+                        intent.putExtra("attendanceSession", sessionstxt);
                         intent.putExtra("classid", classid);
 //                        getActivity().finish();
                         startActivity(intent);
@@ -534,7 +573,7 @@ public class DashboardFragment extends Fragment {
     }
 
     public void getData() {
-        final lottiedialog lottie = new lottiedialog(getContext());
+        final Lottiedialog lottie = new Lottiedialog(getContext());
         lottie.show();
         db.collection("Students").document(utils.getToken()).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -555,6 +594,7 @@ public class DashboardFragment extends Fragment {
 
                         classid = document.getString("student_classID");
                         classgrade = document.getString("class_grade");
+
                         fetchclasssection(document.getString("student_classID"), document.getString("class_grade"));
 
                         txt_studentRegNo.setText(student_RegNoFromDb);
@@ -590,7 +630,7 @@ public class DashboardFragment extends Fragment {
     private void updateUser(Uri filePath) {
 
 
-        final lottiedialog lottie = new lottiedialog(getContext());
+        final Lottiedialog lottie = new Lottiedialog(getContext());
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setTitle("Uploading...");
         progressDialog.show();
@@ -681,6 +721,8 @@ public class DashboardFragment extends Fragment {
         }
     }
     ///////////////////////////////////////////////////////////////
+
+
 }
 
 

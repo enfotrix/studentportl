@@ -19,7 +19,7 @@ import com.enfotrix.cgs.Models.NotificationsViewModel;
 import com.enfotrix.cgs.R;
 import com.enfotrix.cgs.Utils;
 import com.enfotrix.cgs.databinding.FragmentNotificationsBinding;
-import com.enfotrix.cgs.lottiedialog;
+import com.enfotrix.cgs.Lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -91,7 +91,7 @@ public class NotificationsFragment extends Fragment {
     }
 
     private void fetchNotifi(String token) {
-        final lottiedialog lottie = new lottiedialog(getContext());
+        final Lottiedialog lottie = new Lottiedialog(getContext());
         lottie.show();
 
         list_Notifi.clear();

@@ -16,7 +16,7 @@ import com.enfotrix.cgs.Adapters.Adapter_Feedback;
 import com.enfotrix.cgs.Models.Model_Feedback;
 import com.enfotrix.cgs.R;
 import com.enfotrix.cgs.Utils;
-import com.enfotrix.cgs.lottiedialog;
+import com.enfotrix.cgs.Lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -92,7 +92,11 @@ public class ActivityFeedback extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                logout();
+                if (checkEmpty()) {
+
+//                    Toast.makeText(getApplicationContext(), "Please Write Feedback", Toast.LENGTH_SHORT).show();
+                    logout();
+                }
 
 
             }
@@ -115,7 +119,7 @@ public class ActivityFeedback extends AppCompatActivity {
 
     public void logout() {
         MaterialDialog mDialog = new MaterialDialog.Builder(this)
-                .setTitle("Logout")
+                .setTitle("FeedBack")
                 .setMessage("Are you sure want to Submit!")
                 .setCancelable(false)
                 .setPositiveButton("Submit", R.drawable.ic_baseline_logout_24, new MaterialDialog.OnClickListener() {
@@ -143,7 +147,7 @@ public class ActivityFeedback extends AppCompatActivity {
 
     private void fetchFeedback(String token) {
 
-        final lottiedialog lottie = new lottiedialog(this);
+        final Lottiedialog lottie = new Lottiedialog(this);
         lottie.show();
 
         list_Feedback.clear();
@@ -181,7 +185,7 @@ public class ActivityFeedback extends AppCompatActivity {
     private void addFeedback(String token) {
 
 
-        final lottiedialog lottie = new lottiedialog(this);
+        final Lottiedialog lottie = new Lottiedialog(this);
         lottie.show();
 
 
@@ -218,6 +222,14 @@ public class ActivityFeedback extends AppCompatActivity {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         return dateFormat.format(date);
+    }
+
+    private boolean checkEmpty() {
+        Boolean isEmpty = false;
+        if (edt_feedback.getEditText().getText().toString().trim().isEmpty())
+            Toast.makeText(getApplicationContext(), "Please write feedback", Toast.LENGTH_SHORT).show();
+        else isEmpty = true;
+        return isEmpty;
     }
 
 }

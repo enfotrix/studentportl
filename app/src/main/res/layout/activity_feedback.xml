@@ -92,7 +92,6 @@
                     android:layout_marginLeft="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:layout_marginRight="@dimen/_15sdp"
-                    android:hint="FeedBack"
                     app:errorEnabled="true"
                     app:helperText="Required*"
                     app:helperTextTextColor="#D50000"

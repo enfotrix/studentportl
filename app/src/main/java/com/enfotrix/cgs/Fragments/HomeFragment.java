@@ -1,5 +1,8 @@
 package com.enfotrix.cgs.Fragments;
 
+import static android.provider.Telephony.TextBasedSmsColumns.BODY;
+import static android.provider.Telephony.TextBasedSmsColumns.SUBJECT;
+
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -8,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -18,6 +22,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -27,13 +32,13 @@ import com.enfotrix.cgs.Activities.ActivityFee;
 import com.enfotrix.cgs.Activities.ActivityFeedback;
 import com.enfotrix.cgs.Activities.ActivityTimeTable;
 import com.enfotrix.cgs.Activities.Activity_DateSheet;
+import com.enfotrix.cgs.Lottiedialog;
 import com.enfotrix.cgs.Models.HomeViewModel;
 import com.enfotrix.cgs.R;
 import com.enfotrix.cgs.SliderAdapterExample;
 import com.enfotrix.cgs.SliderItem;
 import com.enfotrix.cgs.Utils;
 import com.enfotrix.cgs.databinding.FragmentHomeBinding;
-import com.enfotrix.cgs.lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -54,9 +59,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import static android.provider.Telephony.TextBasedSmsColumns.BODY;
-import static android.provider.Telephony.TextBasedSmsColumns.SUBJECT;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
@@ -92,6 +94,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     AppCompatButton btn_login;
     private String latestsession;
     private TextView tv_status;
+    private String contacttxt;
+    private String txtsession, txtexamtype;
     private String status;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -151,8 +155,64 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         fetchsession();
         fetchresult();
         fetchlastestsession();
+        getcurrentmonthfee();
 
         return root;
+    }
+
+    private void getcurrentmonthfee() {
+
+        final Lottiedialog lottiedialog = new Lottiedialog(getContext());
+        lottiedialog.show();
+
+        DateFormat dateFormat = new SimpleDateFormat("MMMM");
+        Date date = new Date();
+        String currentmonth = dateFormat.format(date);
+
+        db.collection("Sessions").orderBy("sessionID", Query.Direction.DESCENDING).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                db.collection("Fee").document(document.getId())
+                                        .collection("Month").document(currentmonth)
+                                        .collection("StudentsFee").document(utils.getToken())
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
+                                                if (task.isSuccessful()) {
+
+                                                    DocumentSnapshot document = task.getResult();
+//
+                                                    status = "";
+                                                    status = document.getString("status");
+//                                                    Toast.makeText(getContext(), "" + status, Toast.LENGTH_SHORT).show();
+
+
+//                                                    if (document.getString("status") != null) {
+//
+//                                                        Toast.makeText(getContext(), "pendddd", Toast.LENGTH_SHORT).show();
+//
+//                                                        tv_status.setText(status);
+//
+//                                                    } else tv_status.setText("Pend");
+
+                                                }
+                                            }
+                                        });
+
+                            }
+
+                            lottiedialog.dismiss();
+                        }
+                    }
+                });
+
+
     }
 
     private void fetchlastestsession() {
@@ -192,24 +252,52 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         View view = getLayoutInflater().inflate(R.layout.result_dialog, null);
 
-        autoCompletetxt = view.findViewById(R.id.autoCompletetxt);
-        text_examtype = view.findViewById(R.id.text_examtype);
+        AppCompatSpinner spinner = view.findViewById(R.id.autoCompletetxt);
+        AppCompatSpinner spinner1 = view.findViewById(R.id.text_examtype);
         btn_login = view.findViewById(R.id.btn_login);
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), R.layout.dropdown_session, sessions);
-        autoCompletetxt.setText(arrayAdapter.getItem(0).toString(), false);
-        autoCompletetxt.setAdapter(arrayAdapter);
+//        autoCompletetxt.setText(arrayAdapter.getItem(0).toString(), false);
+        spinner.setAdapter(arrayAdapter);
 
         ArrayAdapter Adapter = new ArrayAdapter(getContext(), R.layout.dropdown_examtype, examtype);
-        text_examtype.setText(Adapter.getItem(0).toString(), false);
-        text_examtype.setAdapter(Adapter);
+//        text_examtype.setText(Adapter.getItem(0).toString(), false);
+        spinner1.setAdapter(Adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                txtsession = adapterView.getItemAtPosition(i).toString();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                txtexamtype = adapterView.getItemAtPosition(i).toString();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent resultIntent = new Intent(getActivity().getApplicationContext(), Activity_DateSheet.class);
-                resultIntent.putExtra("session", autoCompletetxt.getText().toString());
-                resultIntent.putExtra("examtype", text_examtype.getText().toString());
+                resultIntent.putExtra("session", txtsession);
+                resultIntent.putExtra("examtype", txtexamtype);
 //                resultIntent.putExtra("classid", classid);
 //                resultIntent.putExtra("classgrade", classgrade);
 //                getActivity().finish();
@@ -407,17 +495,30 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         View attendancedialog = getLayoutInflater().inflate(R.layout.department_dialog, null);
 
-        AutoCompleteTextView txtContact = attendancedialog.findViewById(R.id.txtContact);
+        AppCompatSpinner txtContact = attendancedialog.findViewById(R.id.txtContact);
         AppCompatButton btn_Contact = attendancedialog.findViewById(R.id.btn_Contact);
 
+
         ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), R.layout.dropdown_department, departmentname);
-        txtContact.setText(arrayAdapter.getItem(0).toString(), false);
+//        txtContact.setText(arrayAdapter.getItem(0).toString(), false);
         txtContact.setAdapter(arrayAdapter);
+
+        txtContact.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                contacttxt = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         btn_Contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bottomsheetcontact(txtContact.getText().toString().trim());
+                bottomsheetcontact(contacttxt);
 
             }
         });
@@ -545,7 +646,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void fetchContacts() {
 
-        final lottiedialog lottie = new lottiedialog(getContext());
+        final Lottiedialog lottie = new Lottiedialog(getContext());
         lottie.show();
         firestore.collection("ContactUs").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -645,51 +746,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //        TextView tv_date = vie.findViewById(R.id.tv_date);
         TextView tv_status = vie.findViewById(R.id.tv_stats);
 
-        DateFormat dateFormat = new SimpleDateFormat("MMMM");
-        Date date = new Date();
-        String currentmonth = dateFormat.format(date);
-
-        db.collection("Sessions").orderBy("sessionID", Query.Direction.DESCENDING).get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-
-                                db.collection("Fee").document(document.getId())
-                                        .collection("Month").document("October")
-                                        .collection("StudentsFee").document(utils.getToken())
-                                        .get()
-                                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                            @Override
-                                            public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
-                                                if (task.isSuccessful()) {
-
-                                                    DocumentSnapshot document = task.getResult();
-//
-                                                    String status = "";
-                                                    status = document.getString("status");
-                                                    Toast.makeText(getContext(), ""+status, Toast.LENGTH_SHORT).show();
-
-                                                    tv_status.setText(status);
-
-//                                                    if (document.getString("status") != null) {
-//
-//                                                        Toast.makeText(getContext(), "pendddd", Toast.LENGTH_SHORT).show();
-//
-//                                                        tv_status.setText(status);
-//
-//                                                    } else tv_status.setText("Pend");
-
-                                                }
-                                            }
-                                        });
-
-                            }
-                        }
-                    }
-                });
+        if (status != null) {
+            tv_status.setText(status);
+        } else tv_status.setText("pending");
 
 
         btn_earlier.setOnClickListener(new View.OnClickListener() {

@@ -13,7 +13,7 @@ import com.enfotrix.cgs.Adapters.Adapter_Feedback;
 import com.enfotrix.cgs.Models.Model_Feedback;
 import com.enfotrix.cgs.R;
 import com.enfotrix.cgs.Utils;
-import com.enfotrix.cgs.lottiedialog;
+import com.enfotrix.cgs.Lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -64,7 +64,7 @@ public class EarlierFeedbackActivity extends AppCompatActivity {
     }
 
     private void fetchFeedback(String token) {
-        final lottiedialog lottie = new lottiedialog(this);
+        final Lottiedialog lottie = new Lottiedialog(this);
         lottie.show();
 
         list_Feedback.clear();
