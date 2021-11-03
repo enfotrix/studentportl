@@ -9,18 +9,36 @@
         <entry key="..\:/studentportl/app/src/main/res/drawable/reg_bg.xml" value="0.22552083333333334" />
         <entry key="..\:/studentportl/app/src/main/res/drawable/spinnerbg.xml" value="0.22552083333333334" />
         <entry key="..\:/studentportl/app/src/main/res/layout/activity_announcement.xml" value="0.209375" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/activity_attendance.xml" value="0.18425925925925926" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/activity_custom_image.xml" value="0.18425925925925926" />
         <entry key="..\:/studentportl/app/src/main/res/layout/activity_date_sheet.xml" value="0.209375" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/activity_earlier_feedback.xml" value="0.18425925925925926" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/activity_fee.xml" value="0.18425925925925926" />
         <entry key="..\:/studentportl/app/src/main/res/layout/activity_feedback.xml" value="0.19537037037037036" />
         <entry key="..\:/studentportl/app/src/main/res/layout/activity_forget_password_auth.xml" value="0.209375" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/activity_full_image_container.xml" value="0.18425925925925926" />
         <entry key="..\:/studentportl/app/src/main/res/layout/activity_gallery.xml" value="0.209375" />
         <entry key="..\:/studentportl/app/src/main/res/layout/activity_login.xml" value="0.18" />
         <entry key="..\:/studentportl/app/src/main/res/layout/activity_main.xml" value="0.209375" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/activity_on_boarding_screen.xml" value="0.18425925925925926" />
         <entry key="..\:/studentportl/app/src/main/res/layout/activity_progress_report.xml" value="0.209375" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/activity_pusuccess_fully.xml" value="0.18425925925925926" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/activity_reset_password.xml" value="0.18425925925925926" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/activity_result.xml" value="0.18425925925925926" />
         <entry key="..\:/studentportl/app/src/main/res/layout/activity_splash.xml" value="0.209375" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/activity_time_table.xml" value="0.18425925925925926" />
         <entry key="..\:/studentportl/app/src/main/res/layout/attendance_dialog.xml" value="0.19537037037037036" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/bottam_sheet_attendance.xml" value="0.18425925925925926" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/bottam_sheet_contacts.xml" value="0.18425925925925926" />
         <entry key="..\:/studentportl/app/src/main/res/layout/bottam_sheet_fee.xml" value="0.20092592592592592" />
         <entry key="..\:/studentportl/app/src/main/res/layout/department_dialog.xml" value="0.19537037037037036" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/dropdown_attendancesession.xml" value="0.17407407407407408" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/dropdown_datesession.xml" value="0.17407407407407408" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/dropdown_department.xml" value="0.17407407407407408" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/dropdown_examtype.xml" value="0.17407407407407408" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/dropdown_list.xml" value="0.17407407407407408" />
         <entry key="..\:/studentportl/app/src/main/res/layout/dropdown_session.xml" value="0.209375" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/fee_dialog.xml" value="0.17407407407407408" />
         <entry key="..\:/studentportl/app/src/main/res/layout/fragment_dashboard.xml" value="0.209375" />
         <entry key="..\:/studentportl/app/src/main/res/layout/fragment_home.xml" value="0.209375" />
         <entry key="..\:/studentportl/app/src/main/res/layout/fragment_notifications.xml" value="0.209375" />
@@ -28,8 +46,14 @@
         <entry key="..\:/studentportl/app/src/main/res/layout/list_announce.xml" value="0.209375" />
         <entry key="..\:/studentportl/app/src/main/res/layout/list_attendance.xml" value="0.209375" />
         <entry key="..\:/studentportl/app/src/main/res/layout/list_datesheet.xml" value="0.209375" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/list_fee.xml" value="0.17407407407407408" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/list_month.xml" value="0.17407407407407408" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/list_notifi.xml" value="0.17407407407407408" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/list_result.xml" value="0.17407407407407408" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/list_timetable.xml" value="0.17407407407407408" />
         <entry key="..\:/studentportl/app/src/main/res/layout/lottie_dialog.xml" value="0.209375" />
         <entry key="..\:/studentportl/app/src/main/res/layout/result_dialog.xml" value="0.209375" />
+        <entry key="..\:/studentportl/app/src/main/res/layout/slides_layout.xml" value="0.17407407407407408" />
         <entry key="..\:/studentportl/app/src/main/res/menu/bottom_nav_menu.xml" value="0.209375" />
       </map>
     </option>

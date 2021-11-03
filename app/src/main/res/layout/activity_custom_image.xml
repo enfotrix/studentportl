@@ -6,10 +6,25 @@
     android:layout_margin="5dp"
     app:cardCornerRadius="5dp">
 
-    <ImageView
-        android:id="@+id/image_item"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop" />
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/image_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/_5sdp"
+            android:src="@drawable/ic_baseline_delete_forever_24"
+            app:tint="@color/blue_dark" />
+
+    </RelativeLayout>
+
 
 </com.google.android.material.card.MaterialCardView>

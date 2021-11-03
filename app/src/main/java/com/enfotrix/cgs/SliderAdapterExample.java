@@ -59,7 +59,6 @@ public class SliderAdapterExample extends SliderViewAdapter<SliderAdapterExample
             @Override
             public void onClick(View v) {
 
-
                 Intent intent = new Intent(context, ActivityGallery.class);
                 context.startActivity(intent);
             }
