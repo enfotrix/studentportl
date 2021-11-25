@@ -14,11 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.enfotrix.cgs.Adapters.Adapter_Month;
 import com.enfotrix.cgs.Adapters.Adapter_attendance;
+import com.enfotrix.cgs.Lottiedialog;
 import com.enfotrix.cgs.Models.Model_Attendance;
 import com.enfotrix.cgs.Models.Model_Month;
 import com.enfotrix.cgs.R;
 import com.enfotrix.cgs.Utils;
-import com.enfotrix.cgs.Lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -149,13 +149,15 @@ public class ActivityAttendance extends AppCompatActivity implements Adapter_Mon
                                     }
 
                                     if (document.getString("status").equals("Leave")) {
+                                        total_l++;
                                         tv_totalLeave.setText(String.valueOf(total_l));
 
                                     }
 
                                     if (document.getString("status").equals("Absent")) {
-                                        tv_totalAbsent.setText(String.valueOf(total_a));
                                         total_a++;
+                                        tv_totalAbsent.setText(String.valueOf(total_a));
+
                                     }
 
 

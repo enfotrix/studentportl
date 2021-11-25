@@ -14,12 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.enfotrix.cgs.Adapters.Adapter_Notifi;
+import com.enfotrix.cgs.Lottiedialog;
 import com.enfotrix.cgs.Models.Model_Notifi;
 import com.enfotrix.cgs.Models.NotificationsViewModel;
 import com.enfotrix.cgs.R;
 import com.enfotrix.cgs.Utils;
 import com.enfotrix.cgs.databinding.FragmentNotificationsBinding;
-import com.enfotrix.cgs.Lottiedialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;

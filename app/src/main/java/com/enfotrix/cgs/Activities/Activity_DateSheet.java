@@ -40,6 +40,7 @@ public class Activity_DateSheet extends AppCompatActivity {
     private String sectioID, classgrade;
     private List<String> sub_list;
     private String classsection;
+    private String substringdate, substringmonth, monthalphabetic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,7 +195,9 @@ public class Activity_DateSheet extends AppCompatActivity {
                                                     String examdate = documentSnapshot.getString("examDate");
                                                     String subname = documentSnapshot.getString("subjectName");
 
-                                                    Toast.makeText(getApplicationContext(), ""+subname, Toast.LENGTH_SHORT).show();
+//                                                    Toast.makeText(getApplicationContext(), ""+examdate, Toast.LENGTH_SHORT).show();
+
+                                                    getmonthfromat(documentSnapshot.getString("examDate"));
 
                                                     if (examdate != null && subname != null) {
                                                         Model_DateSheet model_dateSheet = new Model_DateSheet();
@@ -222,6 +225,26 @@ public class Activity_DateSheet extends AppCompatActivity {
                     }
                 });
 
+
+    }
+
+    private void getmonthfromat(String examDate) {
+
+        if (examDate != null) {
+            substringdate = examDate.substring(0, 2);
+
+            substringmonth = examDate.substring(3, 5);
+
+            if (substringmonth.equals("01")) {
+                monthalphabetic = "Jan";
+            } else if (substringmonth.equals("02")) {
+                monthalphabetic = "Feb";
+            } else if (substringmonth.equals("11")) {
+                monthalphabetic = "Nov";
+            }
+
+//            Toast.makeText(getApplicationContext(), "" + monthalphabetic, Toast.LENGTH_SHORT).show();
+        }
 
     }
 

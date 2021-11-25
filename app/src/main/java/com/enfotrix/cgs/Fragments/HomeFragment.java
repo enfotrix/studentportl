@@ -192,6 +192,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //
                                                     status = "";
                                                     status = document.getString("status");
+                                                    
 //                                                    Toast.makeText(getContext(), "" + status, Toast.LENGTH_SHORT).show();
 
 
@@ -750,7 +751,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         if (status != null) {
             tv_status.setText(status);
-        } else tv_status.setText("pending");
+        } else tv_status.setText("N.A");
 
 
         btn_earlier.setOnClickListener(new View.OnClickListener() {

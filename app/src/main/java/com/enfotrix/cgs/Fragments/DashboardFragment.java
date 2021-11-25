@@ -211,26 +211,29 @@ public class DashboardFragment extends Fragment {
 
                                 //sessions.add(document.getId());
 
+                                if (classid != null) {
 
-                                db.collection("Attendance").document(document.getId())
-                                        .collection("Date").document(date)
-                                        .collection("Class").document(classid)
-                                        .collection("Attende").document(utils.getToken())
-                                        .get()
-                                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                            @Override
-                                            public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
-                                                if (task.isSuccessful()) {
-                                                    //Toast.makeText(getContext(), "debug", Toast.LENGTH_SHORT).show();
-                                                    //Toast.makeText(ActivityAttendance.this, "Debug", Toast.LENGTH_SHORT).show();
-                                                    DocumentSnapshot document = task.getResult();
+                                    db.collection("Attendance").document(document.getId())
+                                            .collection("Date").document(date)
+                                            .collection("Class").document(classid)
+                                            .collection("Attende").document(utils.getToken())
+                                            .get()
+                                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
+                                                    if (task.isSuccessful()) {
+                                                        //Toast.makeText(getContext(), "debug", Toast.LENGTH_SHORT).show();
+                                                        //Toast.makeText(ActivityAttendance.this, "Debug", Toast.LENGTH_SHORT).show();
+                                                        DocumentSnapshot document = task.getResult();
 
-                                                    status = document.getString("status");
+                                                        status = document.getString("status");
 
-                                                    //Toast.makeText(getContext(), status, Toast.LENGTH_SHORT).show();
+                                                        //Toast.makeText(getContext(), status, Toast.LENGTH_SHORT).show();
+                                                    }
                                                 }
-                                            }
-                                        });
+                                            });
+
+                                }
 
 
                                 //Toast.makeText(getContext(), "" + document.getId(), Toast.LENGTH_SHORT).show();
@@ -511,7 +514,7 @@ public class DashboardFragment extends Fragment {
 
         if (status != null) {
             tv_status.setText(status);
-        } else tv_status.setText("Pending");
+        } else tv_status.setText("N.A");
 
         btn_earlier.setOnClickListener(new View.OnClickListener() {
             @Override

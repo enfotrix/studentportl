@@ -34,7 +34,7 @@ public class ActivityResult extends AppCompatActivity {
     Adapter_Result adapterResult;
     private FirebaseFirestore db;
 
-    private TextView tv_resultObtainMarks, tv_examType, tv_resultDate, tv_resultGrade;
+    private TextView tv_resultObtainMarks, tv_examType, tv_resultDate, tv_resultGrade, totalsubnumber;
     private String classID, sectionId, sessionname, examtype;
     List<String> sub_list;
     private Utils utils;
@@ -121,7 +121,7 @@ public class ActivityResult extends AppCompatActivity {
                                             public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
                                                 if (task.isSuccessful()) {
 
-                                                    Toast.makeText(getApplicationContext(), "okk", Toast.LENGTH_SHORT).show();
+//                                                    Toast.makeText(getApplicationContext(), "okk", Toast.LENGTH_SHORT).show();
 
                                                     DocumentSnapshot documentSnapshot = task.getResult();
 
@@ -129,7 +129,7 @@ public class ActivityResult extends AppCompatActivity {
                                                     String totalmarks = documentSnapshot.getString("totalMarks");
                                                     String sub_name = documentSnapshot.getString("subjectName");
 
-                                                    Toast.makeText(getApplicationContext(), documentSnapshot.getString("classID") + "", Toast.LENGTH_SHORT).show();
+//                                                    Toast.makeText(getApplicationContext(), documentSnapshot.getString("classID") + "", Toast.LENGTH_SHORT).show();
 
                                                     if (obtainmarks != null && totalmarks != null) {
 
@@ -149,11 +149,12 @@ public class ActivityResult extends AppCompatActivity {
                                                         percentage = (totalObtainMarks * 100) / totalsubjmarks;
 
                                                         tv_resultObtainMarks.setText(String.valueOf(totalObtainMarks));
+                                                        totalsubnumber.setText(String.valueOf(totalsubjmarks));
 
                                                         tv_resultGrade.setText(String.valueOf(percentage) + " %");
 
 
-                                                        Toast.makeText(ActivityResult.this, "" + percentage, Toast.LENGTH_SHORT).show();
+//                                                        Toast.makeText(ActivityResult.this, "" + percentage, Toast.LENGTH_SHORT).show();
 
                                                         // Toast.makeText(ActivityResult.this, "" + totalObtainMarks, Toast.LENGTH_SHORT).show();
 
@@ -204,6 +205,7 @@ public class ActivityResult extends AppCompatActivity {
         tv_examType = findViewById(R.id.tv_examType);
         tv_resultDate = findViewById(R.id.tv_resultDate);
         tv_resultGrade = findViewById(R.id.tv_resultGrade);
+        totalsubnumber = findViewById(R.id.totalsubnumber);
 
 
     }
