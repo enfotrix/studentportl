@@ -8,10 +8,10 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.enfotrix.cgs"
+        applicationId "com.cgs.anfotrix"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 2
+        versionCode 1
         versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -67,7 +67,6 @@ dependencies {
     implementation 'dev.shreyaspatil.MaterialDialog:MaterialDialog:2.2.2'
 
     implementation 'com.ramotion.paperonboarding:paper-onboarding:1.1.3'
-
 
 
 }

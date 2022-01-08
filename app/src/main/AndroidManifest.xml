@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.enfotrix.cgs">
+    package="com.cgs.anfotrix">
 
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,55 +14,55 @@
         android:roundIcon="@drawable/appicon"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentPortal">
-        <activity android:name="com.enfotrix.cgs.Activities.ActivityFee"></activity>
-        <activity android:name="com.enfotrix.cgs.Activities.ActivityOnBoardingScreen" />
+        <activity android:name=".Activities.ActivityFee"></activity>
+        <activity android:name=".Activities.ActivityOnBoardingScreen" />
         <activity
-            android:name="com.enfotrix.cgs.Activities.EarlierFeedbackActivity"
+            android:name=".Activities.EarlierFeedbackActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.enfotrix.cgs.Activities.ActivityPUSuccessFully"
+            android:name=".Activities.ActivityPUSuccessFully"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.enfotrix.cgs.Activities.ActivityResult"
+            android:name=".Activities.ActivityResult"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.enfotrix.cgs.Activities.Activity_DateSheet"
+            android:name=".Activities.Activity_DateSheet"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.enfotrix.cgs.Activities.ActivityTimeTable"
+            android:name=".Activities.ActivityTimeTable"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.enfotrix.cgs.Activities.Activity_custom_image"
+            android:name=".Activities.Activity_custom_image"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.enfotrix.cgs.Activities.Activity_full_image_container"
+            android:name=".Activities.Activity_full_image_container"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.enfotrix.cgs.Activities.ActivityAttendance"
+            android:name=".Activities.ActivityAttendance"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.enfotrix.cgs.Activities.ActivityFeedback"
+            android:name=".Activities.ActivityFeedback"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.enfotrix.cgs.Activities.ActivityProgressReport"
+            android:name=".Activities.ActivityProgressReport"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.enfotrix.cgs.Activities.ActivityGallery"
+            android:name=".Activities.ActivityGallery"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.enfotrix.cgs.Activities.ActivityAnnouncement"
+            android:name=".Activities.ActivityAnnouncement"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.enfotrix.cgs.Activities.ActivityResetPassword"
+            android:name=".Activities.ActivityResetPassword"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.enfotrix.cgs.Activities.ActivityForgetPasswordAuth"
+            android:name=".Activities.ActivityForgetPasswordAuth"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.enfotrix.cgs.Activities.ActivityLogin"
+            android:name=".Activities.ActivityLogin"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.enfotrix.cgs.Activities.ActivitySplash"
+            android:name=".Activities.ActivitySplash"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -71,7 +71,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.enfotrix.cgs.Activities.MainActivity"
+            android:name=".Activities.MainActivity"
             android:screenOrientation="portrait" />
 
         <meta-data
